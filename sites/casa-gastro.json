@@ -1,0 +1,34 @@
+{
+  "slug": "casa-gastro",
+  "category": "catering",
+  "name": "Casa Gastro",
+  "tagline": "Banquetes, taquizas y coffee break en Querétaro",
+  "description": "Banquetes para eventos sociales y empresariales en Querétaro: taquizas, barra tipo buffet, tacos al momento, menú de 2 y 3 tiempos, desayunos y coffee break. Llevamos y recogemos todo.",
+  "logo": "/photos/casa-gastro/logo.webp",
+  "phone": "442 504 0351",
+  "whatsapp": "524425040351",
+  "instagram": "banquetescasagastro",
+  "address": "Prol. Av. del Jacal 959, Emiliano Zapata, 76900 Santiago de Querétaro, Qro.",
+  "mapUrl": "https://www.google.com/maps/place/?q=place_id:ChIJ43KP8K1F04URiHFhWZ7KX50",
+  "hours": [
+    {
+      "days": "Lunes a viernes",
+      "time": "10:00 – 19:00"
+    },
+    {
+      "days": "Sábado",
+      "time": "9:00 – 15:00"
+    },
+    {
+      "days": "Domingo",
+      "time": "Cerrado"
+    }
+  ],
+  "rating": {
+    "stars": 4.9,
+    "count": 64
+  },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (redesign). banquetescasagastro.com (GoDaddy Website Builder): under every dish the SEO filler 'banquetes banquetes para eventos banquetes para fiestas' is visible; the heading 'barra de menú italiano' is repeated over the taquiza and tacos cards; footer '© 2024'; menu item 'OTROS SERVCIOS' (typo, also in the URL); 'Nuestros clientes' page only says 'Comentarios'. WhatsApp Business verified 442 504 0351. 64 reviews 4.9. Photos (event photos, WhatsApp-quality) and packages/prices from their own site."
+}

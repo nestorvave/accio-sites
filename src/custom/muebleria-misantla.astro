@@ -1,0 +1,287 @@
+---
+/**
+ * Mueblería Misantla — built from their own site: the brown of their logo, photos of their doors,
+ * closets, kitchens and bedroom pieces, their 3-step design service, wholesale terms for real-estate
+ * projects, and product names with the prices published in their online store.
+ * Primary action: a quote request that opens WhatsApp with the country code (their current buttons omit it).
+ */
+import "@fontsource/gloock";
+import "@fontsource-variable/inter-tight";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber, telLink } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const tel = telLink(site);
+const P = "/photos/muebleria-misantla";
+const money = (n: number) => `$${n.toLocaleString("es-MX")}`;
+
+const made = [
+  { t: "Puertas", d: "De madera sólida para entrada principal, o de tambor para recámaras. Para casas, hoteles y desarrollos.", img: "puerta-principal" },
+  { t: "Clósets y vestidores", d: "A medida en madera maciza: diseño exclusivo, máxima funcionalidad y acabados premium.", img: "vestidor" },
+  { t: "Cocinas", d: "Totalmente personalizadas en maderas finas, diseñadas a la medida de tu espacio.", img: "cocina" },
+  { t: "Muebles", d: "Recámaras, comedores, salas, libreros y piezas especiales, hechos a mano.", img: "libreros" },
+];
+const steps = [
+  { t: "Envía tu solicitud", d: "Comparte tus ideas, el espacio y fotos que te inspiren." },
+  { t: "Consulta personalizada", d: "Llamada o videollamada para los primeros bocetos; después, diseño en 3D y cotización con materiales, barniz e instalación." },
+  { t: "Revisión y aprobación", d: "Fabricamos y te invitamos a revisar el trabajo terminado antes de entregar." },
+];
+const store = [
+  { cat: "Recámara", img: "recamaras", items: [["Base de cama Standard", 4900], ["Base de cama con cajones", 6800], ["Base de cama Flotante", 11800], ["Cabecera Duna", 4200], ["Cabecera Ciprés", 5500], ["Cabecera Elissa", 12500], ["Burós provenzal EROS", 15900], ["Cómoda Zeltia", 19800], ["Cómoda tallada a mano 7 cajones", 28100]] },
+  { cat: "Comedor y cocina", img: "cocina", items: [["Banco Ares M", 2600], ["Antecomedor Exea", 7500], ["Antecomedor Milan", 15200], ["Barra desayunador Lucy", 23100], ["Bufetero minimalista Fionn", 26200], ["Comedor Australia", 49500], ["Comedor Europa", 64700]] },
+  { cat: "Sala y estudio", img: "libreros", items: [["Mesa lateral Haus", 3500], ["Mesa de centro Cedric", 7500], ["Librero minimalista", 7800], ["Mesa de centro Kenza", 9200], ["Credenza Aida", 9800], ["Escritorio Icía", 14800], ["Cava Ronny", 23500], ["Recibidor Versalles", 25350]] },
+  { cat: "Jardín y balcón", img: "", items: [["Jardinera colgante", 150], ["Canapé para exteriores en cedro", 950], ["Sillón playero Cola de pato", 1800], ["Mecedora Cola de pato", 2700], ["Sala jardín Cola de pato", 14100]] },
+];
+const kinds = ["Puerta", "Clóset o vestidor", "Cocina", "Recámara", "Comedor", "Sala", "Otro mueble"];
+---
+<Base site={site} theme="muebleria-misantla" themeColor="#4C2819" colors={{ bg: "#F6F1EA", ink: "#2A1A12", brand: "#4C2819", paper: "#ECE2D4", "on-brand": "#FFFFFF" }}>
+  <style>
+    :global(html[data-theme="muebleria-misantla"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 64%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 14%, transparent);
+      --cedar: #A9592F;
+      --f-display: "Gloock", Georgia, serif;
+      --f-body: "Inter Tight Variable", system-ui, sans-serif;
+    }
+    :global(html[data-theme="muebleria-misantla"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1180px; margin-inline: auto; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+    .top img { height: 44px; width: auto; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 6px; background: var(--brand); color: #fff; font-weight: 600; font-size: .9rem; text-decoration: none; }
+
+    .hero { display: grid; gap: 0; background: var(--brand); color: #F3E8DA; border-radius: 0; }
+    @media (min-width: 900px) { .hero { grid-template-columns: 1.1fr 1fr; } }
+    .hero .ph { position: relative; min-height: 340px; }
+    .hero .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero .txt { padding: 32px max(16px, 5vw) 40px; display: flex; flex-direction: column; justify-content: center; }
+    .kicker { font-size: .76rem; letter-spacing: .2em; text-transform: uppercase; color: #E2B48F; font-weight: 600; }
+    .hero h1 { margin-top: 12px; font-family: var(--f-display); font-weight: 400; font-size: clamp(2.4rem, 6.4vw, 4.4rem); line-height: 1.02; text-wrap: balance; }
+    .hero p { margin-top: 14px; max-width: 44ch; color: color-mix(in oklab, #F3E8DA 78%, var(--brand)); }
+    .ctas { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 6px; font: inherit; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.cedar { background: var(--cedar); color: #fff; } .btn.cedar:hover { filter: brightness(1.08); }
+    .btn.out { border: 1px solid rgba(243,232,218,.5); color: #F3E8DA; }
+    .facts { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .facts span { display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; background: rgba(255,255,255,.08); font-size: .84rem; }
+
+    section.block { padding-block: 58px 6px; }
+    .eyebrow { font-size: .76rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cedar); font-weight: 700; }
+    h2.sec { font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.05; margin-top: 6px; text-wrap: balance; }
+    .sub { color: var(--ink-2); margin-top: 10px; max-width: 60ch; }
+
+    .made { margin-top: 24px; display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 960px) { .made { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+    .made article { display: grid; gap: 10px; align-content: start; }
+    .made img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 4px; }
+    .made h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.35rem; }
+    .made p { font-size: .9rem; color: var(--ink-2); }
+
+    .steps { margin-top: 24px; display: grid; gap: 12px; }
+    @media (min-width: 860px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .steps li { background: #fff; border-radius: 6px; padding: 18px; box-shadow: 0 1px 0 var(--line); counter-increment: s; }
+    .steps li::before { content: "0" counter(s); font-family: var(--f-display); font-size: 2.2rem; color: var(--cedar); line-height: 1; display: block; }
+    .steps h3 { margin-top: 8px; font-weight: 700; }
+    .steps p { margin-top: 4px; font-size: .92rem; color: var(--ink-2); }
+    .steps { counter-reset: s; }
+
+    .store { margin-top: 24px; display: grid; gap: 16px; }
+    @media (min-width: 900px) { .store { grid-template-columns: 1fr 1fr; gap: 20px; } }
+    .shelf { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 0 var(--line); }
+    .shelf img { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; object-position: center 60%; background: #EFEAE3; }
+    .shelf .in { padding: 14px 18px 18px; }
+    .shelf h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; }
+    .shelf ul { margin-top: 8px; }
+    .shelf li { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px dashed var(--line); }
+    .shelf li:last-child { border-bottom: 0; }
+    .shelf li span { font-size: .95rem; }
+    .shelf li b { font-variant-numeric: tabular-nums; font-weight: 600; }
+    .shelf li a { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--cedar); border: 1px solid color-mix(in oklab, var(--cedar) 40%, transparent); }
+    .shelf li a:hover { background: var(--cedar); color: #fff; }
+    .fine { margin-top: 14px; font-size: .84rem; color: var(--ink-2); }
+
+    .pro { margin-top: 58px; background: var(--paper); border-radius: 6px; display: grid; overflow: hidden; }
+    @media (min-width: 900px) { .pro { grid-template-columns: 1fr 1fr; } }
+    .pro img { width: 100%; height: 100%; min-height: 240px; object-fit: cover; }
+    .pro .in { padding: 26px 22px; }
+    .pro h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.1; }
+    .pro p { margin-top: 10px; color: var(--ink-2); }
+    .pro ul { margin-top: 14px; display: grid; gap: 8px; }
+    .pro li { display: flex; gap: 10px; }
+    .pro li::before { content: ""; flex: 0 0 8px; height: 8px; margin-top: .55em; background: var(--cedar); }
+
+    .quote-wrap { padding-block: 58px 6px; }
+    .quote { background: var(--brand); color: #F3E8DA; border-radius: 6px; padding: 26px 18px; display: grid; gap: 18px; }
+    @media (min-width: 900px) { .quote { grid-template-columns: .9fr 1.3fr; padding: 38px; gap: 38px; } }
+    .quote h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.9rem, 4.2vw, 2.6rem); line-height: 1.08; }
+    .quote .lede { margin-top: 10px; color: color-mix(in oklab, #F3E8DA 74%, var(--brand)); }
+    .fields { display: grid; gap: 12px; }
+    .fields .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .fields label { display: grid; gap: 6px; font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #E2B48F; }
+    .fields select, .fields input { height: 48px; border-radius: 6px; border: 1px solid rgba(243,232,218,.2); background: rgba(255,255,255,.06); padding: 0 14px; font: inherit; font-size: 1rem; color: #fff; width: 100%; appearance: none; }
+    .fields select option { color: var(--ink); }
+    .wood { display: flex; gap: 8px; flex-wrap: wrap; }
+    .wood label { position: relative; text-transform: none; letter-spacing: 0; font-size: .92rem; font-weight: 500; color: #F3E8DA; }
+    .wood input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+    .wood span { display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(243,232,218,.28); cursor: pointer; }
+    .wood input:checked + span { background: #F3E8DA; color: var(--brand); border-color: #F3E8DA; }
+    .wood input:focus-visible + span { outline: 2px solid #fff; outline-offset: 2px; }
+    .hint { font-size: .84rem; color: color-mix(in oklab, #F3E8DA 64%, var(--brand)); }
+
+    .visit { padding-block: 58px 40px; display: grid; gap: 24px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-weight: 400; font-size: 1.9rem; margin-bottom: 10px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--cedar); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .86rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a href="#top"><img src={`${P}/logo.webp`} alt="Mueblería Misantla" width="700" height="249" /></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> 221 184 5926</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="ph"><img src={`${P}/puertas.webp`} alt="Puertas de madera fabricadas por Mueblería Misantla" width="1400" height="788" fetchpriority="high" /></div>
+      <div class="txt">
+        <span class="kicker">Fábrica en San Andrés Cholula</span>
+        <h1>Los detalles hacen el diseño</h1>
+        <p>Carpintería residencial y comercial en maderas finas. Fabricamos a la medida en cedro y caoba, con acabado artesanal, y te mostramos el diseño en 3D antes de empezar.</p>
+        <div class="ctas">
+          <a class="btn cedar" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar a la medida</a>
+          <a class="btn out" href="#tienda">Ver tienda</a>
+        </div>
+        <div class="facts"><span>Más de dos décadas de experiencia</span><span>Cedro y caoba</span><span>★ {site.rating?.stars} en Google</span></div>
+      </div>
+    </section>
+
+    <section class="block gutter" id="fabricamos">
+      <div class="wrap">
+        <span class="eyebrow">A la medida</span>
+        <h2 class="sec">Lo que fabricamos</h2>
+        <div class="made">
+          {made.map((m) => <article><img src={`${P}/${m.img}.webp`} alt={m.t} loading="lazy" /><h3>{m.t}</h3><p>{m.d}</p></article>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter">
+      <div class="wrap">
+        <span class="eyebrow">Servicio de diseño</span>
+        <h2 class="sec">Cómo trabajamos</h2>
+        <ol class="steps">{steps.map((s) => <li><h3>{s.t}</h3><p>{s.d}</p></li>)}</ol>
+      </div>
+    </section>
+
+    <section class="block gutter" id="tienda">
+      <div class="wrap">
+        <span class="eyebrow">Tienda</span>
+        <h2 class="sec">Piezas con precio</h2>
+        <p class="sub">Una selección de nuestra tienda en línea. Pregunta por cualquiera y te mandamos fotos, medidas y tiempo de entrega.</p>
+        <div class="store">
+          {store.map((s) => (
+            <article class="shelf">
+              {s.img && <img src={`${P}/${s.img}.webp`} alt={s.cat} loading="lazy" />}
+              <div class="in">
+                <h3>{s.cat}</h3>
+                <ul>
+                  {s.items.map(([n, p]) => (
+                    <li>
+                      <span>{n}</span><b>{money(p as number)}</b>
+                      {wa && <a href={`https://wa.me/${wa}?text=${encodeURIComponent(`Hola, Mueblería Misantla. Me interesa: ${n} (${money(p as number)}). ¿Me mandan fotos y tiempo de entrega?`)}`} target="_blank" rel="noreferrer" aria-label={`Preguntar por ${n}`}><Icon name="whatsapp" size={16} /></a>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p class="fine">Precios de nuestra tienda en línea; algunos tienen descuento por temporada. Confírmalos por WhatsApp.</p>
+
+        <div class="pro">
+          <img src={`${P}/puerta-recamara.webp`} alt="Puerta de madera en recámara" loading="lazy" />
+          <div class="in">
+            <span class="eyebrow">Arquitectos, diseñadores e inmobiliarias</span>
+            <h2>Proyectos inmobiliarios y mayoreo</h2>
+            <p>Puertas, clósets, cocinas y muebles para residencias, hoteles, restaurantes y desarrollos.</p>
+            <ul>
+              <li>Precio especial para socios comerciales</li>
+              <li>Cantidad mínima: 8 piezas por modelo</li>
+              <li>Incluye previsualizaciones 3D</li>
+              <li>Contrato de fabricación y entrega programada</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-wrap gutter" id="cotizar">
+      {wa && (
+        <form class="quote wrap" id="quote" data-wa={wa}>
+          <div>
+            <span class="eyebrow" style="color:#E2B48F">Cotización</span>
+            <h2>Cuéntanos qué quieres fabricar</h2>
+            <p class="lede">Con el tipo de mueble, las medidas y la madera te contactamos para agendar llamada o videollamada.</p>
+          </div>
+          <div class="fields">
+            <div class="row">
+              <label>Mueble<select id="kind">{kinds.map((k) => <option>{k}</option>)}</select></label>
+              <label>Ciudad<input id="city" type="text" placeholder="Puebla, CDMX…" /></label>
+            </div>
+            <label>Medidas aproximadas<input id="size" type="text" placeholder="Ej. 2.40 m de ancho × 2.20 m de alto" /></label>
+            <span class="eyebrow" style="color:#E2B48F">Madera</span>
+            <div class="wood">
+              {["Cedro", "Caoba", "Me asesoran"].map((w, i) => <label><input type="radio" name="wood" value={w} checked={i === 2} /><span>{w}</span></label>)}
+            </div>
+            <button class="btn cedar" type="submit"><Icon name="whatsapp" size={18} /> Enviar por WhatsApp</button>
+            <p class="hint">Si tienes fotos de referencia, mándalas en el mismo chat.</p>
+          </div>
+        </form>
+      )}
+    </section>
+
+    <section class="visit wrap gutter" id="contacto">
+      <div>
+        <h2>Visita la fábrica</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 221 184 5926</span></a>}
+        <a href="mailto:Proyectos@muebleriamisantla.com"><Icon name="arrow" /> <span>Proyectos@muebleriamisantla.com</span></a>
+        {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Mueblería Misantla · San Andrés Cholula, Puebla</span><span>Muebles a la medida en cedro y caoba</span></div></footer>
+  {wa && <div class="bar"><a class="btn cedar" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar a la medida</a></div>}
+
+  <script>
+    const f = document.getElementById("quote") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      const wood = f.querySelector<HTMLInputElement>('input[name="wood"]:checked')?.value ?? "";
+      const msg = `Hola, Mueblería Misantla. Quiero cotizar a la medida:\n• Mueble: ${v("kind")}\n• Medidas: ${v("size") || "por definir"}\n• Madera: ${wood}\n• Ciudad: ${v("city") || "por definir"}`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

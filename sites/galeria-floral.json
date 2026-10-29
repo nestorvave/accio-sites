@@ -1,0 +1,35 @@
+{
+  "slug": "galeria-floral",
+  "category": "florist",
+  "name": "Galería Floral",
+  "tagline": "Florería en Querétaro con envío a domicilio",
+  "description": "Florería en Mansiones del Valle con envío a todo Querétaro y zona metropolitana: ramos, rosas, tulipanes, orquídeas phalaenopsis, girasoles, cajas y arreglos con chocolates.",
+  "logo": "/photos/galeria-floral/logo.webp",
+  "phone": "442 125 9480",
+  "whatsapp": "524421259480",
+  "instagram": "galeria_floral",
+  "facebook": "Floreria.GaleriaFloral",
+  "address": "Hacienda Casa Blanca 31-B, Mansiones del Valle, 76185 Santiago de Querétaro, Qro.",
+  "mapUrl": "https://www.google.com/maps/place/?q=place_id:ChIJWfPuyz9F04URULNOUc5F3bI",
+  "hours": [
+    {
+      "days": "Lunes a viernes",
+      "time": "10:00 – 21:00"
+    },
+    {
+      "days": "Sábado",
+      "time": "10:00 – 16:00"
+    },
+    {
+      "days": "Domingo",
+      "time": "11:00 – 14:00"
+    }
+  ],
+  "rating": {
+    "stars": 4.9,
+    "count": 299
+  },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (redesign). galeriafloralqro.com (WordPress/Flatsome + WooCommerce): full-width bar at the top reads 'CLICK AQUÍ PARA COMUNICARSE CON NOSTROS MEDIANTE WHATSAPP' (typo); product photos are their own but served at 247×296 in the grid; mixed hero stock image. Site otherwise works (© 2026, prices). WhatsApp Business verified 442 125 9480. 299 reviews 4.9 (strong). Product names, SKUs, prices and photos from their own store (185 products)."
+}

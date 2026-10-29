@@ -1,0 +1,252 @@
+---
+/**
+ * Querétaro Gourmet — built from their own identity: the navy and gold of their logo, their professional
+ * plated-dish photography, their tagline, numbers and service lists from queretarogourmet.com.mx.
+ * Stock images used on their site are left out. Primary action: a quote form that opens WhatsApp
+ * with the country code included (the buttons on their current site omit it).
+ */
+import "@fontsource-variable/playfair-display";
+import "@fontsource-variable/work-sans";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber, telLink } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const tel = telLink(site);
+const P = "/photos/queretaro-gourmet";
+const today = new Date().toISOString().slice(0, 10);
+
+const social = ["Bodas, aniversarios y celebraciones familiares", "Graduaciones y XV años", "Recepciones y openings con canapés y bebidas"];
+const corporate = ["Cócteles, desayunos y comidas ejecutivas", "Openings, inauguraciones y lanzamientos de producto", "Cenas de fin de año y team building"];
+const plates = [
+  ["mole", "Plato con salsa servida al momento"], ["filete-rosa", "Corte con papa paja y flor de jitomate"], ["salmon", "Salmón con salsa"],
+  ["ceviche", "Entrada fresca con flores comestibles"], ["medallon", "Medallón con espárragos"], ["pera", "Postre de pera"],
+  ["crema", "Crema servida en mesa"], ["rollitos", "Entrada de pepino"], ["pastel", "Pastel de chocolate con frutos rojos"],
+];
+const events = ["Boda", "XV años", "Aniversario", "Empresarial", "Fiesta de fin de año", "Apertura", "Graduación"];
+const guests = ["Menos de 50", "51 – 100", "101 – 200", "201 – 300", "Más de 300"];
+const services = ["Banquete", "Canapés", "Estación de bebidas", "Mobiliario y cristalería", "Carpa o pista de baile"];
+---
+<Base site={site} theme="queretaro-gourmet" themeColor="#092E3D" colors={{ bg: "#F7F4EE", ink: "#0E2731", brand: "#092E3D", paper: "#EDE6D8", "on-brand": "#FFFFFF" }}>
+  <style>
+    :global(html[data-theme="queretaro-gourmet"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 64%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 13%, transparent);
+      --navy: #092E3D;
+      --gold: #B99B62;
+      --gold-2: #D8C08F;
+      --f-display: "Playfair Display Variable", Georgia, serif;
+      --f-body: "Work Sans Variable", system-ui, sans-serif;
+    }
+    :global(html[data-theme="queretaro-gourmet"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1180px; margin-inline: auto; }
+
+    .head { background: var(--navy); }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+    .top img { height: 44px; width: auto; filter: brightness(0) invert(1); }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold-2); font-weight: 600; font-size: .88rem; text-decoration: none; }
+
+    .hero { background: var(--navy); color: #F3EEE4; display: grid; overflow: hidden; }
+    @media (min-width: 900px) { .hero { grid-template-columns: 1fr 1fr; min-height: min(82svh, 720px); } }
+    .hero .txt { padding: 30px max(16px, 5vw) 40px; display: flex; flex-direction: column; justify-content: center; }
+    .hero .kicker { font-size: .78rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+    .hero h1 { margin-top: 14px; font-family: var(--f-display); font-weight: 500; font-size: clamp(2.5rem, 6.4vw, 4.6rem); line-height: 1.02; letter-spacing: -.01em; text-wrap: balance; }
+    .hero h1 i { color: var(--gold-2); font-weight: 400; }
+    .hero p { margin-top: 16px; max-width: 46ch; color: color-mix(in oklab, #F3EEE4 76%, var(--navy)); }
+    .ctas { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 2px; font: inherit; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: .86rem; text-decoration: none; border: 0; cursor: pointer; transition: transform var(--t-fast) var(--ease-out), background var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.gold { background: var(--gold); color: #0B1F28; } .btn.gold:hover { background: var(--gold-2); }
+    .btn.out { border: 1px solid color-mix(in oklab, #F3EEE4 40%, transparent); color: #F3EEE4; }
+    .stats { margin-top: 30px; display: flex; gap: 28px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,.14); padding-top: 18px; }
+    .stats div b { display: block; font-family: var(--f-display); font-size: 2rem; font-weight: 500; color: var(--gold-2); line-height: 1; }
+    .stats div span { font-size: .82rem; color: color-mix(in oklab, #F3EEE4 64%, var(--navy)); }
+    .hero .ph { position: relative; min-height: 320px; }
+    .hero .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    section.block { padding-block: 60px 6px; }
+    .eyebrow { font-size: .76rem; letter-spacing: .22em; text-transform: uppercase; color: #8C7240; font-weight: 600; }
+    h2.sec { font-family: var(--f-display); font-weight: 500; font-size: clamp(2rem, 4.8vw, 3.1rem); line-height: 1.06; margin-top: 8px; text-wrap: balance; }
+    .sub { color: var(--ink-2); margin-top: 10px; max-width: 60ch; }
+
+    .two { margin-top: 26px; display: grid; gap: 16px; }
+    @media (min-width: 860px) { .two { grid-template-columns: 1fr 1fr; gap: 22px; } }
+    .card { background: #fff; padding: 22px; border-top: 3px solid var(--gold); box-shadow: 0 1px 0 var(--line); }
+    .card h3 { font-family: var(--f-display); font-weight: 500; font-size: 1.6rem; }
+    .card p { margin-top: 6px; color: var(--ink-2); font-size: .95rem; }
+    .card ul { margin-top: 14px; display: grid; gap: 8px; }
+    .card li { display: flex; gap: 10px; align-items: baseline; }
+    .card li::before { content: ""; flex: 0 0 18px; height: 1px; background: var(--gold); transform: translateY(-4px); }
+
+    .plates { margin-top: 26px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    @media (min-width: 860px) { .plates { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+    .plates figure { margin: 0; position: relative; overflow: hidden; }
+    .plates img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .6s var(--ease-out); }
+    .plates figure:hover img { transform: scale(1.03); }
+    .plates figure:first-child { grid-column: span 2; }
+    .plates figure:first-child img { aspect-ratio: 16 / 9; }
+    @media (min-width: 860px) { .plates figure:first-child { grid-row: span 2; } .plates figure:first-child img { aspect-ratio: auto; height: 100%; } }
+
+    .extras { margin-top: 26px; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    @media (min-width: 860px) { .extras { grid-template-columns: repeat(3, 1fr); } }
+    .extras div { background: var(--bg); padding: 22px; }
+    .extras b { font-family: var(--f-display); font-weight: 500; font-size: 1.3rem; display: block; }
+    .extras p { margin-top: 6px; font-size: .94rem; color: var(--ink-2); }
+
+    .quote-wrap { padding-block: 64px 6px; }
+    .quote { background: var(--navy); color: #F3EEE4; padding: 26px 18px; display: grid; gap: 20px; }
+    @media (min-width: 900px) { .quote { grid-template-columns: .9fr 1.3fr; padding: 40px; gap: 40px; } }
+    .quote h2 { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.9rem, 4.2vw, 2.7rem); line-height: 1.08; }
+    .quote .lede { margin-top: 10px; color: color-mix(in oklab, #F3EEE4 72%, var(--navy)); }
+    .fields { display: grid; gap: 12px; }
+    .fields .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .fields label { display: grid; gap: 6px; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-2); }
+    .fields select, .fields input { height: 48px; border: 0; border-bottom: 1px solid rgba(243,238,228,.35); background: rgba(255,255,255,.05); padding: 0 12px; font: inherit; font-size: 1rem; color: #fff; width: 100%; appearance: none; border-radius: 0; }
+    .fields select option { color: var(--ink); }
+    .fields input::-webkit-calendar-picker-indicator { filter: invert(1); }
+    .svc { display: flex; flex-wrap: wrap; gap: 8px; }
+    .svc label { position: relative; text-transform: none; letter-spacing: 0; font-size: .92rem; color: #F3EEE4; }
+    .svc input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+    .svc span { display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border: 1px solid rgba(243,238,228,.28); cursor: pointer; transition: background var(--t-fast) var(--ease-out); }
+    .svc input:checked + span { background: var(--gold); border-color: var(--gold); color: #0B1F28; }
+    .svc input:focus-visible + span { outline: 2px solid #fff; outline-offset: 2px; }
+    .hint { font-size: .84rem; color: color-mix(in oklab, #F3EEE4 62%, var(--navy)); }
+
+    .visit { padding-block: 60px 40px; display: grid; gap: 24px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-weight: 500; font-size: 1.9rem; margin-bottom: 10px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { text-align: right; color: var(--ink-2); }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: #8C7240; }
+
+    footer { background: var(--navy); color: color-mix(in oklab, #F3EEE4 70%, var(--navy)); padding-block: 22px calc(22px + 76px); font-size: .86rem; }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--navy) 92%, transparent); backdrop-filter: blur(10px); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <div class="head gutter">
+    <div class="top wrap">
+      <a href="#top"><img src={`${P}/logo.webp`} alt="Querétaro Gourmet Banquetes" width="900" height="301" /></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> 442 611 4208</a>}
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="txt">
+        <span class="kicker">Banquetes · Querétaro</span>
+        <h1>Transformando tu evento en <i>experiencias</i></h1>
+        <p>Banquetes de alta calidad para eventos sociales y empresariales, con atención al detalle, excelencia culinaria y un servicio integral.</p>
+        <div class="ctas">
+          <a class="btn gold" href="#cotizar">Cotizar mi evento</a>
+          <a class="btn out" href="#platillos">Ver platillos</a>
+        </div>
+        <div class="stats">
+          <div><b>+13</b><span>años de experiencia</span></div>
+          <div><b>+15K</b><span>clientes felices</span></div>
+          <div><b>{site.rating?.stars}★</b><span>{site.rating?.count} reseñas en Google</span></div>
+        </div>
+      </div>
+      <div class="ph"><img src={`${P}/hero.webp`} alt="Platillo de Querétaro Gourmet" width="1800" height="1200" fetchpriority="high" /></div>
+    </section>
+
+    <section class="block gutter" id="eventos">
+      <div class="wrap">
+        <span class="eyebrow">Quiénes somos</span>
+        <h2 class="sec">Sociales y empresariales, con el mismo cuidado</h2>
+        <p class="sub">Una propuesta personalizada y completa: menú, ambientación, servicio, mobiliario y logística.</p>
+        <div class="two">
+          <article class="card"><h3>Eventos sociales y bodas</h3><p>Nos encargamos de cada detalle culinario para que tú solo te concentres en disfrutar.</p><ul>{social.map((x) => <li>{x}</li>)}</ul></article>
+          <article class="card"><h3>Eventos empresariales</h3><p>Puntualidad, profesionalismo y una experiencia gastronómica de alto nivel.</p><ul>{corporate.map((x) => <li>{x}</li>)}</ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter" id="platillos">
+      <div class="wrap">
+        <span class="eyebrow">Platillos</span>
+        <h2 class="sec">Cocina nacional e internacional</h2>
+        <p class="sub">Una amplia gama de platillos para todo tipo de eventos. Estas son fotos de nuestra cocina.</p>
+        <div class="plates">{plates.map(([img, alt]) => <figure><img src={`${P}/${img}.webp`} alt={alt} loading="lazy" /></figure>)}</div>
+      </div>
+    </section>
+
+    <section class="block gutter">
+      <div class="wrap">
+        <span class="eyebrow">Complementos</span>
+        <h2 class="sec">Todo lo que tu evento necesita</h2>
+        <div class="extras">
+          <div><b>Canapés</b><p>Opciones innovadoras para recepciones, cócteles y openings.</p></div>
+          <div><b>Estaciones de bebidas</b><p>Desde cocteles clásicos hasta mixología contemporánea.</p></div>
+          <div><b>Mobiliario</b><p>Mesas, sillas, cristalería, carpas, pistas de baile y más.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-wrap gutter" id="cotizar">
+      {wa && (
+        <form class="quote wrap" id="quote" data-wa={wa}>
+          <div>
+            <span class="eyebrow" style="color:var(--gold)">Cotizador</span>
+            <h2>Cuéntanos de tu próximo evento</h2>
+            <p class="lede">Elige el tipo de evento, los invitados y lo que necesitas. Te llega directo a nuestro WhatsApp y te respondemos con una propuesta a tu medida.</p>
+          </div>
+          <div class="fields">
+            <div class="row">
+              <label>Tipo de evento<select id="type">{events.map((e) => <option>{e}</option>)}</select></label>
+              <label>Invitados<select id="guests">{guests.map((g, i) => <option selected={i === 2}>{g}</option>)}</select></label>
+            </div>
+            <div class="row">
+              <label>Fecha<input id="date" type="date" min={today} required /></label>
+              <label>Lugar<input id="place" type="text" placeholder="Jardín, salón, oficina…" /></label>
+            </div>
+            <span class="eyebrow" style="color:var(--gold-2)">Necesito</span>
+            <div class="svc">{services.map((s, i) => <label><input type="checkbox" name="svc" value={s} checked={i === 0} /><span>{s}</span></label>)}</div>
+            <label>Restricciones alimentarias o preferencias<input id="notes" type="text" placeholder="Vegetariano, sin gluten, menú infantil…" /></label>
+            <button class="btn gold" type="submit"><Icon name="whatsapp" size={18} /> Enviar por WhatsApp</button>
+            <p class="hint">Atención de lunes a viernes, 9:00 a 17:00. También en contacto@queretarogourmet.com.mx</p>
+          </div>
+        </form>
+      )}
+    </section>
+
+    <section class="visit wrap gutter" id="contacto">
+      <div>
+        <h2>Atención</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {tel && <a href={tel}><Icon name="phone" /> <span>{site.phone}</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 442 611 4208</span></a>}
+        {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+        {site.facebook && <a href={`https://facebook.com/${site.facebook}`} target="_blank" rel="noreferrer"><Icon name="facebook" /> <span>Facebook</span></a>}
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Querétaro Gourmet · Banquetes</span><span>Bodas · XV años · Empresariales</span></div></footer>
+  {wa && <div class="bar"><a class="btn gold" href="#cotizar">Cotizar mi evento</a></div>}
+
+  <script>
+    const f = document.getElementById("quote") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      if (!v("date")) { f.querySelector<HTMLInputElement>("#date")?.focus(); return; }
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" });
+      const svc = [...f.querySelectorAll<HTMLInputElement>('input[name="svc"]:checked')].map((i) => i.value);
+      const msg = `Hola, Querétaro Gourmet. Quiero cotizar un evento:\n• Tipo: ${v("type")}\n• Fecha: ${date}\n• Invitados: ${v("guests")}\n• Lugar: ${v("place") || "por definir"}\n• Necesito: ${svc.join(", ") || "información general"}${v("notes") ? `\n• Preferencias: ${v("notes")}` : ""}`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

@@ -1,0 +1,31 @@
+{
+  "slug": "muebleria-misantla",
+  "category": "store",
+  "name": "Mueblería Misantla",
+  "tagline": "Muebles de cedro y caoba a la medida, fabricados en Puebla",
+  "description": "Fábrica de muebles en San Andrés Cholula con más de dos décadas de experiencia: recámaras, comedores, salas, cocinas, clósets y puertas de madera sólida a la medida, en cedro y caoba.",
+  "logo": "/photos/muebleria-misantla/logo.webp",
+  "phone": "221 184 5926",
+  "whatsapp": "522211845926",
+  "instagram": "mueblerias_misantla",
+  "facebook": "fabrica.misantla",
+  "address": "Carr. Federal Puebla–Atlixco km 11, San Francisco Acatepec, 72846 San Andrés Cholula, Pue.",
+  "mapUrl": "https://www.google.com/maps/place/?q=place_id:ChIJGfw7vQ7Iz4URt8kcYPI9Lqo",
+  "hours": [
+    {
+      "days": "Lunes a sábado",
+      "time": "9:00 – 18:00"
+    },
+    {
+      "days": "Domingo",
+      "time": "10:00 – 18:00"
+    }
+  ],
+  "rating": {
+    "stars": 4.6,
+    "count": 22
+  },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (redesign). muebleriamisantla.com (Duda + Ecwid): every WhatsApp button links to wa.me/2211845926 or wa.me/2215236645 without country code 52 → WhatsApp can't open the chat; two different WhatsApp numbers on the same page; logo says 'Mizantla' while the business is 'Misantla'; 'Saber mâs'; the /en version mixes English menus ('BRIEFCASE', 'Get into') with Spanish categories. WhatsApp Business verified 221 184 5926. 22 reviews 4.6 (one 1-star about a cracked cedar piece). Room photos from their own site; product names and prices from their Ecwid store (product photos could not be downloaded: CDN blocks cross-origin)."
+}

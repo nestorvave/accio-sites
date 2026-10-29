@@ -1,0 +1,31 @@
+{
+  "slug": "queretaro-gourmet",
+  "category": "catering",
+  "name": "Querétaro Gourmet",
+  "tagline": "Banquetes para bodas, XV años y empresas en Querétaro",
+  "description": "Más de 13 años haciendo banquetes en Querétaro: bodas, XV años, graduaciones, aniversarios y eventos empresariales, con canapés, estaciones de bebidas y mobiliario.",
+  "logo": "/photos/queretaro-gourmet/logo.webp",
+  "phone": "442 611 4208",
+  "whatsapp": "524426114208",
+  "instagram": "queretarogourmet",
+  "facebook": "QueretaroGourmet",
+  "address": "Juriquilla, Santiago de Querétaro, Qro.",
+  "mapUrl": "https://www.google.com/maps/place/?q=place_id:ChIJuxJb-jRb04URNay9K67c2Rw",
+  "hours": [
+    {
+      "days": "Lunes a viernes",
+      "time": "9:00 – 17:00"
+    },
+    {
+      "days": "Sábado y domingo",
+      "time": "Cerrado"
+    }
+  ],
+  "rating": {
+    "stars": 4.5,
+    "count": 58
+  },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (redesign). queretarogourmet.com.mx (WordPress + Elementor by Caliko): the three 'Cotiza con nosotros' WhatsApp buttons point to http://wa.me/4426114208 without country code 52 → WhatsApp can't find the number; contact heading breaks as 'CONTÁCTANO S'; menu shows 'Block' next to 'Blog'; one review ends with 'Lorem ipsum dolor sit amet' (carousel); another says 'Goumet Banquet'; heading 'Babquetes SOCIALES'. WhatsApp Business verified 442 611 4208. 58 reviews 4.5. Plated-dish photos are their own (T5M/DSCF series); stock images on their site were left out."
+}

@@ -1,0 +1,325 @@
+---
+/**
+ * Casa Gastro — built from their own site: their script logo, their event photos, and every package,
+ * minimum and "desde" price exactly as they publish them (taquizas, barra buffet, tacos, 2 y 3 tiempos,
+ * menú italiano, desayuno, empresariales, otros servicios).
+ * Primary action: pick an option and request a quote by WhatsApp.
+ */
+import "@fontsource/young-serif";
+import "@fontsource-variable/dm-sans";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber, telLink } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const tel = telLink(site);
+const P = "/photos/casa-gastro";
+const today = new Date().toISOString().slice(0, 10);
+
+const options = [
+  { id: "taquiza", t: "Taquiza de guisos", img: "buffet-alberca", from: "Desde 25 personas", l: ["6 u 8 guisados a elegir", "Tortillas de tortillería o hechas a mano en el evento", "Montaje estilo barra tipo buffet durante 3 horas"] },
+  { id: "tacos", t: "Tacos al momento", img: "tacos", price: "Desde $140", from: "Desde 40 personas", l: ["Pastor, bistec, costilla, chorizo, suadero, tripa o birria", "Gringas, quesadillas, tacos y quesabirrias", "Tacos y servicio ilimitados durante 2 horas"] },
+  { id: "buffet", t: "Barra tipo buffet", img: "buffet-2", price: "Desde $240 por persona", from: "A partir de 30 personas", l: ["Proteínas clásicas o gourmet: pollo BBQ, fajitas, res en crema chipotle, tinga…", "Pastas, ensaladas, purés, arroz, vegetales al vapor", "Porciones generosas sin exceder tu presupuesto"] },
+  { id: "tiempos", t: "Menú de 2 y 3 tiempos", img: "platos", from: "Para todo tipo de eventos", l: ["Menú variado para complacer a todos", "Agenda tu degustación gratuita"] },
+  { id: "italiano", t: "Menú italiano", img: "pizzas", from: "Servicio completo", l: ["Lasaña boloñesa o de espinacas", "Ensaladas, pastas y tapas"] },
+  { id: "desayuno", t: "Desayuno tipo buffet", img: "desayuno", from: "Desde 50 personas", l: ["La experiencia de un desayuno de hotel en tu evento", "Tus invitados arman su plato al gusto"] },
+];
+const taquiza = [
+  { n: "Paquete 1", d: "Solo alimentos: guisados y tortillas de tortillería" },
+  { n: "Paquete 2", d: "Guisados, tortillas y montaje en barra tipo buffet durante 3 horas" },
+  { n: "Paquete 3", d: "Lo del paquete 2 más desechables: platos, cubiertos y servilletas" },
+  { n: "Paquete 4", d: "Plato trinche, cubiertos, vaso de cristal y vitroleros de agua de sabor; desde 50 personas, tortillas hechas a mano en el evento" },
+];
+const business = [
+  { t: "Coffee break", d: "Servicio clásico a partir de 20 personas.", p: "Desde $110 por persona", img: "coffee" },
+  { t: "Barra refrescante", d: "Para reuniones largas o vespertinas: bebidas, snack fresco o crudités.", img: "crudites" },
+  { t: "Canapés", d: "Para eventos que requieren más detalle y elegancia.", img: "canapes" },
+  { t: "Box lunch", d: "Cotizaciones personalizadas desde 20 personas.", img: "box-lunch" },
+  { t: "Comidas de incentivo y desayunos", d: "Para días especiales o agradecer al equipo. Desde 20 personas.", img: "sandwiches" },
+  { t: "Navideñas y fin de año", d: "Comidas y cenas de temporada desde 6 personas.", img: "barra" },
+];
+const extras = ["Loza y mobiliario", "Spots para fotos", "Espejos y letreros", "Centros de mesa", "Muebles para cristalería"];
+const gallery = [
+  ["pan-ensalada", "Panes y ensalada en barra"], ["mesa", "Mesa puesta para evento"], ["postre", "Postre emplatado"], ["sliders", "Mini hamburguesas"],
+  ["jugos", "Jugos en vitrolero"], ["bruschettas", "Bocadillos"], ["emplatado", "Emplatado en cocina"], ["buffet-jardin", "Barra en evento empresarial"],
+];
+---
+<Base site={site} theme="casa-gastro" themeColor="#1D1B19" colors={{ bg: "#F6F1E7", ink: "#1D1B19", brand: "#C2502E", paper: "#EFE6D3", "on-brand": "#FFFFFF" }}>
+  <style>
+    :global(html[data-theme="casa-gastro"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 66%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 14%, transparent);
+      --f-display: "Young Serif", Georgia, serif;
+      --f-body: "DM Sans Variable", system-ui, sans-serif;
+      --chili: #C2502E;
+      --mustard: #E0A93B;
+    }
+    :global(html[data-theme="casa-gastro"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1160px; margin-inline: auto; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+    .top img { height: 46px; width: auto; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 600; font-size: .9rem; text-decoration: none; }
+
+    .hero { display: grid; gap: 22px; padding-block: 8px 30px; }
+    @media (min-width: 900px) { .hero { grid-template-columns: 1.05fr 1fr; align-items: center; gap: 44px; padding-block: 24px 50px; } }
+    .hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.4rem, 7vw, 4.3rem); line-height: 1.02; letter-spacing: -.01em; text-wrap: balance; }
+    .hero h1 em { font-style: normal; color: var(--chili); }
+    .hero p.lede { margin-top: 14px; font-size: 1.08rem; color: var(--ink-2); max-width: 46ch; }
+    .ctas { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 14px; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; font: inherit; font-weight: 700; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.chili { background: var(--chili); color: #fff; } .btn.chili:hover { filter: brightness(1.07); }
+    .btn.ghost { border: 1.5px solid var(--ink); color: var(--ink); background: transparent; }
+    .proof { margin-top: 16px; font-size: .92rem; color: var(--ink-2); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .proof b { color: var(--ink); }
+    .stars { color: var(--mustard); letter-spacing: 2px; }
+    .hero figure { position: relative; margin: 0; }
+    .hero figure img { width: 100%; aspect-ratio: 4 / 3.4; object-fit: cover; border-radius: 26px; }
+    .hero figure .tag { position: absolute; left: 14px; bottom: 14px; background: #fff; border-radius: 14px; padding: 10px 14px; box-shadow: 0 14px 30px -18px rgba(0,0,0,.6); font-size: .86rem; line-height: 1.3; }
+    .hero figure .tag b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 1.15rem; color: var(--chili); }
+
+    .ticker { background: var(--ink); color: #F6F1E7; overflow: hidden; }
+    .ticker ul { display: flex; gap: 34px; padding-block: 14px; white-space: nowrap; width: max-content; animation: slide 36s linear infinite; }
+    .ticker li { display: inline-flex; align-items: center; gap: 34px; font-weight: 600; font-size: .95rem; }
+    .ticker li::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--mustard); }
+    @keyframes slide { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .ticker ul { animation: none; } }
+
+    section.block { padding-block: 54px 6px; }
+    .eyebrow { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--chili); }
+    h2.sec { font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; margin-top: 6px; text-wrap: balance; }
+    .sub { color: var(--ink-2); margin-top: 10px; max-width: 58ch; }
+
+    .opts { margin-top: 24px; display: grid; gap: 16px; }
+    @media (min-width: 700px) { .opts { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1040px) { .opts { grid-template-columns: repeat(3, 1fr); } }
+    .opt { background: #fff; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 0 var(--line); }
+    .opt img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+    .opt .in { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .opt h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.45rem; line-height: 1.1; }
+    .opt .meta { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--paper); font-size: .8rem; font-weight: 600; }
+    .chip.price { background: color-mix(in oklab, var(--chili) 14%, #fff); color: #8E3519; }
+    .opt ul { display: grid; gap: 5px; font-size: .93rem; color: var(--ink-2); }
+    .opt li { padding-left: 16px; position: relative; }
+    .opt li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; border-radius: 2px; background: var(--mustard); transform: rotate(45deg); }
+    .opt .pick { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--chili); text-decoration: none; padding-top: 4px; }
+    .opt .pick:hover { text-decoration: underline; }
+
+    .packs { margin-top: 26px; display: grid; gap: 18px; background: var(--paper); border-radius: 24px; padding: 22px 18px; }
+    @media (min-width: 900px) { .packs { grid-template-columns: .8fr 1.2fr; padding: 32px; gap: 32px; } }
+    .packs h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.7rem; line-height: 1.1; }
+    .packs p { color: var(--ink-2); margin-top: 8px; font-size: .95rem; }
+    .packs ol { display: grid; gap: 10px; counter-reset: p; }
+    .packs li { background: #fff; border-radius: 14px; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
+    .packs li b { font-family: var(--f-display); font-weight: 400; color: var(--chili); white-space: nowrap; }
+    .packs li span { font-size: .93rem; }
+
+    .biz { margin-top: 24px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .biz { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1040px) { .biz { grid-template-columns: repeat(3, 1fr); } }
+    .biz article { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: center; background: #fff; border-radius: 18px; padding: 10px; box-shadow: 0 1px 0 var(--line); }
+    .biz img { width: 96px; height: 96px; object-fit: cover; border-radius: 12px; }
+    .biz h3 { font-weight: 700; font-size: 1.02rem; }
+    .biz p { font-size: .88rem; color: var(--ink-2); margin-top: 2px; }
+    .biz .p { font-size: .82rem; font-weight: 700; color: #8E3519; margin-top: 4px; }
+
+    .quote-wrap { padding-block: 56px 6px; }
+    .quote { background: var(--ink); color: #F6F1E7; border-radius: 26px; padding: 24px 18px; display: grid; gap: 18px; }
+    @media (min-width: 900px) { .quote { grid-template-columns: .9fr 1.3fr; padding: 36px; gap: 36px; } }
+    .quote h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.9rem, 4.4vw, 2.6rem); line-height: 1.05; }
+    .quote .lede { color: color-mix(in oklab, #F6F1E7 72%, var(--ink)); margin-top: 10px; }
+    .fields { display: grid; gap: 12px; }
+    .fields .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .fields label { display: grid; gap: 6px; font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: color-mix(in oklab, #F6F1E7 70%, var(--ink)); }
+    .fields select, .fields input { height: 48px; border-radius: 12px; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); padding: 0 14px; font: inherit; font-size: 1rem; color: #fff; width: 100%; appearance: none; }
+    .fields select option { color: var(--ink); }
+    .fields input::-webkit-calendar-picker-indicator { filter: invert(1); }
+    .extras { display: flex; flex-wrap: wrap; gap: 8px; }
+    .extras label { position: relative; text-transform: none; letter-spacing: 0; font-size: .92rem; font-weight: 500; }
+    .extras input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+    .extras span { display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); color: #F6F1E7; cursor: pointer; transition: background var(--t-fast) var(--ease-out); }
+    .extras input:checked + span { background: var(--mustard); border-color: var(--mustard); color: var(--ink); }
+    .extras input:focus-visible + span { outline: 2px solid #fff; outline-offset: 2px; }
+    .hint { font-size: .85rem; color: color-mix(in oklab, #F6F1E7 64%, var(--ink)); }
+
+    .gallery { margin-top: 22px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    @media (min-width: 860px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+    .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 16px; }
+
+    .visit { padding-block: 56px 40px; display: grid; gap: 24px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-weight: 400; font-size: 1.9rem; margin-bottom: 10px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--chili); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .88rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a href="#top"><img src={`${P}/logo.webp`} alt="Casa Gastro Banquetes" width="700" height="253" /></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> 442 504 0351</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap gutter">
+      <div>
+        <span class="eyebrow">Banquetes en Querétaro</span>
+        <h1>Taquizas, buffet y <em>tacos al momento</em> para tu evento</h1>
+        <p class="lede">Fiestas, graduaciones y eventos de empresa. En barra, los platillos se mantienen calientes durante el evento y nosotros llevamos y recogemos el material.</p>
+        <div class="ctas">
+          <a class="btn chili" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar mi evento</a>
+          <a class="btn ghost" href="#opciones">Ver opciones</a>
+        </div>
+        <p class="proof"><span class="stars" aria-hidden="true">★★★★★</span> <b>{site.rating?.stars}</b> en Google · {site.rating?.count} reseñas</p>
+      </div>
+      <figure>
+        <img src={`${P}/hero.webp`} alt="Barra tipo buffet de Casa Gastro en un evento" width="1800" height="1350" fetchpriority="high" />
+        <figcaption class="tag"><b>Coffee break</b>desde $110 por persona</figcaption>
+      </figure>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <ul>
+        {[0, 1].map(() => <>
+          <li>Coffee break empresarial desde $110 por persona</li>
+          <li>Barra tipo buffet desde $240 por persona</li>
+          <li>Tacos ilimitados durante 2 horas</li>
+          <li>Degustación gratuita para menú de 2 y 3 tiempos</li>
+          <li>Taquizas desde 25 personas</li>
+        </>)}
+      </ul>
+    </div>
+
+    <section class="block gutter" id="opciones">
+      <div class="wrap">
+        <span class="eyebrow">Opciones</span>
+        <h2 class="sec">Elige tu barra</h2>
+        <p class="sub">Opciones completas y para todos los gustos. Elige una y te mandamos la cotización por WhatsApp.</p>
+        <div class="opts">
+          {options.map((o) => (
+            <article class="opt">
+              <img src={`${P}/${o.img}.webp`} alt={o.t} loading="lazy" />
+              <div class="in">
+                <h3>{o.t}</h3>
+                <div class="meta">{o.price && <span class="chip price">{o.price}</span>}<span class="chip">{o.from}</span></div>
+                <ul>{o.l.map((x) => <li>{x}</li>)}</ul>
+                <a class="pick" href="#cotizar" data-opt={o.t}>Cotizar esta opción <Icon name="arrow" size={16} /></a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="packs">
+          <div>
+            <span class="eyebrow">Taquiza de guisos</span>
+            <h3>Cuatro paquetes, de solo alimentos a servicio completo</h3>
+            <p>De 25 a 49 personas eliges 6 guisados; desde 50 personas, 8. En los paquetes 2, 3 y 4 presentamos en chafers: nosotros llevamos y recogemos el material.</p>
+          </div>
+          <ol>{taquiza.map((p) => <li><b>{p.n}</b><span>{p.d}</span></li>)}</ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter" id="empresas">
+      <div class="wrap">
+        <span class="eyebrow">Empresariales</span>
+        <h2 class="sec">Para tu empresa o tu equipo</h2>
+        <div class="biz">
+          {business.map((b) => (
+            <article>
+              <img src={`${P}/${b.img}.webp`} alt={b.t} loading="lazy" width="96" height="96" />
+              <div><h3>{b.t}</h3><p>{b.d}</p>{b.p && <p class="p">{b.p}</p>}</div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-wrap gutter" id="cotizar">
+      {wa && (
+        <form class="quote wrap" id="quote" data-wa={wa}>
+          <div>
+            <span class="eyebrow" style="color:var(--mustard)">Cotización por WhatsApp</span>
+            <h2>Cuéntanos de tu evento</h2>
+            <p class="lede">Con el tipo de servicio, la fecha y el número de invitados te respondemos con opciones y precio. Reservaciones con 50% de anticipo.</p>
+          </div>
+          <div class="fields">
+            <div class="row">
+              <label>Servicio
+                <select id="opt">{options.map((o) => <option>{o.t}</option>)}<option>Coffee break / empresarial</option><option>No sé, quiero opciones</option></select>
+              </label>
+              <label>Invitados<input id="guests" type="number" inputmode="numeric" min="6" step="5" value="50" /></label>
+            </div>
+            <div class="row">
+              <label>Fecha<input id="date" type="date" min={today} required /></label>
+              <label>Lugar<input id="place" type="text" placeholder="Colonia o salón" /></label>
+            </div>
+            <span class="eyebrow" style="color:color-mix(in oklab,#F6F1E7 70%,#1D1B19)">También necesito</span>
+            <div class="extras">
+              {extras.map((x) => <label><input type="checkbox" name="extra" value={x} /><span>{x}</span></label>)}
+            </div>
+            <button class="btn chili" type="submit"><Icon name="whatsapp" size={18} /> Enviar por WhatsApp</button>
+            <p class="hint">Si es de tacos, confírmanos que el carrito cabe en tu evento.</p>
+          </div>
+        </form>
+      )}
+    </section>
+
+    <section class="block gutter" id="galeria">
+      <div class="wrap">
+        <span class="eyebrow">Galería</span>
+        <h2 class="sec">De nuestros eventos</h2>
+        <div class="gallery">{gallery.map(([img, alt]) => <img src={`${P}/${img}.webp`} alt={alt} loading="lazy" />)}</div>
+      </div>
+    </section>
+
+    <section class="visit wrap gutter" id="contacto">
+      <div>
+        <h2>Horario de atención</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {tel && <a href={tel}><Icon name="phone" /> <span>{site.phone}</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 442 504 0351</span></a>}
+        {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Casa Gastro Banquetes · Querétaro</span><span>Taquizas · Buffet · Coffee break</span></div></footer>
+  {wa && <div class="bar"><a class="btn chili" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar mi evento</a></div>}
+
+  <script>
+    const f = document.getElementById("quote") as HTMLFormElement | null;
+    document.querySelectorAll<HTMLAnchorElement>("a.pick").forEach((a) => a.addEventListener("click", () => {
+      const sel = f?.querySelector<HTMLSelectElement>("#opt");
+      if (sel && a.dataset.opt) sel.value = a.dataset.opt;
+    }));
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      if (!v("date")) { f.querySelector<HTMLInputElement>("#date")?.focus(); return; }
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" });
+      const extras = [...f.querySelectorAll<HTMLInputElement>('input[name="extra"]:checked')].map((i) => i.value);
+      const msg = `Hola, Casa Gastro. Quiero cotizar un evento:\n• Servicio: ${v("opt")}\n• Fecha: ${date}\n• Invitados: ${v("guests") || "por definir"}\n• Lugar: ${v("place") || "por definir"}${extras.length ? `\n• También: ${extras.join(", ")}` : ""}`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

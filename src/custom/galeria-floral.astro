@@ -1,0 +1,286 @@
+---
+/**
+ * Galería Floral — built from their own store: every photo, SKU, name and price is from their catalog
+ * (galeriafloralqro.com), shot in their own shop. The green and gold come from their site and logo.
+ * The page leans into the name: arrangements shown like works in a gallery, each with a museum-style label.
+ * Primary action: order a piece by SKU over WhatsApp, or ask for options by occasion and budget.
+ */
+import "@fontsource/libre-caslon-display";
+import "@fontsource-variable/plus-jakarta-sans";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber, telLink } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const tel = telLink(site);
+const P = "/photos/galeria-floral";
+const today = new Date().toISOString().slice(0, 10);
+
+type K = "Ramos" | "Arreglos" | "Orquídeas" | "Cajas y chocolates";
+const pieces: { sku: string; name: string; price: number; img: string; k: K }[] = [
+  { sku: "639", name: "Ramo de 12 rosas en papel coreano", price: 594, img: "p-00", k: "Ramos" },
+  { sku: "999", name: "Ramo de 40 rosas", price: 1595, img: "p-32", k: "Ramos" },
+  { sku: "871", name: "Orquídea phalaenopsis de doble vara en base rústica de cerámica", price: 594, img: "p-05", k: "Orquídeas" },
+  { sku: "905", name: "Ramo de 12 rosas con 16 chocolates Ferrero Rocher", price: 890, img: "p-02", k: "Cajas y chocolates" },
+  { sku: "833", name: "Ramo de tulipanes, rosas y gerberas en papel francés", price: 575, img: "p-01", k: "Ramos" },
+  { sku: "913", name: "Arreglo de 3 orquídeas phalaenopsis en base de cerámica", price: 2300, img: "p-14", k: "Orquídeas" },
+  { sku: "852", name: "Rosas pastel", price: 1895, img: "p-33", k: "Cajas y chocolates" },
+  { sku: "919", name: "Ramo de 7 gerberas, 2 rosas y 1 girasol en papel kraft", price: 565, img: "p-04", k: "Ramos" },
+  { sku: "879", name: "Pecera con rosas", price: 1635, img: "p-34", k: "Arreglos" },
+  { sku: "845", name: "Ramo de 20 girasoles", price: 1480, img: "p-42", k: "Ramos" },
+  { sku: "760", name: "Rosas y Ferrero", price: 1995, img: "p-28", k: "Cajas y chocolates" },
+  { sku: "904", name: "Ramo de 10 claveles y 4 varas de lilies en papel francés", price: 530, img: "p-03", k: "Ramos" },
+  { sku: "462", name: "Phalaenopsis y tulipanes", price: 1825, img: "p-35", k: "Orquídeas" },
+  { sku: "812", name: "Arreglo de 12 rosas en florero de vidrio", price: 615, img: "p-29", k: "Arreglos" },
+  { sku: "728", name: "Ramo de 36 rosas", price: 1840, img: "p-08", k: "Ramos" },
+  { sku: "861", name: "Corazón con gerberas y rosas", price: 770, img: "p-57", k: "Cajas y chocolates" },
+  { sku: "927", name: "Florero mediano con mini rosas, gerberas y lilies", price: 940, img: "p-18", k: "Arreglos" },
+  { sku: "720", name: "Trío de girasoles", price: 310, img: "p-13", k: "Ramos" },
+  { sku: "674", name: "Phalaenopsis y rosas", price: 1740, img: "p-25", k: "Orquídeas" },
+  { sku: "906", name: "Ramo de 24 rosas y chocolates", price: 1400, img: "p-47", k: "Cajas y chocolates" },
+  { sku: "492", name: "Zen de 10 tulipanes y lilies en base de madera", price: 1500, img: "p-48", k: "Arreglos" },
+  { sku: "799", name: "Ramo de 24 rosas en papel francés", price: 1100, img: "p-17", k: "Ramos" },
+  { sku: "374", name: "Canasta colorida mediana", price: 1565, img: "p-09", k: "Arreglos" },
+  { sku: "791", name: "Rosas, mini rosas y yocos", price: 1780, img: "p-63", k: "Cajas y chocolates" },
+  { sku: "721", name: "Tulipanes y girasoles", price: 1250, img: "p-20", k: "Arreglos" },
+  { sku: "834", name: "Docena de gerberas", price: 594, img: "p-46", k: "Ramos" },
+  { sku: "792", name: "Phalaenopsis y tulipanes", price: 2510, img: "p-54", k: "Orquídeas" },
+  { sku: "699", name: "Violetero con tulipanes", price: 795, img: "p-51", k: "Arreglos" },
+  { sku: "936", name: "Ramo de 12 rosas de color en papel francés", price: 594, img: "p-49", k: "Ramos" },
+  { sku: "869", name: "Caja de lilies", price: 630, img: "p-67", k: "Cajas y chocolates" },
+  { sku: "807", name: "Liatris, girasoles y lilies", price: 1045, img: "p-55", k: "Arreglos" },
+  { sku: "920", name: "Rosas y girasoles", price: 1525, img: "p-45", k: "Ramos" },
+  { sku: "842", name: "Corazón con Ferrero", price: 4710, img: "p-65", k: "Cajas y chocolates" },
+  { sku: "672", name: "24 rosas blancas", price: 1200, img: "p-50", k: "Arreglos" },
+  { sku: "651", name: "Phalaenopsis y tulipanes", price: 5780, img: "p-61", k: "Orquídeas" },
+  { sku: "230", name: "Mixto en crepé italiano", price: 1082, img: "p-60", k: "Ramos" },
+  { sku: "867", name: "Tulipanes en florero", price: 545, img: "p-66", k: "Arreglos" },
+  { sku: "296", name: "Esfera mixta", price: 3557, img: "p-31", k: "Arreglos" },
+];
+const money = (n: number) => `$${n.toLocaleString("es-MX")}`;
+const kinds: K[] = ["Ramos", "Arreglos", "Orquídeas", "Cajas y chocolates"];
+const occasions = ["Cumpleaños", "Aniversario", "Amor", "Nacimiento", "Agradecimiento", "Condolencias", "Solo porque sí"];
+---
+<Base site={site} theme="galeria-floral" themeColor="#315B35" colors={{ bg: "#FAF8F3", ink: "#1C2A1E", brand: "#315B35", paper: "#EFEBE0", "on-brand": "#FFFFFF" }}>
+  <style>
+    :global(html[data-theme="galeria-floral"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 13%, transparent);
+      --leaf: #6E9945;
+      --gold: #B59A63;
+      --f-display: "Libre Caslon Display", Georgia, serif;
+      --f-body: "Plus Jakarta Sans Variable", system-ui, sans-serif;
+    }
+    :global(html[data-theme="galeria-floral"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1200px; margin-inline: auto; }
+
+    .strip { background: var(--brand); color: #E6EFE2; font-size: .84rem; text-align: center; padding: 8px 16px; }
+    .strip b { color: #fff; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand img { height: 52px; width: auto; }
+    .brand span { font-family: var(--f-display); font-size: 1.35rem; line-height: 1; }
+    .brand small { display: block; font-family: var(--f-body); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); margin-top: 3px; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 700; font-size: .88rem; text-decoration: none; }
+
+    .hero { padding-block: 18px 34px; display: grid; gap: 26px; }
+    @media (min-width: 920px) { .hero { grid-template-columns: .95fr 1.05fr; align-items: center; gap: 52px; padding-block: 34px 56px; } }
+    .hero .no { font-size: .74rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+    .hero h1 { margin-top: 10px; font-family: var(--f-display); font-weight: 400; font-size: clamp(2.8rem, 8.4vw, 5.4rem); line-height: .95; letter-spacing: -.01em; text-wrap: balance; }
+    .hero h1 em { color: var(--brand); }
+    .hero p { margin-top: 16px; font-size: 1.06rem; color: var(--ink-2); max-width: 44ch; }
+    .proof { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .9rem; color: var(--ink-2); }
+    .proof b { color: var(--ink); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 999px; background: var(--brand); color: #fff; font: inherit; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; transition: transform var(--t-fast) var(--ease-out), background var(--t-fast) var(--ease-out); }
+    .btn:hover { background: #26482A; } .btn:active { transform: scale(.98); }
+    .hero .btn { margin-top: 22px; }
+
+    .wall { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; align-items: end; }
+    .frame { margin: 0; background: #fff; padding: 10px 10px 0; box-shadow: 0 1px 0 var(--line), 0 26px 40px -30px rgba(28,42,30,.55); }
+    .frame img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+    .frame figcaption { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); padding: 8px 2px 10px; }
+    .wall .frame:nth-child(2) { transform: translateY(-26px); }
+    .frame { opacity: 1; transition: opacity .8s var(--ease-out), translate .8s var(--ease-out); }
+    @starting-style { .frame { opacity: 0; translate: 0 14px; } }
+
+    .how { display: grid; gap: 1px; background: var(--line); border-block: 1px solid var(--line); grid-template-columns: 1fr 1fr; }
+    @media (min-width: 860px) { .how { grid-template-columns: repeat(4, 1fr); } }
+    .how div { background: var(--bg); padding: 18px 14px; }
+    .how b { font-family: var(--f-display); font-weight: 400; font-size: 1.6rem; color: var(--gold); line-height: 1; }
+    .how h3 { margin-top: 6px; font-size: .98rem; font-weight: 700; }
+    .how p { font-size: .86rem; color: var(--ink-2); margin-top: 2px; }
+
+    .catalog { padding-block: 52px 20px; }
+    .eyebrow { font-size: .76rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+    .catalog h2, .sec { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.1rem, 5.2vw, 3.3rem); line-height: 1; margin-top: 8px; }
+    .catalog .sub { color: var(--ink-2); margin-top: 10px; max-width: 58ch; }
+    .filters { margin-top: 18px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+    .filters::-webkit-scrollbar { display: none; }
+    .chip { flex: 0 0 auto; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font: inherit; font-weight: 600; font-size: .9rem; cursor: pointer; transition: background var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out); }
+    .chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .grid { margin-top: 20px; display: grid; gap: 26px 12px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 760px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 34px 20px; } }
+    @media (min-width: 1100px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+    .piece { display: grid; gap: 10px; align-content: start; }
+    .piece[hidden] { display: none; }
+    .piece .ph { background: #fff; padding: 8px; box-shadow: 0 1px 0 var(--line); }
+    .piece img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+    .label { border-left: 2px solid var(--gold); padding-left: 10px; display: grid; gap: 2px; }
+    .label small { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+    .label h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.08rem; line-height: 1.2; }
+    .label .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px; }
+    .label b { font-weight: 700; font-variant-numeric: tabular-nums; }
+    .order { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--brand); color: var(--brand); font-weight: 700; font-size: .82rem; text-decoration: none; transition: background var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out); }
+    .order:hover { background: var(--brand); color: #fff; }
+    .fine { margin-top: 18px; font-size: .84rem; color: var(--ink-2); }
+
+    .custom { margin-block: 30px; background: var(--brand); color: #E6EFE2; border-radius: 28px; padding: 26px 20px; display: grid; gap: 18px; }
+    @media (min-width: 900px) { .custom { grid-template-columns: 1fr 1.1fr; padding: 40px; align-items: center; gap: 40px; } }
+    .custom h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.9rem, 4.2vw, 2.7rem); line-height: 1.05; color: #fff; }
+    .custom p { color: #C9DCC4; margin-top: 10px; }
+    .custom form { display: grid; gap: 10px; }
+    .custom label { display: grid; gap: 6px; font-size: .78rem; font-weight: 700; color: #C9DCC4; letter-spacing: .04em; }
+    .custom select, .custom input { height: 48px; border-radius: 12px; border: 0; padding: 0 14px; font: inherit; font-size: 1rem; color: var(--ink); width: 100%; appearance: none; background: #fff; }
+    .custom .row { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+    .custom .btn { background: #fff; color: var(--brand); } .custom .btn:hover { background: #EEF4EA; }
+
+    .visit { padding-block: 26px 40px; display: grid; gap: 24px; }
+    @media (min-width: 900px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-weight: 400; font-size: 2rem; margin-bottom: 10px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
+    .pay { margin-top: 8px; font-size: .9rem; color: var(--ink-2); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .86rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <div class="strip">Envío de flores a <b>todo Querétaro y zona metropolitana</b></div>
+  <header class="gutter">
+    <div class="top wrap">
+      <a class="brand" href="#top"><img src={`${P}/logo.webp`} alt="" width="109" height="163" /><span>Galería Floral<small>Querétaro</small></span></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> 442 125 9480</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap gutter">
+      <div>
+        <span class="no">Florería en Mansiones del Valle</span>
+        <h1>Arreglos florales para <em>toda ocasión</em></h1>
+        <p>Rosas, tulipanes, girasoles y orquídeas phalaenopsis, hechos en nuestra tienda y entregados a domicilio en todo Querétaro.</p>
+        <p class="proof"><span><b>{site.rating?.stars} ★</b> en Google</span><span>{site.rating?.count} reseñas</span></p>
+        <a class="btn" href="#catalogo">Ver la galería</a>
+      </div>
+      <div class="wall" aria-hidden="true">
+        <figure class="frame"><img src={`${P}/p-14.webp`} alt="" width="900" height="1200" fetchpriority="high" /><figcaption>SKU 913</figcaption></figure>
+        <figure class="frame"><img src={`${P}/p-32.webp`} alt="" width="900" height="1200" /><figcaption>SKU 999</figcaption></figure>
+        <figure class="frame"><img src={`${P}/p-42.webp`} alt="" width="900" height="1200" /><figcaption>SKU 845</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="gutter">
+      <div class="how wrap">
+        <div><b>1</b><h3>Elige tu regalo</h3><p>Cada pieza tiene su SKU.</p></div>
+        <div><b>2</b><h3>Agenda el día</h3><p>Dinos la fecha y la colonia.</p></div>
+        <div><b>3</b><h3>Paga</h3><p>Tarjeta, OXXO o SPEI.</p></div>
+        <div><b>4</b><h3>Llega a tiempo</h3><p>Flores hermosas, a domicilio.</p></div>
+      </div>
+    </section>
+
+    <section class="catalog wrap gutter" id="catalogo">
+      <span class="eyebrow">La galería</span>
+      <h2>Elige una pieza</h2>
+      <p class="sub">Fotos de nuestros arreglos, con su SKU y precio. Toca “Pedir” y nos llega tu pedido por WhatsApp.</p>
+      <div class="filters" role="group" aria-label="Filtrar">
+        <button class="chip" data-f="all" aria-pressed="true">Todas</button>
+        {kinds.map((k) => <button class="chip" data-f={k} aria-pressed="false">{k}</button>)}
+        <button class="chip" data-f="lt700" aria-pressed="false">Hasta $700</button>
+      </div>
+      <div class="grid">
+        {pieces.map((p) => (
+          <article class="piece" data-k={p.k} data-price={p.price}>
+            <div class="ph"><img src={`${P}/${p.img}.webp`} alt={p.name} loading="lazy" width="720" height="900" /></div>
+            <div class="label">
+              <small>SKU {p.sku} · {p.k}</small>
+              <h3>{p.name}</h3>
+              <div class="row">
+                <b>{money(p.price)}</b>
+                {wa && <a class="order" href={`https://wa.me/${wa}?text=${encodeURIComponent(`Hola, Galería Floral. Quiero pedir el SKU-${p.sku} ${p.name} (${money(p.price)}). ¿Lo pueden entregar?`)}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={14} /> Pedir</a>}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="fine">Precios de nuestra tienda en línea. Tenemos más de 180 piezas: si buscas algo en particular, pregúntanos.</p>
+    </section>
+
+    <section class="gutter">
+      <div class="custom wrap" id="a-tu-gusto">
+        <div>
+          <h2>¿No sabes cuál elegir?</h2>
+          <p>Dinos la ocasión, tu presupuesto y cuándo lo necesitas, y te mandamos opciones con foto por WhatsApp.</p>
+        </div>
+        {wa && (
+          <form id="custom" data-wa={wa}>
+            <div class="row">
+              <label>Ocasión<select id="occ">{occasions.map((o) => <option>{o}</option>)}</select></label>
+              <label>Presupuesto<select id="budget"><option>Hasta $600</option><option>$600 – $1,200</option><option>$1,200 – $2,000</option><option>Más de $2,000</option></select></label>
+            </div>
+            <div class="row">
+              <label>Fecha de entrega<input id="date" type="date" min={today} value={today} /></label>
+              <label>Colonia<input id="col" type="text" placeholder="Ej. Juriquilla" /></label>
+            </div>
+            <button class="btn" type="submit"><Icon name="whatsapp" size={18} /> Pedir opciones</button>
+          </form>
+        )}
+      </div>
+    </section>
+
+    <section class="visit wrap gutter" id="visita">
+      <div>
+        <h2>Visita la tienda</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 442 125 9480</span></a>}
+        {tel && <a href={tel}><Icon name="phone" /> <span>{site.phone}</span></a>}
+        {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+        <p class="pay">Pagos con tarjeta de crédito o débito, OXXO y SPEI.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Galería Floral · Hacienda Casa Blanca 31-B, Querétaro</span><span>Arreglos florales para toda ocasión</span></div></footer>
+  {wa && <div class="bar"><a class="btn" href="#catalogo"><Icon name="whatsapp" size={18} /> Elegir y pedir</a></div>}
+
+  <script>
+    const chips = [...document.querySelectorAll<HTMLButtonElement>(".chip")];
+    const cards = [...document.querySelectorAll<HTMLElement>(".piece")];
+    chips.forEach((c) => c.addEventListener("click", () => {
+      chips.forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
+      const f = c.dataset.f!;
+      cards.forEach((card) => { card.hidden = !(f === "all" || f === card.dataset.k || (f === "lt700" && Number(card.dataset.price) <= 700)); });
+    }));
+    const f = document.getElementById("custom") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long" });
+      const msg = `Hola, Galería Floral. Busco un arreglo para ${v("occ").toLowerCase()}, presupuesto ${v("budget")}, para el ${date}${v("col") ? ` en la colonia ${v("col")}` : ""}. ¿Qué opciones tienen?`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>
