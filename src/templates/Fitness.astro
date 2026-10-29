@@ -1,158 +1,158 @@
 ---
 /**
- * Plantilla FITNESS — gym, pilates, yoga, box.
- * Mundo visual: el pizarrón de horarios del estudio. Tipografía condensada y grande como cartel,
- * papel cálido, un acento de energía. La acción es "reserva tu clase de prueba" y el horario semanal es el centro.
+ * FITNESS template — gym, pilates, yoga, boxing.
+ * Visual world: the studio's schedule board. Big condensed poster type, warm paper, one energetic accent.
+ * The action is "book your trial class" and the weekly schedule is the centerpiece.
  */
 import Base from "../layouts/Base.astro";
 import Icon from "../components/Icon.astro";
 import Mark from "../components/Mark.astro";
-import { type Site, precio, reservaLink, telLink, waNumber, textoSobre } from "../lib/sites";
+import { type Site, formatPrice, bookingLink, telLink, waNumber, textOn } from "../lib/sites";
 
 interface Props { site: Site }
 const { site } = Astro.props;
-const c = { fondo: "#F3EFE7", tinta: "#16171B", marca: "#E4572E", papel: "#E7E1D6", ...(site.colores ?? {}) };
-const cta = reservaLink(site);
+const c = { bg: "#F3EFE7", ink: "#16171B", brand: "#E4572E", paper: "#E7E1D6", ...(site.colors ?? {}) };
+const cta = bookingLink(site);
 const tel = telLink(site);
 const wa = waNumber(site);
 const fonts = "https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&display=swap";
-const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-const clasesPorDia = dias.map((d) => ({ dia: d, clases: (site.clases ?? []).filter((k) => k.dia === d) })).filter((x) => x.clases.length);
-const tipos = [...new Set((site.clases ?? []).map((k) => k.nombre))];
-const opciones = tipos.length ? tipos : site.secciones.flatMap((s) => s.items.map((i) => i.nombre));
+const weekDays = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+const classesByDay = weekDays.map((d) => ({ day: d, classes: (site.classes ?? []).filter((k) => k.day === d) })).filter((x) => x.classes.length);
+const classTypes = [...new Set((site.classes ?? []).map((k) => k.name))];
+const options = classTypes.length ? classTypes : site.sections.flatMap((s) => s.items.map((i) => i.name));
 ---
-<Base site={site} fonts={fonts} themeColor={c.tinta} colores={{ ...c, "sobre-marca": textoSobre(c.marca) }}>
+<Base site={site} fonts={fonts} themeColor={c.ink} colors={{ ...c, "on-brand": textOn(c.brand) }}>
   <style>
     :global(:root) {
-      --tinta-2: color-mix(in oklab, var(--tinta) 62%, var(--fondo));
-      --linea: color-mix(in oklab, var(--tinta) 16%, transparent);
+      --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 16%, transparent);
       --f-display: "Big Shoulders Display", Impact, sans-serif;
       --f-body: "Archivo", system-ui, sans-serif;
     }
-    :global(body) { background: var(--fondo); color: var(--tinta); font-family: var(--f-body); font-size: 16px; line-height: 1.5; }
+    :global(body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.5; }
     .wrap { max-width: 1080px; margin-inline: auto; }
 
     .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; }
     .top .name { min-width: 0; display: flex; align-items: center; gap: 12px; font-family: var(--f-display); font-weight: 800; font-size: 1.4rem; letter-spacing: .02em; text-transform: uppercase; text-decoration: none; }
-    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; background: var(--tinta); color: var(--fondo); text-decoration: none; font-weight: 600; font-size: .9rem; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: var(--bg); text-decoration: none; font-weight: 600; font-size: .9rem; }
 
-    /* Cartel */
-    .cartel { padding-block: clamp(24px, 5vw, 56px) 20px; }
-    .cartel h1 { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: clamp(3.4rem, 13vw, 9.5rem); line-height: .86; letter-spacing: -.01em; text-wrap: balance; }
-    .cartel h1 .l { display: block; }
-    .cartel h1 .l:nth-child(2) { color: var(--marca); }
-    .cartel h1 .l { opacity: 1; transform: none; transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); }
-    .cartel h1 .l:nth-child(2) { transition-delay: 70ms; } .cartel h1 .l:nth-child(3) { transition-delay: 140ms; }
-    @starting-style { .cartel h1 .l { opacity: 0; transform: translateY(14px); } }
-    .cartel p { margin-top: 20px; max-width: 56ch; font-size: 1.08rem; color: var(--tinta-2); }
+    /* Poster */
+    .poster { padding-block: clamp(24px, 5vw, 56px) 20px; }
+    .poster h1 { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: clamp(3.4rem, 13vw, 9.5rem); line-height: .86; letter-spacing: -.01em; text-wrap: balance; }
+    .poster h1 .l { display: block; }
+    .poster h1 .l:nth-child(2) { color: var(--brand); }
+    .poster h1 .l { opacity: 1; transform: none; transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); }
+    .poster h1 .l:nth-child(2) { transition-delay: 70ms; } .poster h1 .l:nth-child(3) { transition-delay: 140ms; }
+    @starting-style { .poster h1 .l { opacity: 0; transform: translateY(14px); } }
+    .poster p { margin-top: 20px; max-width: 56ch; font-size: 1.08rem; color: var(--ink-2); }
 
-    .prueba { margin-top: 24px; display: grid; gap: 10px; max-width: 620px; grid-template-columns: 1fr; }
-    @media (min-width: 640px) { .prueba { grid-template-columns: 1fr auto; } }
-    .prueba select { height: 52px; padding: 0 44px 0 16px; border-radius: 12px; border: 2px solid var(--tinta); background: #fff; color: var(--tinta); font: inherit; font-weight: 500; appearance: none; width: 100%; }
+    .trial { margin-top: 24px; display: grid; gap: 10px; max-width: 620px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .trial { grid-template-columns: 1fr auto; } }
+    .trial select { height: 52px; padding: 0 44px 0 16px; border-radius: 12px; border: 2px solid var(--ink); background: #fff; color: var(--ink); font: inherit; font-weight: 500; appearance: none; width: 100%; }
     .sel { position: relative; display: block; }
     .sel :global(svg) { position: absolute; right: 14px; top: 50%; transform: translateY(-50%) rotate(90deg); pointer-events: none; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 12px; background: var(--marca); color: var(--sobre-marca); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; font-size: .9rem; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 12px; background: var(--brand); color: var(--on-brand); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; font-size: .9rem; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
     .btn:hover { filter: brightness(1.06); } .btn:active { transform: scale(.98); }
-    .prueba .hint { grid-column: 1 / -1; font-size: .85rem; color: var(--tinta-2); margin: 0; }
+    .trial .hint { grid-column: 1 / -1; font-size: .85rem; color: var(--ink-2); margin: 0; }
 
-    /* Pizarrón de horarios */
-    .horario { margin-top: 44px; background: var(--tinta); color: var(--fondo); border-radius: 22px; padding: 22px; }
-    .horario h2 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 2rem; letter-spacing: .02em; }
-    .horario .sub { color: color-mix(in oklab, var(--fondo) 65%, var(--tinta)); font-size: .92rem; margin-top: 2px; }
-    .semana { margin-top: 18px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
-    .dia h3 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 1.15rem; letter-spacing: .05em; color: var(--marca); border-bottom: 1px solid color-mix(in oklab, var(--fondo) 20%, transparent); padding-bottom: 6px; }
-    .dia ul { margin-top: 8px; display: grid; gap: 6px; }
-    .dia li { display: grid; grid-template-columns: auto 1fr; gap: 10px; font-size: .95rem; align-items: baseline; }
-    .dia li b { font-variant-numeric: tabular-nums; font-weight: 600; color: color-mix(in oklab, var(--fondo) 75%, var(--tinta)); }
-    .dia li small { display: block; color: color-mix(in oklab, var(--fondo) 55%, var(--tinta)); font-size: .82rem; }
+    /* Schedule board */
+    .schedule { margin-top: 44px; background: var(--ink); color: var(--bg); border-radius: 22px; padding: 22px; }
+    .schedule h2 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 2rem; letter-spacing: .02em; }
+    .schedule .sub { color: color-mix(in oklab, var(--bg) 65%, var(--ink)); font-size: .92rem; margin-top: 2px; }
+    .week { margin-top: 18px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .day h3 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 1.15rem; letter-spacing: .05em; color: var(--brand); border-bottom: 1px solid color-mix(in oklab, var(--bg) 20%, transparent); padding-bottom: 6px; }
+    .day ul { margin-top: 8px; display: grid; gap: 6px; }
+    .day li { display: grid; grid-template-columns: auto 1fr; gap: 10px; font-size: .95rem; align-items: baseline; }
+    .day li b { font-variant-numeric: tabular-nums; font-weight: 600; color: color-mix(in oklab, var(--bg) 75%, var(--ink)); }
+    .day li small { display: block; color: color-mix(in oklab, var(--bg) 55%, var(--ink)); font-size: .82rem; }
 
-    .planes { padding-block: 44px 40px; }
-    .planes h2 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 2rem; letter-spacing: .02em; }
-    .grupo { margin-top: 18px; }
-    .grupo h3 { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-2); font-weight: 700; }
-    .grupo .nota { color: var(--tinta-2); font-size: .92rem; }
-    .items { margin-top: 8px; border-top: 2px solid var(--tinta); }
-    .item { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 14px 0; border-bottom: 1px solid var(--linea); align-items: baseline; }
+    .plans { padding-block: 44px 40px; }
+    .plans h2 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 2rem; letter-spacing: .02em; }
+    .group { margin-top: 18px; }
+    .group h3 { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); font-weight: 700; }
+    .group .note { color: var(--ink-2); font-size: .92rem; }
+    .items { margin-top: 8px; border-top: 2px solid var(--ink); }
+    .item { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
     .item .n { font-family: var(--f-display); font-weight: 800; font-size: 1.5rem; text-transform: uppercase; letter-spacing: .02em; }
-    .item .n .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--marca); margin-left: 10px; vertical-align: middle; }
+    .item .n .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); margin-left: 10px; vertical-align: middle; }
     .item .p { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; font-size: 1.1rem; }
-    .item .p small { display: block; color: var(--tinta-2); font-weight: 400; font-size: .85rem; text-align: right; }
-    .item .d { grid-column: 1 / -1; color: var(--tinta-2); font-size: .95rem; max-width: 62ch; }
+    .item .p small { display: block; color: var(--ink-2); font-weight: 400; font-size: .85rem; text-align: right; }
+    .item .d { grid-column: 1 / -1; color: var(--ink-2); font-size: .95rem; max-width: 62ch; }
 
-    .fotos { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); padding-bottom: 30px; }
-    .fotos img { aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
+    .photos { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); padding-bottom: 30px; }
+    .photos img { aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
 
-    .ficha { border-top: 2px solid var(--tinta); padding: 26px 0 50px; display: grid; gap: 26px; grid-template-columns: 1fr; }
-    @media (min-width: 760px) { .ficha { grid-template-columns: 1fr 1fr; gap: 40px; } }
-    .ficha h2 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 1.5rem; letter-spacing: .03em; margin-bottom: 12px; }
-    .horas li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--linea); }
-    .horas li span:last-child { font-variant-numeric: tabular-nums; color: var(--tinta-2); }
-    .datos { display: grid; gap: 12px; }
-    .datos a, .datos p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
-    .datos a:hover { text-decoration: underline; }
-    .datos :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--marca); }
+    .info { border-top: 2px solid var(--ink); padding: 26px 0 50px; display: grid; gap: 26px; grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .info { grid-template-columns: 1fr 1fr; gap: 40px; } }
+    .info h2 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 1.5rem; letter-spacing: .03em; margin-bottom: 12px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+    .details { display: grid; gap: 12px; }
+    .details a, .details p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .details a:hover { text-decoration: underline; }
+    .details :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
 
-    footer { background: var(--tinta); color: var(--fondo); padding-block: 24px calc(24px + 72px); font-size: .9rem; }
+    footer { background: var(--ink); color: var(--bg); padding-block: 24px calc(24px + 72px); font-size: .9rem; }
     footer .in { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
-    footer a { color: var(--fondo); text-decoration: none; }
+    footer a { color: var(--bg); text-decoration: none; }
 
-    .barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--fondo) 88%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--linea); }
-    .barra .btn { width: 100%; }
-    @media (min-width: 760px) { .barra { display: none; } footer { padding-bottom: 24px; } }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 760px) { .bar { display: none; } footer { padding-bottom: 24px; } }
   </style>
 
   <header class="gutter">
     <div class="top wrap">
-      <a class="name" href="#top"><Mark nombre={site.nombre} logo={site.logo} size={40} /> {site.nombre}</a>
+      <a class="name" href="#top"><Mark name={site.name} logo={site.logo} size={40} /> {site.name}</a>
       {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> WhatsApp</a>}
     </div>
   </header>
 
   <main class="gutter" id="top">
-    <section class="cartel wrap">
+    <section class="poster wrap">
       <h1>{site.tagline.split("|").map((l) => <span class="l">{l.trim()}</span>)}</h1>
-      <p>{site.descripcion}</p>
+      <p>{site.description}</p>
       {wa ? (
-        <form class="prueba" id="prueba" data-wa={wa} data-nombre={site.nombre}>
+        <form class="trial" id="trial" data-wa={wa} data-name={site.name}>
           <label class="sel"><span class="sr-only">Clase</span>
-            <select id="clase" required><option value="">¿Qué clase quieres probar?</option>{opciones.map((o) => <option value={o}>{o}</option>)}</select>
+            <select id="class" required><option value="">¿Qué clase quieres probar?</option>{options.map((o) => <option value={o}>{o}</option>)}</select>
             <Icon name="arrow" size={18} />
           </label>
           <button class="btn" type="submit"><Icon name="whatsapp" size={18} /> Reservar clase de prueba</button>
           <p class="hint">Te confirmamos lugar por WhatsApp. Trae ropa cómoda; lo demás lo ponemos nosotros.</p>
         </form>
-      ) : cta ? <p class="prueba"><a class="btn" href={cta.url}>{cta.label}</a></p> : null}
+      ) : cta ? <p class="trial"><a class="btn" href={cta.url}>{cta.label}</a></p> : null}
     </section>
 
-    {clasesPorDia.length ? (
-      <section class="horario wrap" id="horario">
+    {classesByDay.length ? (
+      <section class="schedule wrap" id="schedule">
         <h2>Horario de la semana</h2>
         <p class="sub">Cupo limitado por clase. Reserva con anticipación.</p>
-        <div class="semana">
-          {clasesPorDia.map((d) => (
-            <div class="dia">
-              <h3>{d.dia}</h3>
-              <ul>{d.clases.map((k) => <li><b>{k.hora}</b><span>{k.nombre}{k.coach && <small>{k.coach}</small>}</span></li>)}</ul>
+        <div class="week">
+          {classesByDay.map((d) => (
+            <div class="day">
+              <h3>{d.day}</h3>
+              <ul>{d.classes.map((k) => <li><b>{k.time}</b><span>{k.name}{k.coach && <small>{k.coach}</small>}</span></li>)}</ul>
             </div>
           ))}
         </div>
       </section>
     ) : null}
 
-    {site.fotos?.length ? <div class="fotos wrap">{site.fotos.map((f) => <img src={f} alt="" loading="lazy" />)}</div> : null}
+    {site.photos?.length ? <div class="photos wrap">{site.photos.map((f) => <img src={f} alt="" loading="lazy" />)}</div> : null}
 
-    <section class="planes wrap" id="planes">
+    <section class="plans wrap" id="plans">
       <h2>Planes</h2>
-      {site.secciones.map((s) => (
-        <div class="grupo">
-          <h3>{s.titulo}</h3>
-          {s.nota && <p class="nota">{s.nota}</p>}
+      {site.sections.map((s) => (
+        <div class="group">
+          <h3>{s.title}</h3>
+          {s.note && <p class="note">{s.note}</p>}
           <ul class="items">
             {s.items.map((it) => (
               <li class="item">
-                <span class="n">{it.nombre}{it.destacado && <span class="dot" title="El más elegido" />}</span>
-                <span class="p">{precio(it.precio)}{it.duracion && <small>{it.duracion}</small>}</span>
-                {it.descripcion && <span class="d">{it.descripcion}</span>}
+                <span class="n">{it.name}{it.featured && <span class="dot" title="El más elegido" />}</span>
+                <span class="p">{formatPrice(it.price)}{it.duration && <small>{it.duration}</small>}</span>
+                {it.description && <span class="d">{it.description}</span>}
               </li>
             ))}
           </ul>
@@ -160,16 +160,16 @@ const opciones = tipos.length ? tipos : site.secciones.flatMap((s) => s.items.ma
       ))}
     </section>
 
-    <section class="ficha wrap" id="visita">
+    <section class="info wrap" id="visit">
       <div>
         <h2>Horario del estudio</h2>
-        <ul class="horas">{site.horario.map((h) => <li><span>{h.dias}</span><span>{h.horas}</span></li>)}</ul>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
       </div>
       <div>
         <h2>Dónde</h2>
-        <div class="datos">
-          {site.direccion && (site.mapa ? <a href={site.mapa} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.direccion}</span></a> : <p><Icon name="pin" /> <span>{site.direccion}</span></p>)}
-          {tel && <a href={tel}><Icon name="phone" /> <span>{site.telefono}</span></a>}
+        <div class="details">
+          {site.address && (site.mapUrl ? <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a> : <p><Icon name="pin" /> <span>{site.address}</span></p>)}
+          {tel && <a href={tel}><Icon name="phone" /> <span>{site.phone}</span></a>}
           {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
           {site.facebook && <a href={`https://facebook.com/${site.facebook}`} target="_blank" rel="noreferrer"><Icon name="facebook" /> <span>Facebook</span></a>}
         </div>
@@ -179,20 +179,20 @@ const opciones = tipos.length ? tipos : site.secciones.flatMap((s) => s.items.ma
 
   <footer>
     <div class="in wrap gutter">
-      <span>{site.nombre}</span>
+      <span>{site.name}</span>
       {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer">@{site.instagram}</a>}
     </div>
   </footer>
 
-  {cta && <div class="barra"><a class="btn" href={cta.url} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> {cta.label}</a></div>}
+  {cta && <div class="bar"><a class="btn" href={cta.url} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> {cta.label}</a></div>}
 
   <script>
-    const f = document.getElementById("prueba") as HTMLFormElement | null;
+    const f = document.getElementById("trial") as HTMLFormElement | null;
     f?.addEventListener("submit", (e) => {
       e.preventDefault();
-      const sel = f.querySelector<HTMLSelectElement>("#clase");
+      const sel = f.querySelector<HTMLSelectElement>("#class");
       if (!sel?.value) { sel?.focus(); return; }
-      const msg = `Hola, ${f.dataset.nombre}. Quiero reservar una clase de prueba de ${sel.value}. ¿Qué horarios tienen esta semana?`;
+      const msg = `Hola, ${f.dataset.name}. Quiero reservar una clase de prueba de ${sel.value}. ¿Qué horarios tienen esta semana?`;
       window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
     });
   </script>

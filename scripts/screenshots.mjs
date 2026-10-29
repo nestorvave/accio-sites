@@ -1,5 +1,5 @@
-// Capturas de cada demo en móvil y escritorio, para revisarlas o mandarlas al prospecto.
-// Uso: npm run build && npm run shots [slug]   →  shots/<slug>-movil.png, shots/<slug>-escritorio.png
+// Mobile and desktop screenshots of every built site, for review or for sending as a preview.
+// Usage: npm run build && npm run shots [slug]   →  shots/<slug>-mobile.png, shots/<slug>-desktop.png
 import { chromium } from "playwright";
 import { createServer } from "node:http";
 import { readFile, readdir, mkdir } from "node:fs/promises";
@@ -27,12 +27,12 @@ await mkdir(out, { recursive: true });
 const slugs = (await readdir(dist, { withFileTypes: true })).filter((d) => d.isDirectory() && d.name !== "_astro").map((d) => d.name).filter((s) => !only || s === only);
 const browser = await chromium.launch();
 for (const slug of slugs) {
-  for (const [name, vp, mobile] of [["movil", { width: 390, height: 844 }, true], ["escritorio", { width: 1280, height: 800 }, false]]) {
+  for (const [name, vp, mobile] of [["mobile", { width: 390, height: 844 }, true], ["desktop", { width: 1280, height: 800 }, false]]) {
     const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 2, isMobile: mobile, hasTouch: mobile, locale: "es-MX" });
     const page = await ctx.newPage();
     await page.goto(`http://localhost:${port}/${slug}/`, { waitUntil: "networkidle" });
-    await page.waitForTimeout(900); // que termine la entrada
-    await page.addStyleTag({ content: ".barra,.demo-tag{display:none!important}" }); // fijos: no en página completa
+    await page.waitForTimeout(900); // let the entrance animation finish
+    await page.addStyleTag({ content: ".bar,.demo-tag{display:none!important}" }); // fixed elements do not belong in a full-page capture
     await page.screenshot({ path: join(out, `${slug}-${name}.png`), fullPage: true });
     await ctx.close();
     console.log(`✓ ${slug} ${name}`);

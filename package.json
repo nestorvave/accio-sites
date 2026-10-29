@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Páginas de una hoja por giro para prospectos de ACCIO. Cada negocio es un JSON en sites/.",
+  "description": "One-page sites per business category. Each business is a JSON file in sites/.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

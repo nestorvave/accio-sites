@@ -1,0 +1,193 @@
+---
+/**
+ * CLINIC template — dental, aesthetic medicine, veterinary, firms.
+ * Visual world: the appointment card. Clinic light (cool, bright background), one trust color,
+ * a serious serif + a clear sans. The primary action is the card itself: treatment + date + shift → WhatsApp.
+ */
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import Mark from "../components/Mark.astro";
+import { type Site, formatPrice, bookingLink, telLink, waNumber, textOn } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const c = { bg: "#F6F9FA", ink: "#10232B", brand: "#0E6F7A", paper: "#E4EEF0", ...(site.colors ?? {}) };
+const cta = bookingLink(site);
+const tel = telLink(site);
+const wa = waNumber(site);
+const fonts = "https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap";
+const v = {
+  dental: { who: "patient", action: "Agenda tu cita", list: "Tratamientos", note: "Primera consulta con valoración y plan de tratamiento por escrito.", hint: "Te confirmamos horario en minutos. Urgencias: escríbenos directo." },
+  aesthetic: { who: "patient", action: "Agenda tu valoración", list: "Tratamientos", note: "Toda valoración incluye diagnóstico y propuesta a tu medida; sin compromiso.", hint: "Te confirmamos horario en minutos." },
+  veterinary: { who: "pet", action: "Agenda una consulta", list: "Servicios", note: "Urgencias las 24 horas: llámanos antes de salir de casa.", hint: "Te confirmamos horario en minutos. Si es urgencia, llama." },
+  medical: { who: "patient", action: "Agenda tu cita", list: "Servicios", note: "", hint: "Te confirmamos horario en minutos." },
+  firm: { who: "client", action: "Agenda una asesoría", list: "Servicios", note: "Primera reunión sin costo: revisamos tu situación y te decimos qué conviene.", hint: "Te confirmamos horario en minutos. Atendemos en oficina o por videollamada." },
+}[site.subcategory ?? "medical"];
+const today = new Date().toISOString().slice(0, 10);
+const shifts = ["Mañana", "Mediodía", "Tarde"];
+---
+<Base site={site} fonts={fonts} themeColor={c.brand} colors={{ ...c, "on-brand": textOn(c.brand) }}>
+  <style>
+    :global(:root) {
+      --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 14%, transparent);
+      --f-display: "DM Serif Display", Georgia, serif;
+      --f-body: "Figtree", system-ui, sans-serif;
+    }
+    :global(body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .wrap { max-width: 1040px; margin-inline: auto; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
+    .top .name { min-width: 0; display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: -.01em; text-decoration: none; }
+    .top .tel { white-space: nowrap; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; font-weight: 500; font-size: .92rem; font-variant-numeric: tabular-nums; }
+    .top .tel:hover { background: var(--paper); }
+
+    .hero { display: grid; gap: 28px; padding-block: clamp(28px, 6vw, 64px) clamp(28px, 5vw, 56px); align-items: center; }
+    @media (min-width: 860px) { .hero { grid-template-columns: 1.1fr 1fr; gap: 56px; } }
+    .hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.3rem, 6vw, 4.2rem); line-height: 1.02; letter-spacing: -.015em; text-wrap: balance; max-width: 16ch; }
+    .hero h1 em { font-style: italic; color: var(--brand); }
+    .hero p { margin-top: 18px; max-width: 54ch; font-size: 1.05rem; color: var(--ink-2); }
+    .hero h1, .hero p { opacity: 1; transform: none; transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+    .hero p { transition-delay: 90ms; }
+    @starting-style { .hero h1, .hero p { opacity: 0; transform: translateY(10px); } }
+
+    /* The appointment card: punch hole on top, fields in rows, button at the foot */
+    .appointment { position: relative; background: #fff; border-radius: 22px; box-shadow: 0 18px 40px -24px color-mix(in oklab, var(--ink) 45%, transparent), 0 1px 0 var(--line); padding: 22px 22px 20px; display: grid; gap: 14px; }
+    .appointment::before { content: ""; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); width: 44px; height: 6px; border-radius: 999px; background: var(--paper); }
+    .appointment h2 { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; margin-top: 10px; }
+    .appointment label { display: grid; gap: 6px; font-size: .78rem; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; color: var(--ink-2); }
+    .appointment select, .appointment input { height: 48px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-size: 1rem; width: 100%; appearance: none; }
+    .appointment .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 50px; padding: 0 20px; border-radius: 12px; background: var(--brand); color: var(--on-brand); font-weight: 600; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn:hover { filter: brightness(1.07); } .btn:active { transform: scale(.98); }
+    .appointment .hint { font-size: .85rem; color: var(--ink-2); margin: 0; }
+
+    .list { padding-block: 8px 48px; }
+    .list h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.4rem); }
+    .list .note { color: var(--ink-2); max-width: 60ch; margin-top: 6px; }
+    .group { margin-top: 28px; }
+    .group h3 { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); font-weight: 700; }
+    .items { margin-top: 10px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .item { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+    .item .n { font-weight: 600; font-size: 1.05rem; }
+    .item .n .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); margin-left: 8px; vertical-align: middle; }
+    .item .p { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+    .item .p small { display: block; color: var(--ink-2); font-weight: 400; font-size: .85rem; text-align: right; }
+    .item .d { grid-column: 1 / -1; color: var(--ink-2); font-size: .95rem; max-width: 62ch; }
+
+    .photos { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); padding-bottom: 40px; }
+    .photos img { aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; }
+
+    .info { background: var(--paper); border-radius: 22px; padding: 26px 22px; display: grid; gap: 26px; grid-template-columns: 1fr; margin-bottom: 40px; }
+    @media (min-width: 760px) { .info { grid-template-columns: 1fr 1fr; gap: 40px; padding: 32px; } }
+    .info h2 { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; margin-bottom: 12px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+    .details { display: grid; gap: 12px; }
+    .details a, .details p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .details a:hover { text-decoration: underline; }
+    .details :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 24px calc(24px + 72px); color: var(--ink-2); font-size: .9rem; }
+    footer .in { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
+    footer a { color: var(--ink); text-decoration: none; }
+
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 760px) { .bar { display: none; } footer { padding-bottom: 24px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a class="name" href="#top"><Mark name={site.name} logo={site.logo} size={42} /> {site.name}</a>
+      {tel && <a class="tel" href={tel}><Icon name="phone" size={16} /> {site.phone}</a>}
+    </div>
+  </header>
+
+  <main class="gutter" id="top">
+    <section class="hero wrap">
+      <div>
+        <h1>{site.tagline}</h1>
+        <p>{site.description}</p>
+      </div>
+      {wa ? (
+        <form class="appointment" id="appointment" data-wa={wa} data-name={site.name} data-who={v.who}>
+          <h2>{v.action}</h2>
+          <label>{v.list.slice(0, -1) === "Tratamiento" ? "Tratamiento" : "Servicio"}
+            <select name="treatment" id="treatment" required>
+              <option value="">Elige una opción</option>
+              {site.sections.map((s) => <optgroup label={s.title}>{s.items.map((it) => <option value={it.name}>{it.name}</option>)}</optgroup>)}
+            </select>
+          </label>
+          <div class="row">
+            <label>Día <input type="date" name="date" id="date" min={today} value={today} required /></label>
+            <label>Turno <select name="shift" id="shift">{shifts.map((t) => <option value={t}>{t}</option>)}</select></label>
+          </div>
+          <button class="btn" type="submit"><Icon name="whatsapp" size={18} /> Pedir cita por WhatsApp</button>
+          <p class="hint">{v.hint}</p>
+        </form>
+      ) : cta ? <p><a class="btn" href={cta.url}>{cta.label}</a></p> : null}
+    </section>
+
+    {site.photos?.length ? <div class="photos wrap">{site.photos.map((f) => <img src={f} alt="" loading="lazy" />)}</div> : null}
+
+    <section class="list wrap" id="treatments">
+      <h2>{v.list}</h2>
+      {v.note && <p class="note">{v.note}</p>}
+      {site.sections.map((s) => (
+        <div class="group">
+          <h3>{s.title}</h3>
+          {s.note && <p class="note">{s.note}</p>}
+          <ul class="items">
+            {s.items.map((it) => (
+              <li class="item">
+                <span class="n">{it.name}{it.featured && <span class="dot" title="El más solicitado" />}</span>
+                <span class="p">{formatPrice(it.price)}{it.duration && <small>{it.duration}</small>}</span>
+                {it.description && <span class="d">{it.description}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <section class="info wrap" id="visit">
+      <div>
+        <h2>Horario</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div>
+        <h2>Dónde</h2>
+        <div class="details">
+          {site.address && (site.mapUrl ? <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a> : <p><Icon name="pin" /> <span>{site.address}</span></p>)}
+          {tel && <a href={tel}><Icon name="phone" /> <span>{site.phone}</span></a>}
+          {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+          {site.facebook && <a href={`https://facebook.com/${site.facebook}`} target="_blank" rel="noreferrer"><Icon name="facebook" /> <span>Facebook</span></a>}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="in wrap gutter">
+      <span>{site.name}</span>
+      {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer">@{site.instagram}</a>}
+    </div>
+  </footer>
+
+  {cta && <div class="bar"><a class="btn" href={cta.url} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> {cta.label}</a></div>}
+
+  <script>
+    const f = document.getElementById("appointment") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "");
+      if (!v("treatment")) { f.querySelector<HTMLSelectElement>("#treatment")?.focus(); return; }
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long" });
+      const who = f.dataset.who === "pet" ? " para mi mascota" : "";
+      const msg = `Hola, ${f.dataset.name}. Quiero una cita${who}: ${v("treatment")}, el ${date}, turno ${v("shift").toLowerCase()}. ¿Tienen espacio?`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

@@ -1,106 +1,106 @@
 {
   "slug": "serena-studio",
-  "giro": "fitness",
-  "nombre": "Serena Studio",
+  "category": "fitness",
+  "name": "Serena Studio",
   "tagline": "Entrena | medita | repite",
-  "descripcion": "Estudio en Plaza Flores con grupos pequeños, coaches certificados y clases temáticas por temporada. Cada clase termina con una meditación corta. Accesible y siempre limpio.",
+  "description": "Estudio en Plaza Flores con grupos pequeños, coaches certificados y clases temáticas por temporada. Cada clase termina con una meditación corta. Accesible y siempre limpio.",
   "logo": null,
-  "fotos": [],
-  "colores": {
-    "marca": "#B5533C",
-    "papel": "#F2E4DE"
+  "photos": [],
+  "colors": {
+    "brand": "#B5533C",
+    "paper": "#F2E4DE"
   },
-  "telefono": "777 523 6954",
+  "phone": "777 523 6954",
   "instagram": "__studioserena",
-  "direccion": "Calle 10 de Abril 221, Plaza Flores, 62460 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=4799038299429399877",
-  "horario": [
+  "address": "Calle 10 de Abril 221, Plaza Flores, 62460 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=4799038299429399877",
+  "hours": [
     {
-      "dias": "Lunes a jueves",
-      "horas": "8:00 – 9:30 y 16:30 – 20:00"
+      "days": "Lunes a jueves",
+      "time": "8:00 – 9:30 y 16:30 – 20:00"
     },
     {
-      "dias": "Viernes",
-      "horas": "8:00 – 9:30 y 16:30 – 18:30"
+      "days": "Viernes",
+      "time": "8:00 – 9:30 y 16:30 – 18:30"
     },
     {
-      "dias": "Sábado",
-      "horas": "8:00 – 10:30"
+      "days": "Sábado",
+      "time": "8:00 – 10:30"
     },
     {
-      "dias": "Domingo",
-      "horas": "8:00 – 9:30"
+      "days": "Domingo",
+      "time": "8:00 – 9:30"
     }
   ],
-  "clases": [
+  "classes": [
     {
-      "dia": "Lunes",
-      "hora": "8:00",
-      "nombre": "Funcional"
+      "day": "Lunes",
+      "time": "8:00",
+      "name": "Funcional"
     },
     {
-      "dia": "Lunes",
-      "hora": "18:00",
-      "nombre": "Pilates mat"
+      "day": "Lunes",
+      "time": "18:00",
+      "name": "Pilates mat"
     },
     {
-      "dia": "Martes",
-      "hora": "8:00",
-      "nombre": "Yoga"
+      "day": "Martes",
+      "time": "8:00",
+      "name": "Yoga"
     },
     {
-      "dia": "Martes",
-      "hora": "19:00",
-      "nombre": "Funcional"
+      "day": "Martes",
+      "time": "19:00",
+      "name": "Funcional"
     },
     {
-      "dia": "Miércoles",
-      "hora": "8:00",
-      "nombre": "Pilates mat"
+      "day": "Miércoles",
+      "time": "8:00",
+      "name": "Pilates mat"
     },
     {
-      "dia": "Miércoles",
-      "hora": "18:00",
-      "nombre": "Yoga"
+      "day": "Miércoles",
+      "time": "18:00",
+      "name": "Yoga"
     },
     {
-      "dia": "Jueves",
-      "hora": "8:00",
-      "nombre": "Funcional"
+      "day": "Jueves",
+      "time": "8:00",
+      "name": "Funcional"
     },
     {
-      "dia": "Jueves",
-      "hora": "19:00",
-      "nombre": "Pilates mat"
+      "day": "Jueves",
+      "time": "19:00",
+      "name": "Pilates mat"
     },
     {
-      "dia": "Viernes",
-      "hora": "8:00",
-      "nombre": "Yoga"
+      "day": "Viernes",
+      "time": "8:00",
+      "name": "Yoga"
     },
     {
-      "dia": "Sábado",
-      "hora": "9:00",
-      "nombre": "Clase temática"
+      "day": "Sábado",
+      "time": "9:00",
+      "name": "Clase temática"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Planes",
+      "title": "Planes",
       "items": [
         {
-          "nombre": "Clase de prueba",
-          "destacado": true
+          "name": "Clase de prueba",
+          "featured": true
         },
         {
-          "nombre": "Paquete 8 clases"
+          "name": "Paquete 8 clases"
         },
         {
-          "nombre": "Ilimitado mensual"
+          "name": "Ilimitado mensual"
         }
       ]
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER. Sin página web; su link es Instagram. 10 reseñas 5.0. Horario ilustrativo."
+  "notes": "AFTER BOOKING. No website; their link is Instagram. 10 reviews 5.0. Schedule is illustrative."
 }

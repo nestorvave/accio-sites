@@ -1,93 +1,93 @@
 {
   "slug": "casa-manzano",
-  "giro": "restaurante",
-  "nombre": "Casa Manzano",
+  "category": "restaurant",
+  "name": "Casa Manzano",
   "tagline": "Desayunos y comida entre árboles, flores y un estanque",
-  "descripcion": "Restaurante boutique en el corazón de Cuernavaca. Un jardín con aves, flores y luz de mañana, cocina mexicana de casa y un desayuno completo que incluye pan, jugo y café.",
+  "description": "Restaurante boutique en el corazón de Cuernavaca. Un jardín con aves, flores y luz de mañana, cocina mexicana de casa y un desayuno completo que incluye pan, jugo y café.",
   "logo": "/logos/casa-manzano.jpg",
-  "fotos": [],
-  "colores": {
-    "marca": "#3D6B45",
-    "papel": "#EAF0E4"
+  "photos": [],
+  "colors": {
+    "brand": "#3D6B45",
+    "paper": "#EAF0E4"
   },
-  "telefono": "777 317 3711",
+  "phone": "777 317 3711",
   "whatsapp": "5217775369510",
   "instagram": "casamanzano",
-  "direccion": "Av. Teopanzolco 400, Reforma, 62260 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=16407395018759874006",
-  "horario": [
+  "address": "Av. Teopanzolco 400, Reforma, 62260 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=16407395018759874006",
+  "hours": [
     {
-      "dias": "Lunes a jueves",
-      "horas": "8:00 – 22:00"
+      "days": "Lunes a jueves",
+      "time": "8:00 – 22:00"
     },
     {
-      "dias": "Viernes y sábado",
-      "horas": "8:00 – 23:00"
+      "days": "Viernes y sábado",
+      "time": "8:00 – 23:00"
     },
     {
-      "dias": "Domingo",
-      "horas": "8:00 – 21:00"
+      "days": "Domingo",
+      "time": "8:00 – 21:00"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Desayunos",
+      "title": "Desayunos",
       "items": [
         {
-          "nombre": "Desayuno completo",
-          "descripcion": "Pan de la casa, jugo del día, café o té y un plato fuerte a elegir.",
-          "precio": 250,
-          "destacado": true
+          "name": "Desayuno completo",
+          "description": "Pan de la casa, jugo del día, café o té y un plato fuerte a elegir.",
+          "price": 250,
+          "featured": true
         },
         {
-          "nombre": "Enfrijoladas con chicharrón",
-          "descripcion": "Rellenas de pollo, bañadas en frijol, con crema, queso y cebolla morada."
+          "name": "Enfrijoladas con chicharrón",
+          "description": "Rellenas de pollo, bañadas en frijol, con crema, queso y cebolla morada."
         },
         {
-          "nombre": "Enmoladas de pollo",
-          "descripcion": "Mole de la casa, crema, queso fresco y ajonjolí."
+          "name": "Enmoladas de pollo",
+          "description": "Mole de la casa, crema, queso fresco y ajonjolí."
         },
         {
-          "nombre": "Chilaquiles verdes o rojos",
-          "descripcion": "Con huevo, pollo o cecina."
+          "name": "Chilaquiles verdes o rojos",
+          "description": "Con huevo, pollo o cecina."
         }
       ],
-      "nota": "Todos los desayunos incluyen pan de la casa, jugo y café o té."
+      "note": "Todos los desayunos incluyen pan de la casa, jugo y café o té."
     },
     {
-      "titulo": "Bebidas",
+      "title": "Bebidas",
       "items": [
         {
-          "nombre": "Café de olla",
-          "descripcion": "Con piloncillo y canela."
+          "name": "Café de olla",
+          "description": "Con piloncillo y canela."
         },
         {
-          "nombre": "Café de la casa",
-          "descripcion": "Americano o espresso."
+          "name": "Café de la casa",
+          "description": "Americano o espresso."
         },
         {
-          "nombre": "Jugos naturales",
-          "descripcion": "Naranja, verde o del día."
+          "name": "Jugos naturales",
+          "description": "Naranja, verde o del día."
         }
       ]
     },
     {
-      "titulo": "Comida",
+      "title": "Comida",
       "items": [
         {
-          "nombre": "Sopa de tortilla"
+          "name": "Sopa de tortilla"
         },
         {
-          "nombre": "Cecina de Yecapixtla",
-          "descripcion": "Con guacamole, frijoles y queso."
+          "name": "Cecina de Yecapixtla",
+          "description": "Con guacamole, frijoles y queso."
         },
         {
-          "nombre": "Pescado del día"
+          "name": "Pescado del día"
         }
       ],
-      "nota": "Carta de temporada; pregunta por el plato del día."
+      "note": "Carta de temporada; pregunta por el plato del día."
     }
   ],
   "demo": true,
-  "notas": "ENVIAR YA. Dominio casamanzano.mx secuestrado (sitio de apuestas indonesio). 2,629 reseñas 4.5. IG 24K. WhatsApp sacado de su bio."
+  "notes": "READY. Domain casamanzano.mx hijacked (Indonesian gambling site). 2,629 reviews 4.5. IG 24K. WhatsApp taken from their bio."
 }

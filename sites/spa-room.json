@@ -1,70 +1,70 @@
 {
   "slug": "spa-room",
-  "giro": "spa",
-  "nombre": "Spa Room",
+  "category": "spa",
+  "name": "Spa Room",
   "tagline": "Masajes y faciales para desconectar en Delicias",
-  "descripcion": "Un spa pequeño y cuidado en Av. Diana: faciales, masajes y planes en pareja con bebida y bocadillos. Abierto todos los días de 8 a 8.",
+  "description": "Un spa pequeño y cuidado en Av. Diana: faciales, masajes y planes en pareja con bebida y bocadillos. Abierto todos los días de 8 a 8.",
   "logo": "/logos/spa-room.jpg",
-  "fotos": [],
-  "colores": {
-    "fondo": "#131C15",
-    "marca": "#7FA887",
-    "papel": "#1E2B21"
+  "photos": [],
+  "colors": {
+    "bg": "#131C15",
+    "brand": "#7FA887",
+    "paper": "#1E2B21"
   },
-  "telefono": "777 451 6890",
+  "phone": "777 451 6890",
   "instagram": "sparoomcuerna",
-  "direccion": "Av. Diana 157B, Delicias, 62330 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=10690812301547828340",
-  "horario": [
+  "address": "Av. Diana 157B, Delicias, 62330 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=10690812301547828340",
+  "hours": [
     {
-      "dias": "Lunes a domingo",
-      "horas": "8:00 – 20:00"
+      "days": "Lunes a domingo",
+      "time": "8:00 – 20:00"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Masajes",
+      "title": "Masajes",
       "items": [
         {
-          "nombre": "Relajante",
-          "duracion": "60 min",
-          "destacado": true
+          "name": "Relajante",
+          "duration": "60 min",
+          "featured": true
         },
         {
-          "nombre": "Descontracturante",
-          "duracion": "60 min"
+          "name": "Descontracturante",
+          "duration": "60 min"
         },
         {
-          "nombre": "Piedras calientes",
-          "duracion": "75 min"
+          "name": "Piedras calientes",
+          "duration": "75 min"
         }
       ]
     },
     {
-      "titulo": "Faciales",
+      "title": "Faciales",
       "items": [
         {
-          "nombre": "Facial hidratante",
-          "duracion": "50 min"
+          "name": "Facial hidratante",
+          "duration": "50 min"
         },
         {
-          "nombre": "Facial profundo",
-          "duracion": "60 min"
+          "name": "Facial profundo",
+          "duration": "60 min"
         }
       ]
     },
     {
-      "titulo": "En pareja",
+      "title": "En pareja",
       "items": [
         {
-          "nombre": "Date en pareja",
-          "descripcion": "Masaje y facial para dos, con bebida y bocadillos.",
-          "duracion": "2 h",
-          "destacado": true
+          "name": "Date en pareja",
+          "description": "Masaje y facial para dos, con bebida y bocadillos.",
+          "duration": "2 h",
+          "featured": true
         }
       ]
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER. Sin página web. 20 reseñas 4.8. IG 4.7K. Servicios ilustrativos."
+  "notes": "AFTER BOOKING. No website. 20 reviews 4.8. IG 4.7K. Services are illustrative."
 }

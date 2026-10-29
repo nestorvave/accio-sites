@@ -1,104 +1,104 @@
 {
   "slug": "formae",
-  "giro": "fitness",
-  "nombre": "FORMAÉ",
+  "category": "fitness",
+  "name": "FORMAÉ",
   "tagline": "Reformer | de tres | camas",
-  "descripcion": "Estudio pequeño de pilates reformer en Lomas del Mirador: máximo tres personas por clase, corrección en cada ejercicio y adaptaciones si traes una lesión. Para quien le intimidaba el reformer y se quedó.",
+  "description": "Estudio pequeño de pilates reformer en Lomas del Mirador: máximo tres personas por clase, corrección en cada ejercicio y adaptaciones si traes una lesión. Para quien le intimidaba el reformer y se quedó.",
   "logo": null,
-  "fotos": [],
-  "colores": {
-    "marca": "#2F5D50",
-    "papel": "#E3E8E2"
+  "photos": [],
+  "colors": {
+    "brand": "#2F5D50",
+    "paper": "#E3E8E2"
   },
-  "telefono": "777 352 1686",
+  "phone": "777 352 1686",
   "instagram": "formae_cuernavaca_",
-  "direccion": "C. Cnel. Ahumada 45, Lomas del Mirador, 62350 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=5143044827102578848",
-  "horario": [
+  "address": "C. Cnel. Ahumada 45, Lomas del Mirador, 62350 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=5143044827102578848",
+  "hours": [
     {
-      "dias": "Lunes a viernes",
-      "horas": "7:00 – 12:00 y 18:00 – 21:00"
+      "days": "Lunes a viernes",
+      "time": "7:00 – 12:00 y 18:00 – 21:00"
     },
     {
-      "dias": "Sábado",
-      "horas": "9:00 – 12:00"
+      "days": "Sábado",
+      "time": "9:00 – 12:00"
     },
     {
-      "dias": "Domingo",
-      "horas": "Cerrado"
+      "days": "Domingo",
+      "time": "Cerrado"
     }
   ],
-  "clases": [
+  "classes": [
     {
-      "dia": "Lunes",
-      "hora": "7:00",
-      "nombre": "Reformer"
+      "day": "Lunes",
+      "time": "7:00",
+      "name": "Reformer"
     },
     {
-      "dia": "Lunes",
-      "hora": "19:00",
-      "nombre": "Reformer"
+      "day": "Lunes",
+      "time": "19:00",
+      "name": "Reformer"
     },
     {
-      "dia": "Martes",
-      "hora": "8:00",
-      "nombre": "Reformer"
+      "day": "Martes",
+      "time": "8:00",
+      "name": "Reformer"
     },
     {
-      "dia": "Martes",
-      "hora": "18:00",
-      "nombre": "Reformer"
+      "day": "Martes",
+      "time": "18:00",
+      "name": "Reformer"
     },
     {
-      "dia": "Miércoles",
-      "hora": "7:00",
-      "nombre": "Reformer"
+      "day": "Miércoles",
+      "time": "7:00",
+      "name": "Reformer"
     },
     {
-      "dia": "Miércoles",
-      "hora": "19:00",
-      "nombre": "Reformer"
+      "day": "Miércoles",
+      "time": "19:00",
+      "name": "Reformer"
     },
     {
-      "dia": "Jueves",
-      "hora": "8:00",
-      "nombre": "Reformer"
+      "day": "Jueves",
+      "time": "8:00",
+      "name": "Reformer"
     },
     {
-      "dia": "Jueves",
-      "hora": "18:00",
-      "nombre": "Reformer"
+      "day": "Jueves",
+      "time": "18:00",
+      "name": "Reformer"
     },
     {
-      "dia": "Viernes",
-      "hora": "7:00",
-      "nombre": "Reformer"
+      "day": "Viernes",
+      "time": "7:00",
+      "name": "Reformer"
     },
     {
-      "dia": "Sábado",
-      "hora": "9:00",
-      "nombre": "Reformer"
+      "day": "Sábado",
+      "time": "9:00",
+      "name": "Reformer"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Planes",
+      "title": "Planes",
       "items": [
         {
-          "nombre": "Clase de prueba",
-          "duracion": "50 min",
-          "destacado": true
+          "name": "Clase de prueba",
+          "duration": "50 min",
+          "featured": true
         },
         {
-          "nombre": "Paquete 8 clases"
+          "name": "Paquete 8 clases"
         },
         {
-          "nombre": "Paquete 12 clases"
+          "name": "Paquete 12 clases"
         }
       ],
-      "nota": "Grupos de máximo 3 personas."
+      "note": "Grupos de máximo 3 personas."
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER. Sin página web; su link es Instagram. 17 reseñas 5.0. Horario ilustrativo."
+  "notes": "AFTER BOOKING. No website; their link is Instagram. 17 reviews 5.0. Schedule is illustrative."
 }

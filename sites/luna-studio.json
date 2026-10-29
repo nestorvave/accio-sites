@@ -1,101 +1,101 @@
 {
   "slug": "luna-studio",
-  "giro": "fitness",
-  "nombre": "Luna Studio",
+  "category": "fitness",
+  "name": "Luna Studio",
   "tagline": "Reformer | con técnica | y buena vibra",
-  "descripcion": "Pilates reformer en Jacarandas con clases temáticas, coaches que corrigen la técnica y cuidan que no te lesiones, y una comunidad que se siente como familia.",
+  "description": "Pilates reformer en Jacarandas con clases temáticas, coaches que corrigen la técnica y cuidan que no te lesiones, y una comunidad que se siente como familia.",
   "logo": null,
-  "fotos": [],
-  "colores": {
-    "marca": "#3A3F8F",
-    "papel": "#E4E5F0"
+  "photos": [],
+  "colors": {
+    "brand": "#3A3F8F",
+    "paper": "#E4E5F0"
   },
-  "telefono": "777 307 3467",
-  "direccion": "Av. Plan de Ayala 830, Jacarandas, 62420 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=5161263270315122637",
-  "horario": [
+  "phone": "777 307 3467",
+  "address": "Av. Plan de Ayala 830, Jacarandas, 62420 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=5161263270315122637",
+  "hours": [
     {
-      "dias": "Lunes, miércoles y viernes",
-      "horas": "8:15 – 10:30 y 17:00 – 20:30"
+      "days": "Lunes, miércoles y viernes",
+      "time": "8:15 – 10:30 y 17:00 – 20:30"
     },
     {
-      "dias": "Martes y jueves",
-      "horas": "7:00 – 10:30 y 17:00 – 20:30"
+      "days": "Martes y jueves",
+      "time": "7:00 – 10:30 y 17:00 – 20:30"
     },
     {
-      "dias": "Sábado y domingo",
-      "horas": "9:00 – 11:30"
+      "days": "Sábado y domingo",
+      "time": "9:00 – 11:30"
     }
   ],
-  "clases": [
+  "classes": [
     {
-      "dia": "Lunes",
-      "hora": "7:00",
-      "nombre": "Reformer Flow"
+      "day": "Lunes",
+      "time": "7:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Lunes",
-      "hora": "18:00",
-      "nombre": "Reformer Sculpt"
+      "day": "Lunes",
+      "time": "18:00",
+      "name": "Reformer Sculpt"
     },
     {
-      "dia": "Martes",
-      "hora": "8:00",
-      "nombre": "Reformer Flow"
+      "day": "Martes",
+      "time": "8:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Martes",
-      "hora": "19:00",
-      "nombre": "Reformer Power"
+      "day": "Martes",
+      "time": "19:00",
+      "name": "Reformer Power"
     },
     {
-      "dia": "Miércoles",
-      "hora": "7:00",
-      "nombre": "Reformer Flow"
+      "day": "Miércoles",
+      "time": "7:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Miércoles",
-      "hora": "18:00",
-      "nombre": "Reformer Sculpt"
+      "day": "Miércoles",
+      "time": "18:00",
+      "name": "Reformer Sculpt"
     },
     {
-      "dia": "Jueves",
-      "hora": "8:00",
-      "nombre": "Reformer Flow"
+      "day": "Jueves",
+      "time": "8:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Jueves",
-      "hora": "19:00",
-      "nombre": "Reformer Power"
+      "day": "Jueves",
+      "time": "19:00",
+      "name": "Reformer Power"
     },
     {
-      "dia": "Viernes",
-      "hora": "7:00",
-      "nombre": "Reformer Flow"
+      "day": "Viernes",
+      "time": "7:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Sábado",
-      "hora": "9:00",
-      "nombre": "Reformer Sculpt"
+      "day": "Sábado",
+      "time": "9:00",
+      "name": "Reformer Sculpt"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Planes",
+      "title": "Planes",
       "items": [
         {
-          "nombre": "Clase suelta"
+          "name": "Clase suelta"
         },
         {
-          "nombre": "Paquete 8 clases",
-          "destacado": true
+          "name": "Paquete 8 clases",
+          "featured": true
         },
         {
-          "nombre": "Ilimitado mensual"
+          "name": "Ilimitado mensual"
         }
       ]
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER. Sin página web. 25 reseñas 4.4. IG no confirmado. Horario ilustrativo."
+  "notes": "AFTER BOOKING. No website. 25 reviews 4.4. IG not confirmed. Schedule is illustrative."
 }

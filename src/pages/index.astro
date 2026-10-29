@@ -1,8 +1,8 @@
 ---
-/** Índice interno de demos. No se enlaza desde ninguna página de negocio. */
+/** Internal index of all sites. Not linked from any business page. */
 import "../styles/base.css";
 import { sites } from "../lib/sites";
-const giros = { spa: "Spa / estética", restaurante: "Restaurante", consultorio: "Consultorio", fitness: "Fitness / pilates" };
+const categories = { spa: "Spa / estética", restaurant: "Restaurante", clinic: "Consultorio", fitness: "Fitness / pilates" };
 ---
 <!doctype html>
 <html lang="es">
@@ -12,7 +12,7 @@ const giros = { spa: "Spa / estética", restaurante: "Restaurante", consultorio:
     <meta name="robots" content="noindex" />
     <title>Demos · ACCIO</title>
     <style>
-      :root { --marca: #0B1220; --sobre-marca: #fff; }
+      :root { --brand: #0B1220; --on-brand: #fff; }
       body { background: #F5F3EE; color: #0B1220; font-family: system-ui, sans-serif; padding: 40px 20px; }
       main { max-width: 720px; margin: 0 auto; }
       h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -30,7 +30,7 @@ const giros = { spa: "Spa / estética", restaurante: "Restaurante", consultorio:
       <p>{sites.length} negocios. Cada uno es un JSON en <code>sites/</code>.</p>
       <ul>
         {sites.map((s) => (
-          <li><a href={`/${s.slug}/`}><span>{s.nombre} <small>· {giros[s.giro]}</small></span><code>/{s.slug}</code></a></li>
+          <li><a href={`/${s.slug}/`}><span>{s.name} <small>· {categories[s.category]}</small></span><code>/{s.slug}</code></a></li>
         ))}
       </ul>
     </main>

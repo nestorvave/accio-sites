@@ -1,112 +1,111 @@
 ---
 /**
- * Plantilla SPA / ESTÉTICA — mundo visual: jardín en penumbra, piedra y latón.
- * Fondo oscuro porque la escena de uso es de noche, en el teléfono, decidiendo si reservar.
- * La acción principal es un formulario real: elige el ritual y abre WhatsApp con el mensaje listo.
+ * SPA / AESTHETICS template — visual world: a garden at dusk, stone and brass.
+ * Dark background because the moment of use is at night, on the phone, deciding whether to book.
+ * The primary action is a real form: pick the ritual and open WhatsApp with the message ready.
  */
 import Base from "../layouts/Base.astro";
 import Icon from "../components/Icon.astro";
 import Mark from "../components/Mark.astro";
-import { type Site, precio, reservaLink, telLink, waNumber, textoSobre } from "../lib/sites";
+import { type Site, formatPrice, bookingLink, telLink, waNumber, textOn } from "../lib/sites";
 
 interface Props { site: Site }
 const { site } = Astro.props;
 const c = {
-  fondo: "#0F1F1A",
-  tinta: "#EEF2EC",
-  marca: "#C9A27A",
-  papel: "#16302A",
-  ...(site.colores ?? {}),
+  bg: "#0F1F1A",
+  ink: "#EEF2EC",
+  brand: "#C9A27A",
+  paper: "#16302A",
+  ...(site.colors ?? {}),
 };
-const cta = reservaLink(site);
+const cta = bookingLink(site);
 const tel = telLink(site);
 const wa = waNumber(site);
 const fonts = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap";
-const todos = site.secciones.flatMap((s) => s.items);
 const taglineWords = site.tagline.split(" ");
 ---
-<Base site={site} fonts={fonts} themeColor={c.fondo} colores={{ ...c, "sobre-marca": textoSobre(c.marca) }}>
+<Base site={site} fonts={fonts} themeColor={c.bg} colors={{ ...c, "on-brand": textOn(c.brand) }}>
   <style>
     :global(:root) {
-      --tinta-2: color-mix(in oklab, var(--tinta) 62%, var(--fondo));
-      --linea: color-mix(in oklab, var(--tinta) 14%, transparent);
+      --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 14%, transparent);
       --f-display: "Cormorant Garamond", "Times New Roman", serif;
       --f-body: "Manrope", system-ui, sans-serif;
       color-scheme: dark;
     }
-    :global(body) { background: var(--fondo); color: var(--tinta); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    :global(body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
 
-    /* Agua: anillos concéntricos muy tenues, fijos al fondo. Es la textura del mundo, no decoración suelta. */
-    .agua { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-    .agua :global(svg) { position: absolute; right: -28vw; top: -22vh; width: 110vw; height: auto; opacity: .55; }
-    .agua::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 40% at 80% 0%, color-mix(in oklab, var(--marca) 12%, transparent), transparent 70%); }
+    /* Water: very faint concentric rings fixed to the background. It is the texture of this world, not loose decoration. */
+    .water { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .water :global(svg) { position: absolute; right: -28vw; top: -22vh; width: 110vw; height: auto; opacity: .55; }
+    .water::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 40% at 80% 0%, color-mix(in oklab, var(--brand) 12%, transparent), transparent 70%); }
 
     .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
     .top .name { display: flex; align-items: center; gap: 12px; font-family: var(--f-display); font-size: 1.25rem; letter-spacing: .01em; text-decoration: none; }
-    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--linea); color: var(--tinta); text-decoration: none; font-size: .9rem; font-weight: 500; transition: background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out); }
-    .pill:hover { background: color-mix(in oklab, var(--tinta) 8%, transparent); border-color: color-mix(in oklab, var(--tinta) 30%, transparent); }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-size: .9rem; font-weight: 500; transition: background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out); }
+    .pill:hover { background: color-mix(in oklab, var(--ink) 8%, transparent); border-color: color-mix(in oklab, var(--ink) 30%, transparent); }
 
     .hero { padding-block: clamp(40px, 9vw, 96px) clamp(32px, 6vw, 64px); max-width: 1100px; margin-inline: auto; }
     .hero h1 { font-family: var(--f-display); font-weight: 400; font-style: italic; font-size: clamp(2.6rem, 8.2vw, 6rem); line-height: .98; letter-spacing: -.02em; text-wrap: balance; max-width: 14ch; }
     .hero h1 .w { display: inline-block; opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); transition-delay: calc(var(--i) * 55ms); }
     @starting-style { .hero h1 .w { opacity: 0; transform: translateY(.35em); } }
-    .hero p { margin-top: 24px; max-width: 52ch; font-size: 1.05rem; color: var(--tinta-2); }
+    .hero p { margin-top: 24px; max-width: 52ch; font-size: 1.05rem; color: var(--ink-2); }
 
-    /* Reserva: el formulario es la acción, arriba, funcionando. */
-    .reserva { margin-top: 36px; display: grid; gap: 10px; grid-template-columns: 1fr; max-width: 560px; }
-    @media (min-width: 640px) { .reserva { grid-template-columns: 1fr auto; } }
+    /* Booking: the form is the action, at the top, working. */
+    .booking { margin-top: 36px; display: grid; gap: 10px; grid-template-columns: 1fr; max-width: 560px; }
+    @media (min-width: 640px) { .booking { grid-template-columns: 1fr auto; } }
     .select { position: relative; display: block; }
-    .select select { width: 100%; height: 52px; padding: 0 44px 0 16px; border-radius: 14px; border: 1px solid var(--linea); background: var(--papel); color: var(--tinta); font: inherit; appearance: none; }
-    .select :global(svg) { position: absolute; right: 14px; top: 50%; transform: translateY(-50%) rotate(90deg); pointer-events: none; color: var(--tinta-2); }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 14px; background: var(--marca); color: var(--sobre-marca); font-weight: 600; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .select select { width: 100%; height: 52px; padding: 0 44px 0 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font: inherit; appearance: none; }
+    .select :global(svg) { position: absolute; right: 14px; top: 50%; transform: translateY(-50%) rotate(90deg); pointer-events: none; color: var(--ink-2); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 14px; background: var(--brand); color: var(--on-brand); font-weight: 600; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
     .btn:hover { filter: brightness(1.06); } .btn:active { transform: scale(.98); }
-    .hint { grid-column: 1 / -1; font-size: .85rem; color: var(--tinta-2); }
+    .hint { grid-column: 1 / -1; font-size: .85rem; color: var(--ink-2); }
 
-    .fotos { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 8px 40px; scrollbar-width: none; }
-    .fotos::-webkit-scrollbar { display: none; }
-    .fotos img { flex: 0 0 min(78vw, 420px); aspect-ratio: 4 / 5; object-fit: cover; border-radius: 18px; scroll-snap-align: start; }
+    .photos { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 8px 40px; scrollbar-width: none; }
+    .photos::-webkit-scrollbar { display: none; }
+    .photos img { flex: 0 0 min(78vw, 420px); aspect-ratio: 4 / 5; object-fit: cover; border-radius: 18px; scroll-snap-align: start; }
 
-    .rituales { max-width: 1100px; margin-inline: auto; padding-block: 24px 48px; }
-    .rituales h2 { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.9rem, 4vw, 2.6rem); letter-spacing: -.01em; margin-bottom: 8px; }
-    .rituales .nota { color: var(--tinta-2); font-size: .95rem; max-width: 60ch; }
-    .lista { margin-top: 20px; border-top: 1px solid var(--linea); }
-    .item { display: grid; grid-template-columns: 1fr auto; gap: 4px 20px; padding: 18px 0; border-bottom: 1px solid var(--linea); align-items: baseline; }
+    .rituals { max-width: 1100px; margin-inline: auto; padding-block: 24px 48px; }
+    .rituals h2 { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.9rem, 4vw, 2.6rem); letter-spacing: -.01em; margin-bottom: 8px; }
+    .rituals .note { color: var(--ink-2); font-size: .95rem; max-width: 60ch; }
+    .list { margin-top: 20px; border-top: 1px solid var(--line); }
+    .item { display: grid; grid-template-columns: 1fr auto; gap: 4px 20px; padding: 18px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
     .item .n { font-family: var(--f-display); font-size: 1.45rem; font-weight: 500; line-height: 1.15; }
-    .item .n .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--marca); margin-left: 10px; vertical-align: middle; }
-    .item .p { font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; color: var(--tinta); font-weight: 500; }
-    .item .p small { display: block; color: var(--tinta-2); font-weight: 400; font-size: .85rem; }
-    .item .d { grid-column: 1 / -1; color: var(--tinta-2); font-size: .95rem; max-width: 62ch; }
-    .grupo + .grupo { margin-top: 40px; }
+    .item .n .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--brand); margin-left: 10px; vertical-align: middle; }
+    .item .p { font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; color: var(--ink); font-weight: 500; }
+    .item .p small { display: block; color: var(--ink-2); font-weight: 400; font-size: .85rem; }
+    .item .d { grid-column: 1 / -1; color: var(--ink-2); font-size: .95rem; max-width: 62ch; }
+    .group + .group { margin-top: 40px; }
 
-    .ficha { max-width: 1100px; margin-inline: auto; padding-block: 8px 56px; display: grid; gap: 28px; grid-template-columns: 1fr; }
-    @media (min-width: 760px) { .ficha { grid-template-columns: 1.1fr 1fr; gap: 48px; } }
-    .ficha h2 { font-family: var(--f-display); font-weight: 500; font-size: 1.7rem; margin-bottom: 14px; }
-    .horas { border-top: 1px solid var(--linea); }
-    .horas li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--linea); }
-    .horas li span:last-child { font-variant-numeric: tabular-nums; color: var(--tinta-2); }
-    .datos { display: grid; gap: 14px; }
-    .datos a, .datos p { display: flex; gap: 12px; align-items: flex-start; color: var(--tinta); text-decoration: none; line-height: 1.4; }
-    .datos a:hover { text-decoration: underline; }
-    .datos :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--marca); }
+    .info { max-width: 1100px; margin-inline: auto; padding-block: 8px 56px; display: grid; gap: 28px; grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .info { grid-template-columns: 1.1fr 1fr; gap: 48px; } }
+    .info h2 { font-family: var(--f-display); font-weight: 500; font-size: 1.7rem; margin-bottom: 14px; }
+    .hours { border-top: 1px solid var(--line); }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+    .details { display: grid; gap: 14px; }
+    .details a, .details p { display: flex; gap: 12px; align-items: flex-start; color: var(--ink); text-decoration: none; line-height: 1.4; }
+    .details a:hover { text-decoration: underline; }
+    .details :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
 
-    footer { border-top: 1px solid var(--linea); padding-block: 28px calc(28px + 72px); color: var(--tinta-2); font-size: .9rem; }
+    footer { border-top: 1px solid var(--line); padding-block: 28px calc(28px + 72px); color: var(--ink-2); font-size: .9rem; }
     footer .in { max-width: 1140px; margin-inline: auto; display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
-    footer a { color: var(--tinta); text-decoration: none; }
+    footer a { color: var(--ink); text-decoration: none; }
 
-    .barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--fondo) 86%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--linea); }
-    .barra .btn { width: 100%; }
-    @media (min-width: 760px) { .barra { display: none; } footer { padding-bottom: 28px; } }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 86%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 760px) { .bar { display: none; } footer { padding-bottom: 28px; } }
   </style>
 
-  <div class="agua" aria-hidden="true">
-    <svg viewBox="0 0 800 520" fill="none" stroke={c.marca} stroke-width="1">
+  <div class="water" aria-hidden="true">
+    <svg viewBox="0 0 800 520" fill="none" stroke={c.brand} stroke-width="1">
       {[70, 140, 210, 280, 350, 420].map((r) => <ellipse cx="520" cy="200" rx={r * 1.35} ry={r} opacity={1 - r / 520} />)}
     </svg>
   </div>
 
   <header>
     <div class="top gutter" style="max-width:1140px;margin-inline:auto">
-      <a class="name" href="#"><Mark nombre={site.nombre} logo={site.logo} size={40} /> {site.nombre}</a>
+      <a class="name" href="#"><Mark name={site.name} logo={site.logo} size={40} /> {site.name}</a>
       {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> WhatsApp</a>}
     </div>
   </header>
@@ -114,17 +113,17 @@ const taglineWords = site.tagline.split(" ");
   <main>
     <section class="hero gutter">
       <h1>{taglineWords.map((w, i) => <><span class="w" style={`--i:${i}`}>{w}</span>{" "}</>)}</h1>
-      <p>{site.descripcion}</p>
+      <p>{site.description}</p>
 
       {wa && (
-        <form class="reserva" id="reserva" data-wa={wa} data-nombre={site.nombre}>
+        <form class="booking" id="booking" data-wa={wa} data-name={site.name}>
           <label class="select">
             <span class="sr-only">Ritual</span>
             <select name="ritual" id="ritual" required>
               <option value="">¿Qué ritual quieres?</option>
-              {site.secciones.map((s) => (
-                <optgroup label={s.titulo}>
-                  {s.items.map((it) => <option value={it.nombre}>{it.nombre}{it.duracion ? ` · ${it.duracion}` : ""}</option>)}
+              {site.sections.map((s) => (
+                <optgroup label={s.title}>
+                  {s.items.map((it) => <option value={it.name}>{it.name}{it.duration ? ` · ${it.duration}` : ""}</option>)}
                 </optgroup>
               ))}
             </select>
@@ -134,26 +133,26 @@ const taglineWords = site.tagline.split(" ");
           <p class="hint">Te confirmamos horario en minutos. Sin anticipo para agendar.</p>
         </form>
       )}
-      {!wa && cta && <p class="reserva"><a class="btn" href={cta.url}>{cta.label}</a></p>}
+      {!wa && cta && <p class="booking"><a class="btn" href={cta.url}>{cta.label}</a></p>}
     </section>
 
-    {site.fotos?.length ? (
+    {site.photos?.length ? (
       <section class="gutter" aria-label="Fotos">
-        <div class="fotos" style="max-width:1100px;margin-inline:auto">{site.fotos.map((f) => <img src={f} alt="" loading="lazy" />)}</div>
+        <div class="photos" style="max-width:1100px;margin-inline:auto">{site.photos.map((f) => <img src={f} alt="" loading="lazy" />)}</div>
       </section>
     ) : null}
 
-    <section class="rituales gutter" id="rituales">
-      {site.secciones.map((s) => (
-        <div class="grupo">
-          <h2>{s.titulo}</h2>
-          {s.nota && <p class="nota">{s.nota}</p>}
-          <ul class="lista">
+    <section class="rituals gutter" id="rituals">
+      {site.sections.map((s) => (
+        <div class="group">
+          <h2>{s.title}</h2>
+          {s.note && <p class="note">{s.note}</p>}
+          <ul class="list">
             {s.items.map((it) => (
               <li class="item">
-                <span class="n">{it.nombre}{it.destacado && <span class="dot" title="El más pedido" />}</span>
-                <span class="p">{precio(it.precio)}{it.duracion && <small>{it.duracion}</small>}</span>
-                {it.descripcion && <span class="d">{it.descripcion}</span>}
+                <span class="n">{it.name}{it.featured && <span class="dot" title="El más pedido" />}</span>
+                <span class="p">{formatPrice(it.price)}{it.duration && <small>{it.duration}</small>}</span>
+                {it.description && <span class="d">{it.description}</span>}
               </li>
             ))}
           </ul>
@@ -161,18 +160,18 @@ const taglineWords = site.tagline.split(" ");
       ))}
     </section>
 
-    <section class="ficha gutter" id="visita">
+    <section class="info gutter" id="visit">
       <div>
         <h2>Horario</h2>
-        <ul class="horas">{site.horario.map((h) => <li><span>{h.dias}</span><span>{h.horas}</span></li>)}</ul>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
       </div>
       <div>
         <h2>Visítanos</h2>
-        <div class="datos">
-          {site.direccion && (site.mapa
-            ? <a href={site.mapa} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.direccion}</span></a>
-            : <p><Icon name="pin" /> <span>{site.direccion}</span></p>)}
-          {tel && <a href={tel}><Icon name="phone" /> <span>{site.telefono}</span></a>}
+        <div class="details">
+          {site.address && (site.mapUrl
+            ? <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>
+            : <p><Icon name="pin" /> <span>{site.address}</span></p>)}
+          {tel && <a href={tel}><Icon name="phone" /> <span>{site.phone}</span></a>}
           {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
           {site.facebook && <a href={`https://facebook.com/${site.facebook}`} target="_blank" rel="noreferrer"><Icon name="facebook" /> <span>Facebook</span></a>}
         </div>
@@ -182,22 +181,22 @@ const taglineWords = site.tagline.split(" ");
 
   <footer>
     <div class="in gutter">
-      <span>{site.nombre}{site.direccion ? ` · ${site.direccion.split(",").slice(-2).join(",").trim()}` : ""}</span>
+      <span>{site.name}{site.address ? ` · ${site.address.split(",").slice(-2).join(",").trim()}` : ""}</span>
       {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer">@{site.instagram}</a>}
     </div>
   </footer>
 
-  {cta && <div class="barra"><a class="btn" href={cta.url} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> {cta.label}</a></div>}
+  {cta && <div class="bar"><a class="btn" href={cta.url} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> {cta.label}</a></div>}
 
   <script>
-    // Elegir ritual → WhatsApp con el mensaje listo. Sin backend.
-    const f = document.getElementById("reserva") as HTMLFormElement | null;
+    // Pick a ritual → WhatsApp with the message ready. No backend.
+    const f = document.getElementById("booking") as HTMLFormElement | null;
     f?.addEventListener("submit", (e) => {
       e.preventDefault();
       const sel = f.querySelector<HTMLSelectElement>("#ritual");
       const ritual = sel?.value;
       if (!ritual) { sel?.focus(); return; }
-      const msg = `Hola, ${f.dataset.nombre}. Quiero agendar: ${ritual}. ¿Qué horarios tienen?`;
+      const msg = `Hola, ${f.dataset.name}. Quiero agendar: ${ritual}. ¿Qué horarios tienen?`;
       window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
     });
   </script>

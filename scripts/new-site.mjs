@@ -1,5 +1,5 @@
-// Crea el JSON de un prospecto nuevo con la estructura completa, listo para editar.
-// Uso: npm run new -- --slug nuno-spa --giro spa --nombre "Nuno Spa" --tel "777 986 5933" --ig nuno.mx --dir "Blvd. Díaz Ordaz 42, Acapantzingo"
+// Scaffolds the JSON for a new site with the full structure, ready to edit.
+// Usage: npm run new -- --slug nuno-spa --category spa --name "Nuno Spa" --phone "777 986 5933" --ig nuno.mx --address "Blvd. Díaz Ordaz 42, Acapantzingo"
 import { writeFile, access } from "node:fs/promises";
 
 const args = Object.fromEntries(process.argv.slice(2).join(" ").split(/\s+--/).filter(Boolean).map((p) => {
@@ -7,35 +7,65 @@ const args = Object.fromEntries(process.argv.slice(2).join(" ").split(/\s+--/).f
   return [k, v.join(" ").replace(/^"|"$/g, "")];
 }));
 
-const giros = ["spa", "restaurante"];
-if (!args.slug || !giros.includes(args.giro)) {
-  console.error(`Faltan datos. Ejemplo:\n  npm run new -- --slug nuno-spa --giro ${giros.join("|")} --nombre "Nuno Spa" --tel "777 986 5933"`);
+const categories = ["spa", "restaurant", "clinic", "fitness"];
+const subcategories = ["dental", "aesthetic", "veterinary", "medical", "firm"];
+if (!args.slug || !categories.includes(args.category)) {
+  console.error(`Missing arguments. Example:\n  npm run new -- --slug nuno-spa --category ${categories.join("|")} --name "Nuno Spa" --phone "777 986 5933"`);
+  process.exit(1);
+}
+if (args.subcategory && !subcategories.includes(args.subcategory)) {
+  console.error(`Unknown subcategory. Use one of: ${subcategories.join(", ")}`);
   process.exit(1);
 }
 const file = new URL(`../sites/${args.slug}.json`, import.meta.url);
-try { await access(file); console.error(`Ya existe sites/${args.slug}.json`); process.exit(1); } catch {}
+try { await access(file); console.error(`sites/${args.slug}.json already exists`); process.exit(1); } catch {}
 
-const esSpa = args.giro === "spa";
+// Placeholder copy is Spanish on purpose: it is what the visitor reads.
+const presets = {
+  spa: {
+    tagline: "Un rato para ti",
+    sections: [
+      { title: "Faciales", items: [{ name: "Facial profundo", description: "", duration: "60 min", featured: true }] },
+      { title: "Masajes", items: [{ name: "Relajante", description: "", duration: "60 min" }] },
+    ],
+  },
+  restaurant: {
+    tagline: "Cocina de casa, mesa de siempre",
+    sections: [
+      { title: "Desayunos", items: [{ name: "Chilaquiles", description: "", price: 0, featured: true }] },
+      { title: "Comida", items: [{ name: "Plato del día", description: "" }] },
+    ],
+  },
+  clinic: {
+    tagline: "Atención cercana, sin esperas",
+    sections: [{ title: "Consulta", items: [{ name: "Primera consulta", description: "", duration: "40 min", featured: true }] }],
+  },
+  fitness: {
+    tagline: "Entrena | con nosotros",
+    sections: [{ title: "Planes", items: [{ name: "Clase suelta" }, { name: "Mensualidad", featured: true }] }],
+    classes: [{ day: "Lunes", time: "7:00", name: "Clase" }],
+  },
+};
+const preset = presets[args.category];
+
 const site = {
   slug: args.slug,
-  giro: args.giro,
-  nombre: args.nombre ?? args.slug,
-  tagline: esSpa ? "Un rato para ti" : "Cocina de casa, mesa de siempre",
-  descripcion: "Dos o tres frases sobre el lugar, con lo que lo hace distinto. Sin cifras inventadas.",
+  category: args.category,
+  ...(args.category === "clinic" ? { subcategory: args.subcategory ?? "medical" } : {}),
+  name: args.name ?? args.slug,
+  tagline: preset.tagline,
+  description: "Dos o tres frases sobre el lugar, con lo que lo hace distinto. Sin cifras inventadas.",
   logo: null,
-  fotos: [],
-  telefono: args.tel ?? "",
+  photos: [],
+  phone: args.phone ?? "",
   instagram: args.ig ?? "",
-  direccion: args.dir ?? "",
-  mapa: "",
-  horario: [{ dias: "Lunes a sábado", horas: "9:00 – 20:00" }, { dias: "Domingo", horas: "Cerrado" }],
-  secciones: esSpa
-    ? [{ titulo: "Faciales", items: [{ nombre: "Facial profundo", descripcion: "", duracion: "60 min", destacado: true }] },
-       { titulo: "Masajes", items: [{ nombre: "Relajante", descripcion: "", duracion: "60 min" }] }]
-    : [{ titulo: "Desayunos", items: [{ nombre: "Chilaquiles", descripcion: "", precio: 0, destacado: true }] },
-       { titulo: "Comida", items: [{ nombre: "Plato del día", descripcion: "" }] }],
+  address: args.address ?? "",
+  mapUrl: "",
+  hours: [{ days: "Lunes a sábado", time: "9:00 – 20:00" }, { days: "Domingo", time: "Cerrado" }],
+  ...(preset.classes ? { classes: preset.classes } : {}),
+  sections: preset.sections,
   demo: true,
-  notas: "",
+  notes: "",
 };
 await writeFile(file, JSON.stringify(site, null, 2) + "\n");
-console.log(`✓ sites/${args.slug}.json creado. Edítalo y corre: npm run build && npm run shots ${args.slug}`);
+console.log(`✓ sites/${args.slug}.json created. Edit it, then run: npm run build && npm run shots ${args.slug}`);

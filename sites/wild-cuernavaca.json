@@ -1,99 +1,99 @@
 {
   "slug": "wild-cuernavaca",
-  "giro": "fitness",
-  "nombre": "Wild Cuernavaca",
+  "category": "fitness",
+  "name": "Wild Cuernavaca",
   "tagline": "Entrena | adentro | vive afuera",
-  "descripcion": "Funcional, híbrido, OCR, yoga y box en Miguel Hidalgo, con cafetería y una comunidad que sale los fines de semana a correr, hacer senderismo y carreras de obstáculos. Rutinas que nunca se repiten.",
+  "description": "Funcional, híbrido, OCR, yoga y box en Miguel Hidalgo, con cafetería y una comunidad que sale los fines de semana a correr, hacer senderismo y carreras de obstáculos. Rutinas que nunca se repiten.",
   "logo": null,
-  "fotos": [],
-  "colores": {
-    "marca": "#D9461E",
-    "papel": "#F1DED4"
+  "photos": [],
+  "colors": {
+    "brand": "#D9461E",
+    "paper": "#F1DED4"
   },
-  "telefono": "777 370 1367",
+  "phone": "777 370 1367",
   "instagram": "wild_livemx",
-  "direccion": "Blvd. Lic. Benito Juárez 65, Miguel Hidalgo, 62040 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=14156281393540531060",
-  "horario": [
+  "address": "Blvd. Lic. Benito Juárez 65, Miguel Hidalgo, 62040 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=14156281393540531060",
+  "hours": [
     {
-      "dias": "Lunes a viernes",
-      "horas": "6:00 – 20:00"
+      "days": "Lunes a viernes",
+      "time": "6:00 – 20:00"
     },
     {
-      "dias": "Sábado y domingo",
-      "horas": "Actividades al aire libre"
+      "days": "Sábado y domingo",
+      "time": "Actividades al aire libre"
     }
   ],
-  "clases": [
+  "classes": [
     {
-      "dia": "Lunes",
-      "hora": "6:00",
-      "nombre": "Funcional"
+      "day": "Lunes",
+      "time": "6:00",
+      "name": "Funcional"
     },
     {
-      "dia": "Lunes",
-      "hora": "19:00",
-      "nombre": "Box"
+      "day": "Lunes",
+      "time": "19:00",
+      "name": "Box"
     },
     {
-      "dia": "Martes",
-      "hora": "6:00",
-      "nombre": "Híbrido"
+      "day": "Martes",
+      "time": "6:00",
+      "name": "Híbrido"
     },
     {
-      "dia": "Martes",
-      "hora": "19:00",
-      "nombre": "Yoga"
+      "day": "Martes",
+      "time": "19:00",
+      "name": "Yoga"
     },
     {
-      "dia": "Miércoles",
-      "hora": "6:00",
-      "nombre": "Funcional"
+      "day": "Miércoles",
+      "time": "6:00",
+      "name": "Funcional"
     },
     {
-      "dia": "Miércoles",
-      "hora": "19:00",
-      "nombre": "OCR"
+      "day": "Miércoles",
+      "time": "19:00",
+      "name": "OCR"
     },
     {
-      "dia": "Jueves",
-      "hora": "6:00",
-      "nombre": "Híbrido"
+      "day": "Jueves",
+      "time": "6:00",
+      "name": "Híbrido"
     },
     {
-      "dia": "Jueves",
-      "hora": "19:00",
-      "nombre": "Box"
+      "day": "Jueves",
+      "time": "19:00",
+      "name": "Box"
     },
     {
-      "dia": "Viernes",
-      "hora": "6:00",
-      "nombre": "Funcional"
+      "day": "Viernes",
+      "time": "6:00",
+      "name": "Funcional"
     },
     {
-      "dia": "Sábado",
-      "hora": "7:00",
-      "nombre": "Salida: trail o senderismo"
+      "day": "Sábado",
+      "time": "7:00",
+      "name": "Salida: trail o senderismo"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Planes",
+      "title": "Planes",
       "items": [
         {
-          "nombre": "Clase de prueba",
-          "destacado": true
+          "name": "Clase de prueba",
+          "featured": true
         },
         {
-          "nombre": "Mensualidad"
+          "name": "Mensualidad"
         },
         {
-          "nombre": "Eventos de fin de semana",
-          "descripcion": "Trail, senderismo y clínicas de running."
+          "name": "Eventos de fin de semana",
+          "description": "Trail, senderismo y clínicas de running."
         }
       ]
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER. Su 'sitio web' en Google es un link de Instagram. 46 reseñas 5.0. Horario ilustrativo."
+  "notes": "AFTER BOOKING. Their 'website' on Google is an Instagram link. 46 reviews 5.0. Schedule is illustrative."
 }

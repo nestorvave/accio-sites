@@ -1,88 +1,88 @@
 {
   "slug": "el-madrigal",
-  "giro": "restaurante",
-  "nombre": "El Madrigal",
+  "category": "restaurant",
+  "name": "El Madrigal",
   "tagline": "Un jardín para desayunar, comer y celebrar",
-  "descripcion": "Uno de los 100 lugares imperdibles de México. Terraza y jardín en Vista Hermosa, cocina mexicana e internacional, valet parking y eventos. Desayunos, comidas, postres y cócteles.",
+  "description": "Uno de los 100 lugares imperdibles de México. Terraza y jardín en Vista Hermosa, cocina mexicana e internacional, valet parking y eventos. Desayunos, comidas, postres y cócteles.",
   "logo": "/logos/el-madrigal.jpg",
-  "fotos": [],
-  "colores": {
-    "marca": "#24211D",
-    "papel": "#EFECE6"
+  "photos": [],
+  "colors": {
+    "brand": "#24211D",
+    "paper": "#EFECE6"
   },
-  "telefono": "777 100 7700",
+  "phone": "777 100 7700",
   "instagram": "elmadrigalmx",
-  "direccion": "Sonora 115, Vista Hermosa, 62290 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=18061225676473695321",
-  "horario": [
+  "address": "Sonora 115, Vista Hermosa, 62290 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=18061225676473695321",
+  "hours": [
     {
-      "dias": "Lunes",
-      "horas": "Cerrado"
+      "days": "Lunes",
+      "time": "Cerrado"
     },
     {
-      "dias": "Martes a jueves",
-      "horas": "8:00 – 22:00"
+      "days": "Martes a jueves",
+      "time": "8:00 – 22:00"
     },
     {
-      "dias": "Viernes y sábado",
-      "horas": "8:00 – 23:00"
+      "days": "Viernes y sábado",
+      "time": "8:00 – 23:00"
     },
     {
-      "dias": "Domingo",
-      "horas": "8:00 – 20:00"
+      "days": "Domingo",
+      "time": "8:00 – 20:00"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Para empezar",
+      "title": "Para empezar",
       "items": [
         {
-          "nombre": "Sopa de tortilla",
-          "descripcion": "La favorita de la casa.",
-          "destacado": true
+          "name": "Sopa de tortilla",
+          "description": "La favorita de la casa.",
+          "featured": true
         },
         {
-          "nombre": "Sopa de cebolla"
+          "name": "Sopa de cebolla"
         },
         {
-          "nombre": "Carpaccio de atún"
+          "name": "Carpaccio de atún"
         }
       ]
     },
     {
-      "titulo": "Fuertes",
+      "title": "Fuertes",
       "items": [
         {
-          "nombre": "Pulpo a las brasas",
-          "descripcion": "Con guacamole, jitomate rostizado y cebolla."
+          "name": "Pulpo a las brasas",
+          "description": "Con guacamole, jitomate rostizado y cebolla."
         },
         {
-          "nombre": "Huachinango almendrado"
+          "name": "Huachinango almendrado"
         },
         {
-          "nombre": "Estofado de lengua"
+          "name": "Estofado de lengua"
         },
         {
-          "nombre": "Fetuccini con camarones"
+          "name": "Fetuccini con camarones"
         }
       ]
     },
     {
-      "titulo": "Desayunos",
+      "title": "Desayunos",
       "items": [
         {
-          "nombre": "Chilaquiles"
+          "name": "Chilaquiles"
         },
         {
-          "nombre": "Huevos al gusto"
+          "name": "Huevos al gusto"
         },
         {
-          "nombre": "Pan de la casa"
+          "name": "Pan de la casa"
         }
       ],
-      "nota": "Todos los días desde las 8:00."
+      "note": "Todos los días desde las 8:00."
     }
   ],
   "demo": true,
-  "notas": "ENVIAR YA. elmadrigal.shop no carga (dos intentos de 50 s). 3,605 reseñas 4.7. IG 7.1K. Platos tomados de reseñas; precios con su carta real."
+  "notes": "READY. elmadrigal.shop does not load (two 50 s attempts). 3,605 reviews 4.7. IG 7.1K. Dishes taken from reviews; prices from their real menu."
 }

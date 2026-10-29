@@ -1,105 +1,105 @@
 {
   "slug": "arts-pilates",
-  "giro": "fitness",
-  "nombre": "Arts Pilates Reformer",
+  "category": "fitness",
+  "name": "Arts Pilates Reformer",
   "tagline": "Pilates | reformer | en Delicias",
-  "descripcion": "Strong Pilates Reformer en Patio Diana. Grupos chicos, coach atenta a tu técnica, estacionamiento y horarios de mañana y tarde. Aceptamos Wellhub, TotalPass y Fitpass.",
+  "description": "Strong Pilates Reformer en Patio Diana. Grupos chicos, coach atenta a tu técnica, estacionamiento y horarios de mañana y tarde. Aceptamos Wellhub, TotalPass y Fitpass.",
   "logo": "/logos/arts-pilates.jpg",
-  "fotos": [],
-  "colores": {
-    "marca": "#8A6A1E",
-    "papel": "#F0E4C5"
+  "photos": [],
+  "colors": {
+    "brand": "#8A6A1E",
+    "paper": "#F0E4C5"
   },
-  "telefono": "777 460 1200",
+  "phone": "777 460 1200",
   "instagram": "arts_pilates_reformer",
-  "direccion": "Av. Diana, Patio Diana, Delicias, 62330 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=479956050398033064",
-  "horario": [
+  "address": "Av. Diana, Patio Diana, Delicias, 62330 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=479956050398033064",
+  "hours": [
     {
-      "dias": "Lunes a viernes",
-      "horas": "7:00 – 12:00 y 16:00 – 21:00"
+      "days": "Lunes a viernes",
+      "time": "7:00 – 12:00 y 16:00 – 21:00"
     },
     {
-      "dias": "Sábado",
-      "horas": "8:00 – 12:00"
+      "days": "Sábado",
+      "time": "8:00 – 12:00"
     },
     {
-      "dias": "Domingo",
-      "horas": "8:00 – 10:00"
+      "days": "Domingo",
+      "time": "8:00 – 10:00"
     }
   ],
-  "clases": [
+  "classes": [
     {
-      "dia": "Lunes",
-      "hora": "7:00",
-      "nombre": "Reformer Flow"
+      "day": "Lunes",
+      "time": "7:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Lunes",
-      "hora": "18:00",
-      "nombre": "Reformer Sculpt"
+      "day": "Lunes",
+      "time": "18:00",
+      "name": "Reformer Sculpt"
     },
     {
-      "dia": "Martes",
-      "hora": "8:00",
-      "nombre": "Reformer Flow"
+      "day": "Martes",
+      "time": "8:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Martes",
-      "hora": "19:00",
-      "nombre": "Reformer Power"
+      "day": "Martes",
+      "time": "19:00",
+      "name": "Reformer Power"
     },
     {
-      "dia": "Miércoles",
-      "hora": "7:00",
-      "nombre": "Reformer Flow"
+      "day": "Miércoles",
+      "time": "7:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Miércoles",
-      "hora": "18:00",
-      "nombre": "Reformer Sculpt"
+      "day": "Miércoles",
+      "time": "18:00",
+      "name": "Reformer Sculpt"
     },
     {
-      "dia": "Jueves",
-      "hora": "8:00",
-      "nombre": "Reformer Flow"
+      "day": "Jueves",
+      "time": "8:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Jueves",
-      "hora": "19:00",
-      "nombre": "Reformer Power"
+      "day": "Jueves",
+      "time": "19:00",
+      "name": "Reformer Power"
     },
     {
-      "dia": "Viernes",
-      "hora": "7:00",
-      "nombre": "Reformer Flow"
+      "day": "Viernes",
+      "time": "7:00",
+      "name": "Reformer Flow"
     },
     {
-      "dia": "Sábado",
-      "hora": "9:00",
-      "nombre": "Reformer Sculpt"
+      "day": "Sábado",
+      "time": "9:00",
+      "name": "Reformer Sculpt"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Planes",
+      "title": "Planes",
       "items": [
         {
-          "nombre": "Clase suelta",
-          "duracion": "50 min"
+          "name": "Clase suelta",
+          "duration": "50 min"
         },
         {
-          "nombre": "Paquete 8 clases",
-          "descripcion": "Vigencia de un mes.",
-          "destacado": true
+          "name": "Paquete 8 clases",
+          "description": "Vigencia de un mes.",
+          "featured": true
         },
         {
-          "nombre": "Ilimitado mensual"
+          "name": "Ilimitado mensual"
         }
       ],
-      "nota": "Precios con el estudio; también Wellhub, TotalPass y Fitpass."
+      "note": "Precios con el estudio; también Wellhub, TotalPass y Fitpass."
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER. Sin página web; reservan por WhatsApp o DM. 10 reseñas 5.0. IG 949. Horario de clases ilustrativo."
+  "notes": "AFTER BOOKING. No website; they book via WhatsApp or DM. 10 reviews 5.0. IG 949. Class schedule is illustrative."
 }

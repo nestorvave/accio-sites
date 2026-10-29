@@ -1,16 +1,16 @@
 ---
 import { sites } from "../lib/sites";
 import Spa from "../templates/Spa.astro";
-import Restaurante from "../templates/Restaurante.astro";
-import Consultorio from "../templates/Consultorio.astro";
+import Restaurant from "../templates/Restaurant.astro";
+import Clinic from "../templates/Clinic.astro";
 import Fitness from "../templates/Fitness.astro";
 
 export function getStaticPaths() {
   return sites.map((site) => ({ params: { slug: site.slug }, props: { site } }));
 }
 const { site } = Astro.props;
-const plantillas = { spa: Spa, restaurante: Restaurante, consultorio: Consultorio, fitness: Fitness } as const;
-const Plantilla = plantillas[site.giro];
-if (!Plantilla) throw new Error(`Giro sin plantilla: ${site.giro} (${site.slug})`);
+const templates = { spa: Spa, restaurant: Restaurant, clinic: Clinic, fitness: Fitness } as const;
+const Template = templates[site.category];
+if (!Template) throw new Error(`No template for category: ${site.category} (${site.slug})`);
 ---
-<Plantilla site={site} />
+<Template site={site} />

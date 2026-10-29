@@ -1,71 +1,71 @@
 {
   "slug": "dr-samper",
-  "giro": "consultorio",
-  "subgiro": "estetica",
-  "nombre": "Clínica Samper",
+  "category": "clinic",
+  "subcategory": "aesthetic",
+  "name": "Clínica Samper",
   "tagline": "Cirugía plástica certificada en Cuernavaca",
-  "descripcion": "El Dr. Rolando Samper, cirujano plástico certificado, atiende en Reforma con una primera consulta que resuelve dudas, explica el procedimiento y planea el seguimiento. Pacientes de México, Estados Unidos y Canadá.",
+  "description": "El Dr. Rolando Samper, cirujano plástico certificado, atiende en Reforma con una primera consulta que resuelve dudas, explica el procedimiento y planea el seguimiento. Pacientes de México, Estados Unidos y Canadá.",
   "logo": null,
-  "fotos": [],
-  "telefono": "777 256 9930",
+  "photos": [],
+  "phone": "777 256 9930",
   "instagram": "drrolandosamper",
-  "direccion": "Jantetelco 101, Reforma, 62260 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=6055858106051800108",
-  "horario": [
+  "address": "Jantetelco 101, Reforma, 62260 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=6055858106051800108",
+  "hours": [
     {
-      "dias": "Lunes a viernes",
-      "horas": "9:00 – 18:00"
+      "days": "Lunes a viernes",
+      "time": "9:00 – 18:00"
     },
     {
-      "dias": "Sábado",
-      "horas": "9:00 – 12:00"
+      "days": "Sábado",
+      "time": "9:00 – 12:00"
     },
     {
-      "dias": "Domingo",
-      "horas": "Cerrado"
+      "days": "Domingo",
+      "time": "Cerrado"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Rostro",
+      "title": "Rostro",
       "items": [
         {
-          "nombre": "Rinoplastia",
-          "destacado": true
+          "name": "Rinoplastia",
+          "featured": true
         },
         {
-          "nombre": "Lifting facial"
+          "name": "Lifting facial"
         },
         {
-          "nombre": "Blefaroplastia",
-          "descripcion": "Párpados."
+          "name": "Blefaroplastia",
+          "description": "Párpados."
         }
       ]
     },
     {
-      "titulo": "Cuerpo",
+      "title": "Cuerpo",
       "items": [
         {
-          "nombre": "Aumento mamario"
+          "name": "Aumento mamario"
         },
         {
-          "nombre": "Liposucción"
+          "name": "Liposucción"
         },
         {
-          "nombre": "Abdominoplastia"
+          "name": "Abdominoplastia"
         }
       ]
     },
     {
-      "titulo": "Consulta",
+      "title": "Consulta",
       "items": [
         {
-          "nombre": "Valoración",
-          "descripcion": "Primera consulta con plan por escrito."
+          "name": "Valoración",
+          "description": "Primera consulta con plan por escrito."
         }
       ]
     }
   ],
   "demo": true,
-  "notas": "ENVIAR YA. rolandosamper.com: sin WhatsApp ni formulario, 97 imágenes en portada (lento en celular), un recurso http. 662 reseñas 4.9. Ticket alto. Tratamientos de ejemplo: confirmar con su lista."
+  "notes": "READY. rolandosamper.com: no WhatsApp or form, 97 images on the home page (slow on mobile), one http resource. 662 reviews 4.9. High ticket. Treatments are examples: confirm against their list."
 }

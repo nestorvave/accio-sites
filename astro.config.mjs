@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 
-// Sitio estático. Cada negocio sale como /<slug>/index.html.
-// Para producción pon el dominio real (ej. https://demo.accio.mx) para que las etiquetas og: lleven URL absoluta.
+// Static site. Each business is emitted as /<slug>/index.html.
+// Set SITE_URL in production so og: tags carry absolute URLs.
 export default defineConfig({
   site: process.env.SITE_URL || "https://demo.accio.mx",
   output: "static",

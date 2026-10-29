@@ -1,47 +1,47 @@
 {
   "slug": "royal-vet",
-  "giro": "consultorio",
-  "subgiro": "veterinaria",
-  "nombre": "Royal Vet",
+  "category": "clinic",
+  "subcategory": "veterinary",
+  "name": "Royal Vet",
   "tagline": "Urgencias veterinarias las 24 horas",
-  "descripcion": "Clínica veterinaria en Lomas de Cortés abierta las 24 horas. Atención de urgencias con precios accesibles, consulta general y seguimiento por WhatsApp.",
+  "description": "Clínica veterinaria en Lomas de Cortés abierta las 24 horas. Atención de urgencias con precios accesibles, consulta general y seguimiento por WhatsApp.",
   "logo": null,
-  "fotos": [],
-  "telefono": "777 931 6320",
-  "direccion": "C. Nueva Inglaterra 301, Lomas de Cortés, 62247 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=17233534928180910446",
-  "horario": [
+  "photos": [],
+  "phone": "777 931 6320",
+  "address": "C. Nueva Inglaterra 301, Lomas de Cortés, 62247 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=17233534928180910446",
+  "hours": [
     {
-      "dias": "Lunes a domingo",
-      "horas": "Abierto 24 horas"
+      "days": "Lunes a domingo",
+      "time": "Abierto 24 horas"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Urgencias",
+      "title": "Urgencias",
       "items": [
         {
-          "nombre": "Urgencia 24 h",
-          "descripcion": "Llama antes de salir; te esperamos.",
-          "destacado": true
+          "name": "Urgencia 24 h",
+          "description": "Llama antes de salir; te esperamos.",
+          "featured": true
         }
       ]
     },
     {
-      "titulo": "Consulta",
+      "title": "Consulta",
       "items": [
         {
-          "nombre": "Consulta general"
+          "name": "Consulta general"
         },
         {
-          "nombre": "Vacunas y desparasitación"
+          "name": "Vacunas y desparasitación"
         },
         {
-          "nombre": "Cirugía"
+          "name": "Cirugía"
         }
       ]
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER (o enviar ya: su dolor es visibilidad). Sin página web. 19 reseñas 4.9. Sin IG encontrado."
+  "notes": "AFTER BOOKING (or ready: their pain is visibility). No website. 19 reviews 4.9. No IG found."
 }

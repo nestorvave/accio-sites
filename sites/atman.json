@@ -1,105 +1,105 @@
 {
   "slug": "atman",
-  "giro": "fitness",
-  "nombre": "Atmán Yoga y Pilates",
+  "category": "fitness",
+  "name": "Atmán Yoga y Pilates",
   "tagline": "Yoga | pilates | y terapias",
-  "descripcion": "Yoga, pilates, acupuntura y masaje en Av. Diana. Una instructora con años de camino, un grupo que se vuelve comunidad y terapias alternativas en el mismo lugar.",
+  "description": "Yoga, pilates, acupuntura y masaje en Av. Diana. Una instructora con años de camino, un grupo que se vuelve comunidad y terapias alternativas en el mismo lugar.",
   "logo": null,
-  "fotos": [],
-  "colores": {
-    "marca": "#6B4E9B",
-    "papel": "#EAE4F1"
+  "photos": [],
+  "colors": {
+    "brand": "#6B4E9B",
+    "paper": "#EAE4F1"
   },
-  "telefono": "777 216 6558",
-  "direccion": "Av. Diana 217b, Delicias, 62330 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=13205092388666762785",
-  "horario": [
+  "phone": "777 216 6558",
+  "address": "Av. Diana 217b, Delicias, 62330 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=13205092388666762785",
+  "hours": [
     {
-      "dias": "Lunes a viernes",
-      "horas": "8:00 – 21:00"
+      "days": "Lunes a viernes",
+      "time": "8:00 – 21:00"
     },
     {
-      "dias": "Sábado y domingo",
-      "horas": "9:00 – 14:00"
+      "days": "Sábado y domingo",
+      "time": "9:00 – 14:00"
     }
   ],
-  "clases": [
+  "classes": [
     {
-      "dia": "Lunes",
-      "hora": "8:00",
-      "nombre": "Hatha yoga"
+      "day": "Lunes",
+      "time": "8:00",
+      "name": "Hatha yoga"
     },
     {
-      "dia": "Lunes",
-      "hora": "19:00",
-      "nombre": "Pilates mat"
+      "day": "Lunes",
+      "time": "19:00",
+      "name": "Pilates mat"
     },
     {
-      "dia": "Martes",
-      "hora": "8:00",
-      "nombre": "Vinyasa"
+      "day": "Martes",
+      "time": "8:00",
+      "name": "Vinyasa"
     },
     {
-      "dia": "Martes",
-      "hora": "19:00",
-      "nombre": "Yoga restaurativo"
+      "day": "Martes",
+      "time": "19:00",
+      "name": "Yoga restaurativo"
     },
     {
-      "dia": "Miércoles",
-      "hora": "8:00",
-      "nombre": "Hatha yoga"
+      "day": "Miércoles",
+      "time": "8:00",
+      "name": "Hatha yoga"
     },
     {
-      "dia": "Miércoles",
-      "hora": "19:00",
-      "nombre": "Pilates mat"
+      "day": "Miércoles",
+      "time": "19:00",
+      "name": "Pilates mat"
     },
     {
-      "dia": "Jueves",
-      "hora": "8:00",
-      "nombre": "Vinyasa"
+      "day": "Jueves",
+      "time": "8:00",
+      "name": "Vinyasa"
     },
     {
-      "dia": "Jueves",
-      "hora": "19:00",
-      "nombre": "Yoga restaurativo"
+      "day": "Jueves",
+      "time": "19:00",
+      "name": "Yoga restaurativo"
     },
     {
-      "dia": "Viernes",
-      "hora": "8:00",
-      "nombre": "Hatha yoga"
+      "day": "Viernes",
+      "time": "8:00",
+      "name": "Hatha yoga"
     },
     {
-      "dia": "Sábado",
-      "hora": "10:00",
-      "nombre": "Yoga para todos"
+      "day": "Sábado",
+      "time": "10:00",
+      "name": "Yoga para todos"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Planes",
+      "title": "Planes",
       "items": [
         {
-          "nombre": "Clase suelta"
+          "name": "Clase suelta"
         },
         {
-          "nombre": "Mensualidad",
-          "destacado": true
+          "name": "Mensualidad",
+          "featured": true
         }
       ]
     },
     {
-      "titulo": "Terapias",
+      "title": "Terapias",
       "items": [
         {
-          "nombre": "Acupuntura"
+          "name": "Acupuntura"
         },
         {
-          "nombre": "Masaje terapéutico"
+          "name": "Masaje terapéutico"
         }
       ]
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER. Sin página web. 27 reseñas 5.0. Sin IG encontrado. Horario ilustrativo."
+  "notes": "AFTER BOOKING. No website. 27 reviews 5.0. No IG found. Schedule is illustrative."
 }

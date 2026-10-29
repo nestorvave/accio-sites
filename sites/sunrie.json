@@ -1,56 +1,56 @@
 {
   "slug": "sunrie",
-  "giro": "consultorio",
-  "subgiro": "estetica",
-  "nombre": "Sunrie Clínica Estética",
+  "category": "clinic",
+  "subcategory": "aesthetic",
+  "name": "Sunrie Clínica Estética",
   "tagline": "Armonización facial con un médico actualizado",
-  "descripcion": "Clínica estética en Ocotepec. El Dr. Eduardo se mantiene al día en bioestimuladores, hilos tensores y armonización facial, con precios accesibles y disponibilidad para resolver dudas.",
+  "description": "Clínica estética en Ocotepec. El Dr. Eduardo se mantiene al día en bioestimuladores, hilos tensores y armonización facial, con precios accesibles y disponibilidad para resolver dudas.",
   "logo": null,
-  "fotos": [],
-  "telefono": "777 367 0778",
-  "direccion": "C. del Arrastradero, Ocotepec, 62220 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=5375237780171396281",
-  "horario": [
+  "photos": [],
+  "phone": "777 367 0778",
+  "address": "C. del Arrastradero, Ocotepec, 62220 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=5375237780171396281",
+  "hours": [
     {
-      "dias": "Lunes a viernes",
-      "horas": "8:00 – 20:00"
+      "days": "Lunes a viernes",
+      "time": "8:00 – 20:00"
     },
     {
-      "dias": "Sábado",
-      "horas": "8:00 – 17:00"
+      "days": "Sábado",
+      "time": "8:00 – 17:00"
     },
     {
-      "dias": "Domingo",
-      "horas": "Cerrado"
+      "days": "Domingo",
+      "time": "Cerrado"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Rostro",
+      "title": "Rostro",
       "items": [
         {
-          "nombre": "Armonización facial",
-          "destacado": true
+          "name": "Armonización facial",
+          "featured": true
         },
         {
-          "nombre": "Hilos tensores",
-          "descripcion": "Resultado casi inmediato."
+          "name": "Hilos tensores",
+          "description": "Resultado casi inmediato."
         },
         {
-          "nombre": "Bioestimuladores de colágeno"
+          "name": "Bioestimuladores de colágeno"
         }
       ]
     },
     {
-      "titulo": "Consulta",
+      "title": "Consulta",
       "items": [
         {
-          "nombre": "Valoración",
-          "descripcion": "Sin costo."
+          "name": "Valoración",
+          "description": "Sin costo."
         }
       ]
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER. Sin página web. 41 reseñas 5.0. Sin IG encontrado."
+  "notes": "AFTER BOOKING. No website. 41 reviews 5.0. No IG found."
 }

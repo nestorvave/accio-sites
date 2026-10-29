@@ -1,67 +1,67 @@
 {
   "slug": "spa-alory",
-  "giro": "spa",
-  "nombre": "Alory Cosmetology & Wellness",
+  "category": "spa",
+  "name": "Alory Cosmetology & Wellness",
   "tagline": "Te recibimos por tu nombre",
-  "descripcion": "Spa y cosmetología en Cantarranas: masajes, faciales y paquetes para celebrar. Atención personalizada desde que tocas la puerta, con detalles que hacen la visita especial.",
+  "description": "Spa y cosmetología en Cantarranas: masajes, faciales y paquetes para celebrar. Atención personalizada desde que tocas la puerta, con detalles que hacen la visita especial.",
   "logo": null,
-  "fotos": [],
-  "telefono": "777 223 1309",
-  "direccion": "Blvd. Gustavo Díaz Ordaz 22, Cantarranas, 62448 Cuernavaca, Mor.",
-  "mapa": "https://maps.google.com/?cid=10706855238531059177",
-  "horario": [
+  "photos": [],
+  "phone": "777 223 1309",
+  "address": "Blvd. Gustavo Díaz Ordaz 22, Cantarranas, 62448 Cuernavaca, Mor.",
+  "mapUrl": "https://maps.google.com/?cid=10706855238531059177",
+  "hours": [
     {
-      "dias": "Lunes a sábado",
-      "horas": "10:00 – 19:00"
+      "days": "Lunes a sábado",
+      "time": "10:00 – 19:00"
     },
     {
-      "dias": "Domingo",
-      "horas": "Cerrado"
+      "days": "Domingo",
+      "time": "Cerrado"
     }
   ],
-  "secciones": [
+  "sections": [
     {
-      "titulo": "Masajes",
+      "title": "Masajes",
       "items": [
         {
-          "nombre": "Relajante",
-          "duracion": "60 min",
-          "destacado": true
+          "name": "Relajante",
+          "duration": "60 min",
+          "featured": true
         },
         {
-          "nombre": "Descontracturante",
-          "duracion": "60 min"
+          "name": "Descontracturante",
+          "duration": "60 min"
         }
       ]
     },
     {
-      "titulo": "Faciales",
+      "title": "Faciales",
       "items": [
         {
-          "nombre": "Facial profundo",
-          "duracion": "60 min"
+          "name": "Facial profundo",
+          "duration": "60 min"
         },
         {
-          "nombre": "Facial hidratante",
-          "duracion": "50 min"
+          "name": "Facial hidratante",
+          "duration": "50 min"
         }
       ]
     },
     {
-      "titulo": "Paquetes",
+      "title": "Paquetes",
       "items": [
         {
-          "nombre": "Masaje + facial",
-          "descripcion": "Para ti o en pareja.",
-          "destacado": true
+          "name": "Masaje + facial",
+          "description": "Para ti o en pareja.",
+          "featured": true
         },
         {
-          "nombre": "Cumpleaños",
-          "descripcion": "Con pastelito de cortesía."
+          "name": "Cumpleaños",
+          "description": "Con pastelito de cortesía."
         }
       ]
     }
   ],
   "demo": true,
-  "notas": "ESPERAR BOOKER. Ya agenda con AgendaPro (su 'sitio' es alorycosmetology.site.agendapro.com). Mensaje ajustado: reconocer AgendaPro, ofrecer página que lleve ahí. 60 reseñas 5.0. Sin IG encontrado."
+  "notes": "AFTER BOOKING. Already books with AgendaPro (their 'site' is alorycosmetology.site.agendapro.com). Adjusted pitch: acknowledge AgendaPro, offer a page that links there. 60 reviews 5.0. No IG found."
 }
