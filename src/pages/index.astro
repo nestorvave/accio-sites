@@ -1,0 +1,38 @@
+---
+/** Índice interno de demos. No se enlaza desde ninguna página de negocio. */
+import "../styles/base.css";
+import { sites } from "../lib/sites";
+const giros = { spa: "Spa / estética", restaurante: "Restaurante", consultorio: "Consultorio", fitness: "Fitness / pilates" };
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Demos · ACCIO</title>
+    <style>
+      :root { --marca: #0B1220; --sobre-marca: #fff; }
+      body { background: #F5F3EE; color: #0B1220; font-family: system-ui, sans-serif; padding: 40px 20px; }
+      main { max-width: 720px; margin: 0 auto; }
+      h1 { font-size: 1.4rem; margin-bottom: 4px; }
+      p { color: #5b6672; margin-bottom: 24px; }
+      ul { display: grid; gap: 10px; }
+      li a { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; background: #fff; border-radius: 12px; text-decoration: none; }
+      li a:hover { background: #fdfcf9; }
+      small { color: #5b6672; }
+      code { font-size: .85em; color: #5b6672; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Demos de páginas</h1>
+      <p>{sites.length} negocios. Cada uno es un JSON en <code>sites/</code>.</p>
+      <ul>
+        {sites.map((s) => (
+          <li><a href={`/${s.slug}/`}><span>{s.nombre} <small>· {giros[s.giro]}</small></span><code>/{s.slug}</code></a></li>
+        ))}
+      </ul>
+    </main>
+  </body>
+</html>

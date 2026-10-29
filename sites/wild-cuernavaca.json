@@ -1,0 +1,99 @@
+{
+  "slug": "wild-cuernavaca",
+  "giro": "fitness",
+  "nombre": "Wild Cuernavaca",
+  "tagline": "Entrena | adentro | vive afuera",
+  "descripcion": "Funcional, híbrido, OCR, yoga y box en Miguel Hidalgo, con cafetería y una comunidad que sale los fines de semana a correr, hacer senderismo y carreras de obstáculos. Rutinas que nunca se repiten.",
+  "logo": null,
+  "fotos": [],
+  "colores": {
+    "marca": "#D9461E",
+    "papel": "#F1DED4"
+  },
+  "telefono": "777 370 1367",
+  "instagram": "wild_livemx",
+  "direccion": "Blvd. Lic. Benito Juárez 65, Miguel Hidalgo, 62040 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=14156281393540531060",
+  "horario": [
+    {
+      "dias": "Lunes a viernes",
+      "horas": "6:00 – 20:00"
+    },
+    {
+      "dias": "Sábado y domingo",
+      "horas": "Actividades al aire libre"
+    }
+  ],
+  "clases": [
+    {
+      "dia": "Lunes",
+      "hora": "6:00",
+      "nombre": "Funcional"
+    },
+    {
+      "dia": "Lunes",
+      "hora": "19:00",
+      "nombre": "Box"
+    },
+    {
+      "dia": "Martes",
+      "hora": "6:00",
+      "nombre": "Híbrido"
+    },
+    {
+      "dia": "Martes",
+      "hora": "19:00",
+      "nombre": "Yoga"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "6:00",
+      "nombre": "Funcional"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "19:00",
+      "nombre": "OCR"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "6:00",
+      "nombre": "Híbrido"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "19:00",
+      "nombre": "Box"
+    },
+    {
+      "dia": "Viernes",
+      "hora": "6:00",
+      "nombre": "Funcional"
+    },
+    {
+      "dia": "Sábado",
+      "hora": "7:00",
+      "nombre": "Salida: trail o senderismo"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Planes",
+      "items": [
+        {
+          "nombre": "Clase de prueba",
+          "destacado": true
+        },
+        {
+          "nombre": "Mensualidad"
+        },
+        {
+          "nombre": "Eventos de fin de semana",
+          "descripcion": "Trail, senderismo y clínicas de running."
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ESPERAR BOOKER. Su 'sitio web' en Google es un link de Instagram. 46 reseñas 5.0. Horario ilustrativo."
+}

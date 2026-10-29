@@ -1,0 +1,19 @@
+---
+/** Logo del negocio, o monograma con sus iniciales si todavía no hay logo. */
+import { monograma } from "../lib/sites";
+interface Props { nombre: string; logo?: string | null; size?: number; class?: string }
+const { nombre, logo, size = 56, class: cls = "" } = Astro.props;
+---
+{logo ? (
+  <img class={`mark ${cls}`} src={logo} alt={nombre} width={size} height={size} style={`--s:${size}px`} loading="eager" decoding="async" />
+) : (
+  <span class={`mark mark--mono ${cls}`} style={`--s:${size}px`} aria-label={nombre}>{monograma(nombre)}</span>
+)}
+<style>
+  .mark { width: var(--s, auto); height: var(--s, auto); object-fit: cover; border-radius: 22%; flex: 0 0 auto; }
+  .mark--mono {
+    display: inline-grid; place-items: center; width: var(--s); height: var(--s);
+    border-radius: 22%; background: var(--marca); color: var(--sobre-marca, #fff);
+    font-family: var(--f-display); font-weight: 600; font-size: calc(var(--s) * .42); letter-spacing: .02em;
+  }
+</style>

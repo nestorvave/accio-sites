@@ -1,0 +1,101 @@
+{
+  "slug": "luna-studio",
+  "giro": "fitness",
+  "nombre": "Luna Studio",
+  "tagline": "Reformer | con técnica | y buena vibra",
+  "descripcion": "Pilates reformer en Jacarandas con clases temáticas, coaches que corrigen la técnica y cuidan que no te lesiones, y una comunidad que se siente como familia.",
+  "logo": null,
+  "fotos": [],
+  "colores": {
+    "marca": "#3A3F8F",
+    "papel": "#E4E5F0"
+  },
+  "telefono": "777 307 3467",
+  "direccion": "Av. Plan de Ayala 830, Jacarandas, 62420 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=5161263270315122637",
+  "horario": [
+    {
+      "dias": "Lunes, miércoles y viernes",
+      "horas": "8:15 – 10:30 y 17:00 – 20:30"
+    },
+    {
+      "dias": "Martes y jueves",
+      "horas": "7:00 – 10:30 y 17:00 – 20:30"
+    },
+    {
+      "dias": "Sábado y domingo",
+      "horas": "9:00 – 11:30"
+    }
+  ],
+  "clases": [
+    {
+      "dia": "Lunes",
+      "hora": "7:00",
+      "nombre": "Reformer Flow"
+    },
+    {
+      "dia": "Lunes",
+      "hora": "18:00",
+      "nombre": "Reformer Sculpt"
+    },
+    {
+      "dia": "Martes",
+      "hora": "8:00",
+      "nombre": "Reformer Flow"
+    },
+    {
+      "dia": "Martes",
+      "hora": "19:00",
+      "nombre": "Reformer Power"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "7:00",
+      "nombre": "Reformer Flow"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "18:00",
+      "nombre": "Reformer Sculpt"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "8:00",
+      "nombre": "Reformer Flow"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "19:00",
+      "nombre": "Reformer Power"
+    },
+    {
+      "dia": "Viernes",
+      "hora": "7:00",
+      "nombre": "Reformer Flow"
+    },
+    {
+      "dia": "Sábado",
+      "hora": "9:00",
+      "nombre": "Reformer Sculpt"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Planes",
+      "items": [
+        {
+          "nombre": "Clase suelta"
+        },
+        {
+          "nombre": "Paquete 8 clases",
+          "destacado": true
+        },
+        {
+          "nombre": "Ilimitado mensual"
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ESPERAR BOOKER. Sin página web. 25 reseñas 4.4. IG no confirmado. Horario ilustrativo."
+}

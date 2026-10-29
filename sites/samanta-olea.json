@@ -1,0 +1,53 @@
+{
+  "slug": "samanta-olea",
+  "giro": "consultorio",
+  "subgiro": "estetica",
+  "nombre": "Dra. Samanta Olea",
+  "tagline": "Medicina estética que escucha",
+  "descripcion": "La Dra. Samanta Olea atiende en Teopanzolco con productos abiertos frente a ti, consentimiento informado y explicación de cada paso. Opciones sin presión, resultados naturales.",
+  "logo": null,
+  "fotos": [],
+  "telefono": "777 209 8273",
+  "direccion": "Fresno 51, Teopanzolco, 62350 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=13684107902110245006",
+  "horario": [
+    {
+      "dias": "Lunes a sábado",
+      "horas": "9:00 – 18:00"
+    },
+    {
+      "dias": "Domingo",
+      "horas": "Cerrado"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Rostro",
+      "items": [
+        {
+          "nombre": "Toxina botulínica",
+          "destacado": true
+        },
+        {
+          "nombre": "Relleno de labios",
+          "descripcion": "Ácido hialurónico."
+        },
+        {
+          "nombre": "PDRN y exosomas",
+          "descripcion": "Regeneración de la piel."
+        }
+      ]
+    },
+    {
+      "titulo": "Consulta",
+      "items": [
+        {
+          "nombre": "Valoración",
+          "descripcion": "Diagnóstico y propuesta a tu medida."
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ESPERAR BOOKER. Sin página web. 41 reseñas 5.0. Tratamientos tomados de reseñas. Sin IG encontrado."
+}

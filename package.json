@@ -1,0 +1,20 @@
+{
+  "name": "accio-sites",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Páginas de una hoja por giro para prospectos de ACCIO. Cada negocio es un JSON en sites/.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "new": "node scripts/new-site.mjs",
+    "shots": "node scripts/screenshots.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.13.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.50.0"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "slug": "atman",
+  "giro": "fitness",
+  "nombre": "Atmán Yoga y Pilates",
+  "tagline": "Yoga | pilates | y terapias",
+  "descripcion": "Yoga, pilates, acupuntura y masaje en Av. Diana. Una instructora con años de camino, un grupo que se vuelve comunidad y terapias alternativas en el mismo lugar.",
+  "logo": null,
+  "fotos": [],
+  "colores": {
+    "marca": "#6B4E9B",
+    "papel": "#EAE4F1"
+  },
+  "telefono": "777 216 6558",
+  "direccion": "Av. Diana 217b, Delicias, 62330 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=13205092388666762785",
+  "horario": [
+    {
+      "dias": "Lunes a viernes",
+      "horas": "8:00 – 21:00"
+    },
+    {
+      "dias": "Sábado y domingo",
+      "horas": "9:00 – 14:00"
+    }
+  ],
+  "clases": [
+    {
+      "dia": "Lunes",
+      "hora": "8:00",
+      "nombre": "Hatha yoga"
+    },
+    {
+      "dia": "Lunes",
+      "hora": "19:00",
+      "nombre": "Pilates mat"
+    },
+    {
+      "dia": "Martes",
+      "hora": "8:00",
+      "nombre": "Vinyasa"
+    },
+    {
+      "dia": "Martes",
+      "hora": "19:00",
+      "nombre": "Yoga restaurativo"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "8:00",
+      "nombre": "Hatha yoga"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "19:00",
+      "nombre": "Pilates mat"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "8:00",
+      "nombre": "Vinyasa"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "19:00",
+      "nombre": "Yoga restaurativo"
+    },
+    {
+      "dia": "Viernes",
+      "hora": "8:00",
+      "nombre": "Hatha yoga"
+    },
+    {
+      "dia": "Sábado",
+      "hora": "10:00",
+      "nombre": "Yoga para todos"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Planes",
+      "items": [
+        {
+          "nombre": "Clase suelta"
+        },
+        {
+          "nombre": "Mensualidad",
+          "destacado": true
+        }
+      ]
+    },
+    {
+      "titulo": "Terapias",
+      "items": [
+        {
+          "nombre": "Acupuntura"
+        },
+        {
+          "nombre": "Masaje terapéutico"
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ESPERAR BOOKER. Sin página web. 27 reseñas 5.0. Sin IG encontrado. Horario ilustrativo."
+}

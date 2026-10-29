@@ -1,0 +1,84 @@
+{
+  "slug": "maya-spa",
+  "giro": "spa",
+  "nombre": "Maya Spa Center",
+  "tagline": "Un rato para ti, en el corazón de Cuernavaca",
+  "descripcion": "Faciales, masajes y rituales corporales en un espacio tranquilo en Jacarandas, con jacuzzi y sauna. Te escuchamos antes de empezar: cada tratamiento se ajusta a tu piel y a cómo llegas ese día.",
+  "logo": "/logos/maya-spa.jpg",
+  "fotos": [],
+  "colores": {
+    "fondo": "#1C1914",
+    "marca": "#D0BD96",
+    "papel": "#2B271F"
+  },
+  "telefono": "777 256 1613",
+  "instagram": "maya.spa.center",
+  "direccion": "Helechos 2, Jacarandas, 62420 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=2857684120126060535",
+  "horario": [
+    {
+      "dias": "Lunes a domingo",
+      "horas": "8:00 – 20:00"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Faciales",
+      "items": [
+        {
+          "nombre": "Facial profundo",
+          "descripcion": "Limpieza, exfoliación, extracción y mascarilla según tu piel.",
+          "duracion": "60 min",
+          "destacado": true
+        },
+        {
+          "nombre": "Facial anti acné",
+          "descripcion": "Para piel grasa o con brotes.",
+          "duracion": "60 min"
+        },
+        {
+          "nombre": "Facial hidratante",
+          "descripcion": "Termina con masaje de rostro y cuello.",
+          "duracion": "50 min"
+        }
+      ],
+      "nota": "Empezamos con una valoración de tu piel; el precio final depende del tratamiento que elijamos juntos."
+    },
+    {
+      "titulo": "Masajes",
+      "items": [
+        {
+          "nombre": "Relajante",
+          "descripcion": "Presión suave y aceites tibios.",
+          "duracion": "60 min"
+        },
+        {
+          "nombre": "Deportivo",
+          "descripcion": "Para después de entrenar o competir.",
+          "duracion": "60 min"
+        },
+        {
+          "nombre": "Reductivo",
+          "descripcion": "Con ventosas y maniobras de drenaje.",
+          "duracion": "60 min",
+          "destacado": true
+        }
+      ]
+    },
+    {
+      "titulo": "Momentos",
+      "items": [
+        {
+          "nombre": "Cumpleaños y aniversarios",
+          "descripcion": "Paquete en pareja con jacuzzi y sauna."
+        },
+        {
+          "nombre": "Limpieza de espalda",
+          "duracion": "45 min"
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ESPERAR BOOKER. Sin página web; su link es un linktr.ee. 91 reseñas 4.7. IG 4.9K. Servicios tomados de sus destacados de IG."
+}

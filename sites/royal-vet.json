@@ -1,0 +1,47 @@
+{
+  "slug": "royal-vet",
+  "giro": "consultorio",
+  "subgiro": "veterinaria",
+  "nombre": "Royal Vet",
+  "tagline": "Urgencias veterinarias las 24 horas",
+  "descripcion": "Clínica veterinaria en Lomas de Cortés abierta las 24 horas. Atención de urgencias con precios accesibles, consulta general y seguimiento por WhatsApp.",
+  "logo": null,
+  "fotos": [],
+  "telefono": "777 931 6320",
+  "direccion": "C. Nueva Inglaterra 301, Lomas de Cortés, 62247 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=17233534928180910446",
+  "horario": [
+    {
+      "dias": "Lunes a domingo",
+      "horas": "Abierto 24 horas"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Urgencias",
+      "items": [
+        {
+          "nombre": "Urgencia 24 h",
+          "descripcion": "Llama antes de salir; te esperamos.",
+          "destacado": true
+        }
+      ]
+    },
+    {
+      "titulo": "Consulta",
+      "items": [
+        {
+          "nombre": "Consulta general"
+        },
+        {
+          "nombre": "Vacunas y desparasitación"
+        },
+        {
+          "nombre": "Cirugía"
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ESPERAR BOOKER (o enviar ya: su dolor es visibilidad). Sin página web. 19 reseñas 4.9. Sin IG encontrado."
+}

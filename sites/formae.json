@@ -1,0 +1,104 @@
+{
+  "slug": "formae",
+  "giro": "fitness",
+  "nombre": "FORMAÉ",
+  "tagline": "Reformer | de tres | camas",
+  "descripcion": "Estudio pequeño de pilates reformer en Lomas del Mirador: máximo tres personas por clase, corrección en cada ejercicio y adaptaciones si traes una lesión. Para quien le intimidaba el reformer y se quedó.",
+  "logo": null,
+  "fotos": [],
+  "colores": {
+    "marca": "#2F5D50",
+    "papel": "#E3E8E2"
+  },
+  "telefono": "777 352 1686",
+  "instagram": "formae_cuernavaca_",
+  "direccion": "C. Cnel. Ahumada 45, Lomas del Mirador, 62350 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=5143044827102578848",
+  "horario": [
+    {
+      "dias": "Lunes a viernes",
+      "horas": "7:00 – 12:00 y 18:00 – 21:00"
+    },
+    {
+      "dias": "Sábado",
+      "horas": "9:00 – 12:00"
+    },
+    {
+      "dias": "Domingo",
+      "horas": "Cerrado"
+    }
+  ],
+  "clases": [
+    {
+      "dia": "Lunes",
+      "hora": "7:00",
+      "nombre": "Reformer"
+    },
+    {
+      "dia": "Lunes",
+      "hora": "19:00",
+      "nombre": "Reformer"
+    },
+    {
+      "dia": "Martes",
+      "hora": "8:00",
+      "nombre": "Reformer"
+    },
+    {
+      "dia": "Martes",
+      "hora": "18:00",
+      "nombre": "Reformer"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "7:00",
+      "nombre": "Reformer"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "19:00",
+      "nombre": "Reformer"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "8:00",
+      "nombre": "Reformer"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "18:00",
+      "nombre": "Reformer"
+    },
+    {
+      "dia": "Viernes",
+      "hora": "7:00",
+      "nombre": "Reformer"
+    },
+    {
+      "dia": "Sábado",
+      "hora": "9:00",
+      "nombre": "Reformer"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Planes",
+      "items": [
+        {
+          "nombre": "Clase de prueba",
+          "duracion": "50 min",
+          "destacado": true
+        },
+        {
+          "nombre": "Paquete 8 clases"
+        },
+        {
+          "nombre": "Paquete 12 clases"
+        }
+      ],
+      "nota": "Grupos de máximo 3 personas."
+    }
+  ],
+  "demo": true,
+  "notas": "ESPERAR BOOKER. Sin página web; su link es Instagram. 17 reseñas 5.0. Horario ilustrativo."
+}

@@ -1,0 +1,70 @@
+{
+  "slug": "animals-hospital",
+  "giro": "consultorio",
+  "subgiro": "veterinaria",
+  "nombre": "Animal's Hospital Veterinario",
+  "tagline": "30 años cuidando a los que más quieres",
+  "descripcion": "Hospital veterinario en Buena Vista con consulta, hospitalización, cirugía y estética. Un equipo que explica cada diagnóstico y cada medicamento, y responde cuando hay una urgencia.",
+  "logo": null,
+  "fotos": [],
+  "telefono": "777 311 5913",
+  "direccion": "Av. Emiliano Zapata 833-B, Buena Vista, 62130 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=11419529465118028175",
+  "horario": [
+    {
+      "dias": "Lunes a viernes",
+      "horas": "10:00 – 19:00"
+    },
+    {
+      "dias": "Sábado y domingo",
+      "horas": "10:00 – 17:00"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Consulta",
+      "items": [
+        {
+          "nombre": "Consulta general",
+          "descripcion": "Revisión completa, diagnóstico y plan de tratamiento.",
+          "destacado": true
+        },
+        {
+          "nombre": "Vacunas y desparasitación"
+        },
+        {
+          "nombre": "Urgencias",
+          "descripcion": "Llama antes de salir de casa."
+        }
+      ]
+    },
+    {
+      "titulo": "Hospital",
+      "items": [
+        {
+          "nombre": "Hospitalización",
+          "descripcion": "Con reporte diario por WhatsApp."
+        },
+        {
+          "nombre": "Cirugía"
+        },
+        {
+          "nombre": "Laboratorio y rayos X"
+        }
+      ]
+    },
+    {
+      "titulo": "Estética",
+      "items": [
+        {
+          "nombre": "Baño y corte"
+        },
+        {
+          "nombre": "Limpieza dental"
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ENVIAR YA. Sitio animals.com.mx: carrusel de portada en negro, sin Instagram enlazado. 107 reseñas 4.4. Sin IG encontrado."
+}

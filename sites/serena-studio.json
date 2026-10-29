@@ -1,0 +1,106 @@
+{
+  "slug": "serena-studio",
+  "giro": "fitness",
+  "nombre": "Serena Studio",
+  "tagline": "Entrena | medita | repite",
+  "descripcion": "Estudio en Plaza Flores con grupos pequeños, coaches certificados y clases temáticas por temporada. Cada clase termina con una meditación corta. Accesible y siempre limpio.",
+  "logo": null,
+  "fotos": [],
+  "colores": {
+    "marca": "#B5533C",
+    "papel": "#F2E4DE"
+  },
+  "telefono": "777 523 6954",
+  "instagram": "__studioserena",
+  "direccion": "Calle 10 de Abril 221, Plaza Flores, 62460 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=4799038299429399877",
+  "horario": [
+    {
+      "dias": "Lunes a jueves",
+      "horas": "8:00 – 9:30 y 16:30 – 20:00"
+    },
+    {
+      "dias": "Viernes",
+      "horas": "8:00 – 9:30 y 16:30 – 18:30"
+    },
+    {
+      "dias": "Sábado",
+      "horas": "8:00 – 10:30"
+    },
+    {
+      "dias": "Domingo",
+      "horas": "8:00 – 9:30"
+    }
+  ],
+  "clases": [
+    {
+      "dia": "Lunes",
+      "hora": "8:00",
+      "nombre": "Funcional"
+    },
+    {
+      "dia": "Lunes",
+      "hora": "18:00",
+      "nombre": "Pilates mat"
+    },
+    {
+      "dia": "Martes",
+      "hora": "8:00",
+      "nombre": "Yoga"
+    },
+    {
+      "dia": "Martes",
+      "hora": "19:00",
+      "nombre": "Funcional"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "8:00",
+      "nombre": "Pilates mat"
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "18:00",
+      "nombre": "Yoga"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "8:00",
+      "nombre": "Funcional"
+    },
+    {
+      "dia": "Jueves",
+      "hora": "19:00",
+      "nombre": "Pilates mat"
+    },
+    {
+      "dia": "Viernes",
+      "hora": "8:00",
+      "nombre": "Yoga"
+    },
+    {
+      "dia": "Sábado",
+      "hora": "9:00",
+      "nombre": "Clase temática"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Planes",
+      "items": [
+        {
+          "nombre": "Clase de prueba",
+          "destacado": true
+        },
+        {
+          "nombre": "Paquete 8 clases"
+        },
+        {
+          "nombre": "Ilimitado mensual"
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ESPERAR BOOKER. Sin página web; su link es Instagram. 10 reseñas 5.0. Horario ilustrativo."
+}

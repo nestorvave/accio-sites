@@ -1,0 +1,58 @@
+{
+  "slug": "felix-reyes",
+  "giro": "consultorio",
+  "subgiro": "despacho",
+  "nombre": "Félix Reyes Contadores",
+  "tagline": "Tu contabilidad al día y sin sorpresas con el SAT",
+  "descripcion": "Despacho contable en el centro de Cuernavaca. Llevamos la contabilidad, los impuestos y la administración de empresas y personas físicas, con un equipo que explica las cosas claras y a tiempo.",
+  "logo": null,
+  "fotos": [],
+  "telefono": "777 312 4048",
+  "direccion": "Netzahualcóyotl 13, Centro, 62000 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=13630764167878680397",
+  "horario": [
+    {
+      "dias": "Lunes a viernes",
+      "horas": "9:00 – 17:00"
+    },
+    {
+      "dias": "Sábado y domingo",
+      "horas": "Cerrado"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Contabilidad",
+      "items": [
+        {
+          "nombre": "Contabilidad mensual",
+          "descripcion": "Registro, pólizas y estados financieros.",
+          "destacado": true
+        },
+        {
+          "nombre": "Declaraciones",
+          "descripcion": "Mensuales y anual."
+        },
+        {
+          "nombre": "Facturación CFDI"
+        }
+      ]
+    },
+    {
+      "titulo": "Empresas",
+      "items": [
+        {
+          "nombre": "Nómina e IMSS"
+        },
+        {
+          "nombre": "Alta ante el SAT y apertura de empresa"
+        },
+        {
+          "nombre": "Atención a requerimientos"
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ENVIAR YA. Sitio tipo plantilla con 3 imágenes rotas, sin WhatsApp, sin formulario, sin Instagram. 7 reseñas 4.9."
+}

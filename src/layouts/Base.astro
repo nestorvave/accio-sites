@@ -1,0 +1,46 @@
+---
+/** Cabecera HTML común: título, descripción, og: con el logo del negocio, fuentes. */
+import "../styles/base.css";
+import type { Site } from "../lib/sites";
+interface Props { site: Site; fonts: string; themeColor: string; colores: Record<string, string> }
+const { site, fonts, themeColor, colores } = Astro.props;
+const vars = `:root{${Object.entries(colores).map(([k, v]) => `--${k}:${v}`).join(";")}}`;
+const title = `${site.nombre} · ${site.tagline}`;
+const canonical = new URL(`/${site.slug}/`, Astro.site).toString();
+const ogImage = site.logo ? new URL(site.logo, Astro.site).toString() : null;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={site.descripcion} />
+    <meta name="theme-color" content={themeColor} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={site.descripcion} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {site.demo && <meta name="robots" content="noindex" />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={fonts} />
+    <style is:inline set:html={vars} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": ({ restaurante: "Restaurant", spa: "DaySpa", consultorio: site.subgiro === "dental" ? "Dentist" : site.subgiro === "veterinaria" ? "VeterinaryCare" : "MedicalClinic", fitness: "ExerciseGym" } as Record<string, string>)[site.giro],
+      name: site.nombre,
+      description: site.descripcion,
+      telephone: site.telefono,
+      address: site.direccion,
+      url: canonical,
+      image: ogImage ?? undefined,
+    })} />
+  </head>
+  <body>
+    <slot />
+    {site.demo && <div class="demo-tag">Demostración · ACCIO</div>}
+  </body>
+</html>

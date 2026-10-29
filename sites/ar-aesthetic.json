@@ -1,0 +1,59 @@
+{
+  "slug": "ar-aesthetic",
+  "giro": "consultorio",
+  "subgiro": "estetica",
+  "nombre": "AR Aesthetic Medicine",
+  "tagline": "Medicina estética con resultados naturales",
+  "descripcion": "Consultorio de medicina estética en Reforma. Tratamientos faciales y corporales, cicatrices y rejuvenecimiento, con una valoración honesta antes de proponer cualquier procedimiento.",
+  "logo": null,
+  "fotos": [],
+  "telefono": "777 559 7675",
+  "direccion": "Av. Teopanzolco 408, int. 102-B, Reforma, 62260 Cuernavaca, Mor.",
+  "mapa": "https://maps.google.com/?cid=1228959611485739736",
+  "horario": [
+    {
+      "dias": "Lunes a viernes",
+      "horas": "11:00 – 18:00"
+    },
+    {
+      "dias": "Sábado",
+      "horas": "10:00 – 14:00"
+    },
+    {
+      "dias": "Domingo",
+      "horas": "Cerrado"
+    }
+  ],
+  "secciones": [
+    {
+      "titulo": "Rostro",
+      "items": [
+        {
+          "nombre": "Rinomodelación",
+          "descripcion": "Sin cirugía, con ácido hialurónico.",
+          "destacado": true
+        },
+        {
+          "nombre": "Toxina botulínica"
+        },
+        {
+          "nombre": "Hollywood Peel"
+        }
+      ]
+    },
+    {
+      "titulo": "Piel",
+      "items": [
+        {
+          "nombre": "Tratamiento de cicatrices",
+          "descripcion": "Queloides y cicatrices de cesárea."
+        },
+        {
+          "nombre": "Facial médico"
+        }
+      ]
+    }
+  ],
+  "demo": true,
+  "notas": "ESPERAR BOOKER. Sin página web. 55 reseñas 4.9. Tratamientos tomados de reseñas. Sin IG encontrado."
+}

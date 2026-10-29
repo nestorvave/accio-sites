@@ -1,0 +1,17 @@
+---
+/** Iconos propios, un solo trazo y peso (1.75). Sin emoji. */
+interface Props { name: "whatsapp" | "instagram" | "facebook" | "pin" | "clock" | "phone" | "arrow" | "leaf" | "fork"; size?: number; class?: string }
+const { name, size = 20, class: cls = "" } = Astro.props;
+const paths: Record<Props["name"], string> = {
+  whatsapp: `<path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/><path d="M9.2 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.1.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .5-.4.7-.5.3-1.3.5-2.3.1a8.6 8.6 0 0 1-4.9-4.9c-.4-1 0-1.9.1-2.4Z"/>`,
+  instagram: `<rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/>`,
+  facebook: `<path d="M14 21v-7h2.5l.5-3H14V9.2c0-.9.3-1.5 1.6-1.5H17V5.1c-.3 0-1.2-.1-2.2-.1-2.2 0-3.8 1.3-3.8 3.9V11H8.5v3H11v7"/>`,
+  pin: `<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/>`,
+  clock: `<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 1.8"/>`,
+  phone: `<path d="M5.5 4h3l1.5 4-2 1.3a11 11 0 0 0 6.7 6.7L16 14l4 1.5v3A1.5 1.5 0 0 1 18.5 20 15.5 15.5 0 0 1 4 5.5 1.5 1.5 0 0 1 5.5 4Z"/>`,
+  arrow: `<path d="M5 12h14M13 6l6 6-6 6"/>`,
+  leaf: `<path d="M4 20c0-8 4-14 16-16-1 10-5 15-14 15"/><path d="M4 20c3-5 6-8 10-10"/>`,
+  fork: `<path d="M7 3v7a3 3 0 0 0 3 3v8M7 3v4M13 3v4M10 3v7"/><path d="M17 3c-1.5 2-2 4-2 7h2v11"/>`,
+};
+---
+<svg class={cls} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={paths[name]} />
