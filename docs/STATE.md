@@ -1,6 +1,6 @@
 # Project state · accio-sites
 
-Last update: 2026-10-29, 12:00. Keep this file current at the end of every task.
+Last update: 2026-10-29, 16:35. Keep this file current at the end of every task.
 
 ## Context
 - ACCIO (Néstor) sells micro-apps, online booking (the "booker": `~/Documents/Accio/accio-booker` + `booker-api`) and web pages to small businesses. The booker is **not in production yet**; missing: hosting, R2 for uploads, Resend with a domain, og tags per business, and the WhatsApp bot (Meta).
@@ -31,6 +31,15 @@ Small, single-location businesses whose own site has visible problems and whose 
 | floreria-de-liz | 527773414229 | WordPress © 2019, May 2023 Mother's Day banner still on home, 1 broken image | their arrangement photos (small, ~250 px) |
 
 Sent 2026-10-29 between 12:10 and 12:17 (ACCIO intro → findings → link → invitation to talk). Royal Vet and Rosedal answered with auto-replies. From now on the signature adds ACCIO's Instagram (@accio.hub), and every demo shows a badge linking to it.
+
+### Batch 2 (2026-10-29, outside Morelos; messages do not mention where ACCIO is based)
+| slug | WhatsApp | finding on their site | sent |
+|---|---|---|---|
+| casa-gastro (Querétaro) | 524425040351 | SEO filler 'banquetes banquetes para eventos…' visible under every dish, wrong 'barra de menú italiano' headings, © 2024 | 16:30 |
+| galeria-floral (Querétaro) | 524421259480 | 'comunicarse con NOSTROS' banner, product photos served at 247 px | 16:30 (polite reply 16:31) |
+| muebleria-misantla (Puebla) | 522211845926 | all WhatsApp buttons use wa.me without 52, two different WhatsApp numbers | 16:31 |
+| queretaro-gourmet (Querétaro) | 524426114208 | 'Cotiza' WhatsApp buttons use wa.me without 52, 'CONTÁCTANO S', 'Block' menu item | pending: Fri 10:30 |
+Pending in this batch: Kuxtal (chocolate shop, CDMX Centro, WhatsApp 525534889370 verified, no website, IG @mxkuxtal) — page waits until Instagram lifts the rate limit on @accio.hub (429 after reading ~180 profiles). Rejected after checking: Toco Madera, Flores de Julia, La Fleur (sites fine); TerraCu (5 stores).
 
 Discarded as too big (owner unlikely to answer): Pan del Sol (6 branches), Jardín La Estancia (Grupo Paraíso), KOFFI (2 branches, 19K IG). Event venues' Maps numbers are landlines.
 
@@ -68,6 +77,8 @@ No demo (no template yet): International House (school; © 2012), Corcon and Smi
 7. One follow-up after 4–5 days to whoever does not reply (once only).
 
 ## Problems and solutions
+- Instagram API returns 429 after ~180 profile fetches in a row: space them out (max ~40 per hour).
+- Images on another CDN without CORS (Ecwid/CloudFront): fetch fails from the store page; opening the image URL as a tab works for fetch, but downloads from an image document are blocked. Product photos for muebleria-misantla were left out.
 - Downloading images from the browser: Chrome allows one automatic download per tab, so each business is bundled in the page (images as data URLs + text) into a single `accio-<slug>.json`, downloaded from a fresh tab to ~/Downloads, staged and unpacked (`scratchpad/unbundle.py`). Instagram needs the ACCIO session for 1080 px images.
 - Screenshots: the script scrolls the page and forces lazy images to load; fonts load locally because they are self-hosted.
 - Astro bundles the global CSS of every template into one file → use scoped `<style>` with `:global(body)` / `:global(:root)`, and `:global(svg)` for icons from other components.
