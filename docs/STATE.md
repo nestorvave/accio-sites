@@ -30,6 +30,8 @@ Small, single-location businesses whose own site has visible problems and whose 
 | flores-del-rosedal | 527771351209 | Maps links to http (no SSL), page named 'escriba-el-nombre-de-la-pagina-nueva', no WhatsApp link | their catalog photos with codes and prices |
 | floreria-de-liz | 527773414229 | WordPress © 2019, May 2023 Mother's Day banner still on home, 1 broken image | their arrangement photos (small, ~250 px) |
 
+Sent 2026-10-29 between 12:10 and 12:17 (ACCIO intro → findings → link → invitation to talk). Royal Vet and Rosedal answered with auto-replies. From now on the signature adds ACCIO's Instagram (@accio.hub), and every demo shows a badge linking to it.
+
 Discarded as too big (owner unlikely to answer): Pan del Sol (6 branches), Jardín La Estancia (Grupo Paraíso), KOFFI (2 branches, 19K IG). Event venues' Maps numbers are landlines.
 
 ## Sites (template demos)
@@ -62,7 +64,8 @@ No demo (no template yet): International House (school; © 2012), Corcon and Smi
 3. Get the 13 missing Instagram logos and run `scripts/palette.py` for their colors.
 4. Missing templates for GDL: barbershop, nails/lashes, school.
 5. Booker to production (see `booker-api/docs/PENDIENTES-PRODUCCION.md`), then send the AFTER BOOKING group with page + booking.
-6. One follow-up after 4–5 days to whoever does not reply (once only).
+6. Follow-ups on 2026-11-03 for dr-samper and royal-vet, 2026-11-03/04 for the five custom pages (one only).
+7. One follow-up after 4–5 days to whoever does not reply (once only).
 
 ## Problems and solutions
 - Downloading images from the browser: Chrome allows one automatic download per tab, so each business is bundled in the page (images as data URLs + text) into a single `accio-<slug>.json`, downloaded from a fresh tab to ~/Downloads, staged and unpacked (`scratchpad/unbundle.py`). Instagram needs the ACCIO session for 1080 px images.

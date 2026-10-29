@@ -35,11 +35,13 @@ a { text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
   padding-right: max(20px, env(safe-area-inset-right, 0px));
 }
 
-/* Demo badge (only when the JSON has demo: true) */
+/* Demo badge (only when the JSON has demo: true); links to ACCIO's Instagram */
 .demo-tag {
   position: fixed; left: 50%; bottom: max(10px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
   z-index: 50; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
   padding: 6px 12px; border-radius: 999px; background: rgba(0,0,0,.72); color: #fff; backdrop-filter: blur(6px);
-  pointer-events: none;
+  text-decoration: none; white-space: nowrap;
 }
+/* On phones every page has a fixed action bar at the bottom: keep the badge above it, not on top of the button. */
+@media (max-width: 899px) { .demo-tag { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); } }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
