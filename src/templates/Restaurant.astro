@@ -4,6 +4,9 @@
  * Light paper, ink, a single wine color. The name is the sign, the menu uses dotted leaders
  * (the real convention of printed menus), and the reservation is a form that opens WhatsApp with everything filled in.
  */
+import "@fontsource-variable/fraunces/full.css";
+import "@fontsource-variable/fraunces/full-italic.css";
+import "@fontsource-variable/instrument-sans";
 import Base from "../layouts/Base.astro";
 import Icon from "../components/Icon.astro";
 import Mark from "../components/Mark.astro";
@@ -21,19 +24,18 @@ const c = {
 const cta = bookingLink(site);
 const tel = telLink(site);
 const wa = waNumber(site);
-const fonts = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Instrument+Sans:wght@400;500;600&display=swap";
 const timeSlots = ["8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"];
 const today = new Date().toISOString().slice(0, 10);
 ---
-<Base site={site} fonts={fonts} themeColor={c.brand} colors={{ ...c, "on-brand": textOn(c.brand) }}>
+<Base site={site} theme="restaurant" themeColor={c.brand} colors={{ ...c, "on-brand": textOn(c.brand) }}>
   <style>
-    :global(:root) {
+    :global(html[data-theme="restaurant"]) {
       --ink-2: color-mix(in oklab, var(--ink) 64%, var(--bg));
       --line: color-mix(in oklab, var(--ink) 16%, transparent);
-      --f-display: "Fraunces", Georgia, serif;
-      --f-body: "Instrument Sans", system-ui, sans-serif;
+      --f-display: "Fraunces Variable", Georgia, serif;
+      --f-body: "Instrument Sans Variable", system-ui, sans-serif;
     }
-    :global(body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    :global(html[data-theme="restaurant"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
 
     /* Sign */
     .sign { text-align: center; padding-block: 28px 10px; max-width: 980px; margin-inline: auto; }

@@ -1,0 +1,34 @@
+{
+  "slug": "banquetes-dai",
+  "category": "catering",
+  "name": "Banquetes DAI",
+  "tagline": "Banquetes y mobiliario para eventos en Cuernavaca",
+  "description": "Empresa 100% morelense de banquetes: bodas, XV años, bautizos, eventos empresariales, repostería y renta de mobiliario. Nos encargamos de todo el evento.",
+  "logo": "/photos/banquetes-dai/logo.webp",
+  "phone": "777 364 0224",
+  "whatsapp": "5217775638083",
+  "facebook": "BanquetesDAI",
+  "address": "Antiguo Camino a Ahuatepec 1000, Col. Federación, Cuernavaca, Mor.",
+  "mapUrl": "https://www.google.com/maps/place/?q=place_id:ChIJqdZETd7fzYURFoNJsZNvJG8",
+  "hours": [
+    {
+      "days": "Lunes a viernes",
+      "time": "9:30 – 14:00 y 16:00 – 18:00"
+    },
+    {
+      "days": "Sábado",
+      "time": "9:30 – 14:00"
+    },
+    {
+      "days": "Domingo",
+      "time": "Cerrado"
+    }
+  ],
+  "rating": {
+    "stars": 4.8,
+    "count": 36
+  },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (redesign). banquetesdai.com is a table layout with spacer.gif and sliced menu images, no viewport meta (not mobile friendly); 'Promociones' in the menu returns 404; address on the site (Antiguo Camino a Ahuatepec 1000) differs from Google Maps (Sarh 2, Federación). WhatsApp 777 563 8083 verified. 36 reviews 4.8. Photos (watermarked by them) and copy from their own site."
+}

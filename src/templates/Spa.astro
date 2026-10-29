@@ -4,6 +4,9 @@
  * Dark background because the moment of use is at night, on the phone, deciding whether to book.
  * The primary action is a real form: pick the ritual and open WhatsApp with the message ready.
  */
+import "@fontsource-variable/cormorant-garamond/wght.css";
+import "@fontsource-variable/cormorant-garamond/wght-italic.css";
+import "@fontsource-variable/manrope";
 import Base from "../layouts/Base.astro";
 import Icon from "../components/Icon.astro";
 import Mark from "../components/Mark.astro";
@@ -21,19 +24,18 @@ const c = {
 const cta = bookingLink(site);
 const tel = telLink(site);
 const wa = waNumber(site);
-const fonts = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap";
 const taglineWords = site.tagline.split(" ");
 ---
-<Base site={site} fonts={fonts} themeColor={c.bg} colors={{ ...c, "on-brand": textOn(c.brand) }}>
+<Base site={site} theme="spa" themeColor={c.bg} colors={{ ...c, "on-brand": textOn(c.brand) }}>
   <style>
-    :global(:root) {
+    :global(html[data-theme="spa"]) {
       --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
       --line: color-mix(in oklab, var(--ink) 14%, transparent);
-      --f-display: "Cormorant Garamond", "Times New Roman", serif;
-      --f-body: "Manrope", system-ui, sans-serif;
+      --f-display: "Cormorant Garamond Variable", "Times New Roman", serif;
+      --f-body: "Manrope Variable", system-ui, sans-serif;
       color-scheme: dark;
     }
-    :global(body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    :global(html[data-theme="spa"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
 
     /* Water: very faint concentric rings fixed to the background. It is the texture of this world, not loose decoration. */
     .water { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }

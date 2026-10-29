@@ -1,0 +1,209 @@
+---
+/**
+ * Florería De Liz — built from their own material: the mauve logo and "Flores con arte" line,
+ * arrangement photos taken against the blue wall of their shop, and their own promises
+ * (entrega el mismo día, regalos personalizados, pago en pesos o dólares).
+ * Their photos are small (≈250 px), so the layout is a dense shop-window mosaic instead of big heroes.
+ * Primary action: order by WhatsApp with occasion, flower, date and budget.
+ */
+import "@fontsource/gilda-display";
+import "@fontsource-variable/mulish";
+import "@fontsource/allura";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber, telLink } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const tel = telLink(site);
+const P = "/photos/floreria-de-liz";
+const today = new Date().toISOString().slice(0, 10);
+
+const shelves = [
+  { t: "Girasoles", items: [["f-00", "Arreglo grande de girasoles"], ["f-01", "Ramo de girasoles"], ["f-21", "Girasoles y gerberas"], ["f-22", "Arreglo alto de girasoles"], ["f-24", "Girasoles con rosas"], ["f-25", "Girasoles y rosas blancas"], ["f-26", "Girasoles con chocolates"], ["f-23", "¿Quieres ser mi novia?"]] },
+  { t: "Rosas", items: [["f-17", "Gran arreglo de rosas rojas"], ["f-11", "Ramo de rosas rosas"], ["f-12", "Ramo de rosas lila"], ["f-16", "Rosas y gerberas"], ["f-20", "Rosas lila envueltas"], ["f-15", "Rosas con orquídea"], ["f-10", "Corazón de rosas"]] },
+  { t: "Gerberas y mixtos", items: [["f-02", "Ramo de gerberas"], ["f-14", "Gerberas y lilis"], ["f-18", "Rosas, gerberas y lilis"], ["f-19", "Arreglo naranja"], ["f-13", "Gerberas con chocolates"]] },
+  { t: "Regalos", items: [["f-03", "Rosas con globo de cumpleaños"], ["f-04", "Rosas con globo"], ["f-05", "Corazón de rosas y chocolates"], ["f-06", "Caja corazón con vino"], ["f-07", "Caja de rosas y chocolates"], ["f-08", "Rosas con chocolates"], ["f-09", "Caja redonda"]] },
+];
+const occasions = ["Cumpleaños", "Aniversario", "Para caballero", "Bienvenida a un bebé", "Funeral", "Boda o XV años", "Solo porque sí"];
+const flowers = ["Rosas", "Girasoles", "Gerberas", "Tulipanes", "Orquídeas", "Lilis", "Alcatraces", "Sorpréndanme"];
+const hero = ["f-17", "f-00", "f-11", "f-21", "f-05", "f-14"];
+---
+<Base site={site} theme="floreria-de-liz" themeColor="#6B2C55" colors={{ bg: "#FCF5F7", ink: "#2B1A24", brand: "#6B2C55", paper: "#F3E5EB", "on-brand": "#FFFFFF", wall: "#1F74BA", mauve: "#A47E92" }}>
+  <style>
+    :global(html[data-theme="floreria-de-liz"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 64%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 12%, transparent);
+      --f-display: "Gilda Display", Georgia, serif;
+      --f-body: "Mulish Variable", system-ui, sans-serif;
+      --f-script: "Allura", cursive;
+    }
+    :global(html[data-theme="floreria-de-liz"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1140px; margin-inline: auto; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 14px; }
+    .top img { height: 46px; width: auto; mix-blend-mode: multiply; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 700; font-size: .9rem; text-decoration: none; }
+
+    .hero { display: grid; gap: 24px; padding-block: 10px 36px; }
+    @media (min-width: 900px) { .hero { grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; padding-block: 24px 56px; } }
+    .script { font-family: var(--f-script); font-size: 2.2rem; color: var(--mauve); line-height: 1; }
+    .hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.4rem, 7vw, 4.2rem); line-height: 1.02; margin-top: 4px; text-wrap: balance; }
+    .hero p.lead { margin-top: 12px; color: var(--ink-2); font-size: 1.05rem; max-width: 46ch; }
+    .proof { margin-top: 12px; font-size: .9rem; color: var(--ink-2); }
+    .proof b { color: var(--ink); }
+
+    /* Shop window: their photos on the blue of their wall */
+    .window { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 8px; background: var(--wall); border-radius: 22px; }
+    .window img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; }
+    .window img { opacity: 1; transform: none; transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+    @starting-style { .window img { opacity: 0; transform: scale(.96); } }
+    .window img:nth-child(2) { transition-delay: 60ms; } .window img:nth-child(3) { transition-delay: 120ms; } .window img:nth-child(4) { transition-delay: 180ms; } .window img:nth-child(5) { transition-delay: 240ms; } .window img:nth-child(6) { transition-delay: 300ms; }
+
+    .order { margin-top: 20px; background: #fff; border-radius: 20px; padding: 18px; display: grid; gap: 12px; box-shadow: 0 1px 0 var(--line), 0 24px 40px -30px rgba(43,26,36,.45); }
+    .order h2 { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; }
+    .order .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .order label { display: grid; gap: 6px; font-size: .78rem; font-weight: 800; letter-spacing: .03em; color: var(--ink-2); }
+    .order select, .order input { height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); padding: 0 12px; font: inherit; font-size: 1rem; color: var(--ink); width: 100%; appearance: none; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 800; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), background var(--t-fast) var(--ease-out); }
+    .btn:hover { background: #561F44; } .btn:active { transform: scale(.98); }
+    .order .hint { font-size: .84rem; color: var(--ink-2); }
+
+    .promises { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-block: 4px 30px; }
+    @media (min-width: 900px) { .promises { grid-template-columns: repeat(4, 1fr); } }
+    .promises div { background: var(--paper); border-radius: 16px; padding: 14px; }
+    .promises b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 1.15rem; }
+    .promises span { font-size: .86rem; color: var(--ink-2); }
+
+    .shelf { padding-block: 22px; }
+    .shelf h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.8rem, 4.4vw, 2.6rem); display: flex; align-items: baseline; gap: 12px; }
+    .shelf h2 small { font-family: var(--f-body); font-size: .9rem; color: var(--ink-2); }
+    .tiles { margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    @media (min-width: 700px) { .tiles { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 1000px) { .tiles { grid-template-columns: repeat(6, 1fr); gap: 12px; } }
+    .tile { display: grid; gap: 6px; text-decoration: none; }
+    .tile img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; background: var(--wall); transition: transform 400ms var(--ease-out); }
+    @media (hover: hover) { .tile:hover img { transform: translateY(-3px); } }
+    .tile span { font-size: .8rem; line-height: 1.25; color: var(--ink-2); }
+
+    .pay { margin-block: 30px; background: var(--brand); color: #F6E8EF; border-radius: 22px; padding: 24px 20px; display: grid; gap: 14px; }
+    @media (min-width: 900px) { .pay { grid-template-columns: 1.2fr 1fr; padding: 34px; align-items: center; } }
+    .pay h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.7rem, 4vw, 2.3rem); color: #fff; line-height: 1.1; }
+    .pay ul { display: grid; gap: 8px; }
+    .pay li { display: flex; gap: 10px; align-items: flex-start; }
+    .pay li::before { content: ""; flex: 0 0 auto; margin-top: .55em; width: 7px; height: 7px; border-radius: 50%; background: #F2C6DB; }
+
+    .visit { padding-block: 10px 40px; display: grid; gap: 24px; }
+    @media (min-width: 900px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-weight: 400; font-size: 1.9rem; margin-bottom: 10px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .88rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; align-items: center; }
+    footer .script { font-size: 1.8rem; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 900px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a href="#top"><img src={`${P}/logo.webp`} alt="Florería De Liz · Flores con arte" width="225" height="62" /></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> Pedir</a>}
+    </div>
+  </header>
+
+  <main class="gutter" id="top">
+    <section class="hero wrap">
+      <div>
+        <span class="script">Flores con arte</span>
+        <h1>Arreglos hechos a mano, entregados el mismo día</h1>
+        <p class="lead">Rosas, girasoles, tulipanes, orquídeas y regalos con chocolates o globo, en El Empleado, Cuernavaca.</p>
+        <p class="proof"><b>★ {site.rating?.stars}</b> en Google · {site.rating?.count} reseñas</p>
+        {wa && (
+          <form class="order" id="order" data-wa={wa}>
+            <h2>Pide tu arreglo</h2>
+            <div class="row">
+              <label>Ocasión<select id="occ">{occasions.map((o) => <option>{o}</option>)}</select></label>
+              <label>Flor<select id="flower">{flowers.map((f) => <option>{f}</option>)}</select></label>
+            </div>
+            <div class="row">
+              <label>Entrega<input id="date" type="date" min={today} value={today} /></label>
+              <label>Presupuesto<select id="budget"><option>Hasta $600</option><option>$600 – $1,200</option><option>$1,200 – $2,500</option><option>Más de $2,500</option></select></label>
+            </div>
+            <button class="btn" type="submit"><Icon name="whatsapp" size={18} /> Pedir por WhatsApp</button>
+            <p class="hint">Te mandamos opciones con foto y precio.</p>
+          </form>
+        )}
+      </div>
+      <div class="window" aria-label="Algunos de nuestros arreglos">
+        {hero.map((h) => <img src={`${P}/${h}.webp`} alt="Arreglo floral de Florería De Liz" />)}
+      </div>
+    </section>
+
+    <section class="promises wrap">
+      <div><b>Entrega en el día</b><span>En Cuernavaca, si pides a tiempo.</span></div>
+      <div><b>Regalos a tu medida</b><span>Chocolates, globos, peluches y cajas.</span></div>
+      <div><b>Atención personal</b><span>Te ayudamos a elegir por WhatsApp.</span></div>
+      <div><b>Garantía</b><span>100% felicidad, como siempre.</span></div>
+    </section>
+
+    {shelves.map((s) => (
+      <section class="shelf wrap">
+        <h2>{s.t} <small>{s.items.length} modelos</small></h2>
+        <div class="tiles">
+          {s.items.map(([img, name]) => (
+            <a class="tile" href={wa ? `https://wa.me/${wa}?text=${encodeURIComponent(`Hola, Florería De Liz. Me interesa un arreglo como el de "${name}" (${s.t}). ¿Qué precio tiene?`)}` : "#order"} target="_blank" rel="noreferrer">
+              <img src={`${P}/${img}.webp`} alt={name} loading="lazy" />
+              <span>{name}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <section class="pay wrap">
+      <h2>¿Mandas flores desde otra ciudad o del extranjero?</h2>
+      <ul>
+        <li>Pagas en pesos o en dólares.</li>
+        <li>Nos escribes por WhatsApp y lo entregamos en Cuernavaca.</li>
+        <li>También arreglos para funeral, presidium, bodas y XV años.</li>
+      </ul>
+    </section>
+
+    <section class="visit wrap" id="visita">
+      <div>
+        <h2>Horario</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 777 341 4229</span></a>}
+        <a href="tel:+527772243180"><Icon name="phone" /> <span>777 224 3180</span></a>
+        <a href="mailto:floreriadeliz@hotmail.com"><Icon name="arrow" /> <span>floreriadeliz@hotmail.com</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span class="script">Flores con arte</span><span>Florería De Liz · Av. Poder Legislativo 208, Cuernavaca</span></div></footer>
+  {wa && <div class="bar"><a class="btn" href="#order"><Icon name="whatsapp" size={18} /> Pedir arreglo</a></div>}
+
+  <script>
+    const f = document.getElementById("order") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "");
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long" });
+      const msg = `Hola, Florería De Liz. Quiero un arreglo para ${v("occ").toLowerCase()}, de ${v("flower").toLowerCase()}, para el ${date}. Presupuesto: ${v("budget")}. ¿Qué opciones tienen?`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

@@ -15,11 +15,16 @@ Commit messages describe the change in neutral terms ("Add clinic template", "Up
 - `python3 scripts/palette.py public/logos/x.jpg <category>` proposes `colors` from the logo (Pillow)
 - Deploy: Netlify builds from GitHub using `netlify.toml` (`npm run build` → `dist`, domain `demo.accio.mx`). Pushing to `main` publishes.
 
+## Two kinds of pages
+- **Template pages** (`src/templates/`): one visual world per category; the business only changes its JSON. Used for quick demos.
+- **Custom pages** (`src/custom/<slug>.astro`): a redesign built on the business's own identity — their logo colors, their photos (in `public/photos/<slug>/`, WebP), their product names and their own copy from their site/Instagram. `[slug].astro` uses the custom page when it exists. Preferred for prospects that already have a site or a strong Instagram.
+- Never invent claims, prices, policies or reviews. Prices only when the business publishes them; Google rating/count copied from Maps into `rating`.
+- Avoid photos where customers' or staff faces are the subject.
+
 ## Design rules (non-negotiable)
-- One template per category with its own visual world; a business only changes its JSON. No hand-made pages per business.
-- Google Fonts with real fallbacks. No emoji as icons: `src/components/Icon.astro`.
+- Fonts are self-hosted with Fontsource (`import "@fontsource-variable/<font>"` in the page; family name ends in " Variable"). No Google Fonts links. No emoji as icons: `src/components/Icon.astro`.
 - The primary action of every template is a form that opens WhatsApp with the message prefilled. Once the booking app is in production, `booking.url` points to `/r/<slug>`.
-- Template styles live in a scoped `<style>`; use `:global(body)` and `:global(:root)` for globals. Icons from other components are selected with `:global(svg)`.
+- All pages share one CSS bundle, so page-level globals must be scoped: pass `theme="<name>"` to `Base` (sets `html[data-theme]`) and write `:global(html[data-theme="<name>"])` / `:global(html[data-theme="<name>"] body)` instead of `:root` / `body`. Icons from other components are selected with `:global(svg)`.
 - Colors always through tokens (`--bg --ink --brand --paper`, plus `--on-brand` from `textOn()`).
 - Nothing invented presented as real: illustrative services/prices only while `demo: true`.
 

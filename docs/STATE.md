@@ -1,6 +1,6 @@
 # Project state · accio-sites
 
-Last update: 2026-10-28, 22:40. Keep this file current at the end of every task.
+Last update: 2026-10-29, 12:00. Keep this file current at the end of every task.
 
 ## Context
 - ACCIO (Néstor) sells micro-apps, online booking (the "booker": `~/Documents/Accio/accio-booker` + `booker-api`) and web pages to small businesses. The booker is **not in production yet**; missing: hosting, R2 for uploads, Resend with a domain, og tags per business, and the WhatsApp bot (Meta).
@@ -15,9 +15,24 @@ Last update: 2026-10-28, 22:40. Keep this file current at the end of every task.
 - Outreach page (claude.ai artifact: https://claude.ai/artifact/W4unGViLXxysorR39sZdve) with finding, WhatsApp, screenshot and message per business.
 - Each demo also published as its own artifact (links in the table). They are private: for review only, not for sending; the business gets `demo.accio.mx/<slug>` once Netlify is up.
 - Audit of 13 existing sites (2026-10-28): casamanzano.mx hijacked; elmadrigal.shop down; ihcuernavaca.com © 2012; felixreyescontadorescuernavaca.com with broken images; rolandosamper.com with no way to book; animals.com.mx black home carousel.
-- Repo: github.com/nestorvave/accio-sites (make it private). Codebase translated to English on 2026-10-28 (JSON keys, CSS tokens, templates, scripts).
+- Fixed 2026-10-29: every template rendered with the Fitness display font because all page CSS shares one bundle; globals are now scoped under `html[data-theme]`, and fonts are self-hosted (Fontsource).
+- Repo: github.com/nestorvave/accio-sites (private). Netlify project `accio-sites` (team nestorvave) builds from `main`; live at https://accio-sites.netlify.app. Badge off, no visitor protection.
+- Outreach 2026-10-29: messages rewritten (ACCIO intro → findings → proposal link → invitation to talk; no call-to-action keyword). Sent via WhatsApp Web in Chrome: dr-samper (10:26), royal-vet (10:29). animals-hospital and felix-reyes have landlines without WhatsApp → phone calls, along with casa-manzano and el-madrigal. Codebase translated to English on 2026-10-28 (JSON keys, CSS tokens, templates, scripts).
 
-## Sites
+## Custom pages (2026-10-29)
+Small, single-location businesses whose own site has visible problems and whose WhatsApp was verified (chat opened in WhatsApp Web, nothing sent). Each page is built from their own photos, copy and colors (`src/custom/<slug>.astro`, photos in `public/photos/<slug>/`). Live at https://accio-sites.netlify.app/<slug>.
+
+| slug | WhatsApp | finding on their site | material used |
+|---|---|---|---|
+| agora-bakery | 5215539608774 | Wix site with stock photos, no WhatsApp link, broken IG link | IG @agora_bakery photos and captions (owner Liz) |
+| decomuebles | 527771674143 | Shopify: all 60 products show $0.00, hero text unreadable | their product photos, names, descriptions |
+| banquetes-dai | 5217775638083 | table layout, not mobile friendly, 'Promociones' 404, address differs from Maps | their dish/event photos, services, values |
+| flores-del-rosedal | 527771351209 | Maps links to http (no SSL), page named 'escriba-el-nombre-de-la-pagina-nueva', no WhatsApp link | their catalog photos with codes and prices |
+| floreria-de-liz | 527773414229 | WordPress © 2019, May 2023 Mother's Day banner still on home, 1 broken image | their arrangement photos (small, ~250 px) |
+
+Discarded as too big (owner unlikely to answer): Pan del Sol (6 branches), Jardín La Estancia (Grupo Paraíso), KOFFI (2 branches, 19K IG). Event venues' Maps numbers are landlines.
+
+## Sites (template demos)
 | slug | status | category | WhatsApp | finding | demo (claude.ai, private) |
 |---|---|---|---|---|---|
 | casa-manzano | READY | restaurant | 5217775369510 | domain hijacked (gambling) · 2,629 reviews · IG 24K | [demo](https://claude.ai/artifact/2EaNcnNZiZ1kezsknvcek2) |
@@ -42,14 +57,16 @@ Last update: 2026-10-28, 22:40. Keep this file current at the end of every task.
 No demo (no template yet): International House (school; © 2012), Corcon and Smile (acceptable sites: maintenance only).
 
 ## Pending
-1. Netlify: `npx netlify-cli init` on the repo, then `demo.accio.mx` (CNAME `demo` → the netlify.app host). Messages already use `demo.accio.mx/<slug>`.
-2. Send the READY group (Casa Manzano and El Madrigal by phone call). Record date and reply in `notes`.
+1. Domain: add `demo.accio.mx` in Netlify (CNAME `demo` → `accio-sites.netlify.app`). Messages currently use `https://accio-sites.netlify.app/<slug>`.
+2. Phone calls: casa-manzano, el-madrigal, animals-hospital, felix-reyes. Record date and reply in `notes`. Follow up dr-samper and royal-vet on 2026-11-03 if no reply.
 3. Get the 13 missing Instagram logos and run `scripts/palette.py` for their colors.
 4. Missing templates for GDL: barbershop, nails/lashes, school.
 5. Booker to production (see `booker-api/docs/PENDIENTES-PRODUCCION.md`), then send the AFTER BOOKING group with page + booking.
 6. One follow-up after 4–5 days to whoever does not reply (once only).
 
 ## Problems and solutions
+- Downloading images from the browser: Chrome allows one automatic download per tab, so each business is bundled in the page (images as data URLs + text) into a single `accio-<slug>.json`, downloaded from a fresh tab to ~/Downloads, staged and unpacked (`scratchpad/unbundle.py`). Instagram needs the ACCIO session for 1080 px images.
+- Screenshots: the script scrolls the page and forces lazy images to load; fonts load locally because they are self-hosted.
 - Astro bundles the global CSS of every template into one file → use scoped `<style>` with `:global(body)` / `:global(:root)`, and `:global(svg)` for icons from other components.
 - `define:vars` puts variables on the component's root elements, not on `:root` → color variables are emitted by `Base.astro` in a `<style is:inline>`.
 - Instagram (logged out) exposes `og:image` and the bio; the profile picture downloads with `fetch` from the page (open CORS) at 100–150 px.

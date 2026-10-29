@@ -1,0 +1,29 @@
+{
+  "slug": "floreria-de-liz",
+  "category": "florist",
+  "name": "Florería De Liz",
+  "tagline": "Flores con arte en Cuernavaca",
+  "description": "Arreglos florales hechos a mano en El Empleado: rosas, girasoles, tulipanes, orquídeas, arreglos para eventos y regalos. Entrega el mismo día en Cuernavaca.",
+  "logo": "/photos/floreria-de-liz/logo.webp",
+  "phone": "777 341 4229",
+  "whatsapp": "527773414229",
+  "address": "Av. Poder Legislativo 208, El Empleado, 62250 Cuernavaca, Mor.",
+  "mapUrl": "https://www.google.com/maps/place/?q=place_id:ChIJibo01izezYURNjz2dO6dcnc",
+  "hours": [
+    {
+      "days": "Lunes a sábado",
+      "time": "8:30 – 20:00"
+    },
+    {
+      "days": "Domingo",
+      "time": "9:30 – 17:00"
+    }
+  ],
+  "rating": {
+    "stars": 4.4,
+    "count": 101
+  },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (redesign). floreriadeliz.com (WordPress, © 2019): home slider still shows a May 2023 Mother's Day banner ('Happy Mother's Day' in English), one broken image, title stuffed with ~20 keywords, the Facebook link points to 'floreriasams'; product photos are 200–300 px. WhatsApp Business verified: 777 341 4229. 101 reviews 4.4. Photos from their own site."
+}

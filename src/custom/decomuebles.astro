@@ -1,0 +1,268 @@
+---
+/**
+ * DecoMuebles — built from their own store: the brick-red logo, their parota furniture photos,
+ * product names and descriptions from their Shopify catalog (where every price shows $0.00).
+ * Primary action: build a shortlist and ask price/availability for all of it in one WhatsApp message.
+ */
+import "@fontsource-variable/jost";
+import "@fontsource-variable/libre-franklin";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber, telLink } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const tel = telLink(site);
+const P = "/photos/decomuebles";
+
+type Item = { n: string; d: string; img: string; cat: string; fit?: "contain" };
+const items: Item[] = [
+  { cat: "Salas", n: "Sala Imperio 3-2-1", d: "100% madera de parota.", img: "p-47" },
+  { cat: "Salas", n: "Sala Florentina 3-2-1", d: "Incluye cojines.", img: "p-45" },
+  { cat: "Salas", n: "Sala Montreal 3-2-1", d: "Floter con vinil.", img: "p-43" },
+  { cat: "Salas", n: "Sala Ferrara", d: "Conjunto de reclinables con love seat.", img: "p-48" },
+  { cat: "Salas", n: "Sala Montreal modular", d: "Modular, floter con vinil.", img: "p-46" },
+  { cat: "Salas", n: "Sala Segovia", d: "En escuadra.", img: "p-42" },
+  { cat: "Comedores", n: "Antecomedor Chuleta", d: "100% parota, 8 sillas.", img: "p-49" },
+  { cat: "Comedores", n: "Antecomedor Singapur", d: "100% parota, silla Estocolmo forrada en piel.", img: "p-50" },
+  { cat: "Comedores", n: "Antecomedor Bruselas Duela", d: "100% parota, sillas con descansabrazos.", img: "p-51" },
+  { cat: "Comedores", n: "Antecomedor Bruselas", d: "Mesa de madera de parota.", img: "p-01" },
+  { cat: "Comedores", n: "Antecomedor Tulum", d: "Mesa con chapa de parota.", img: "p-53" },
+  { cat: "Comedores", n: "Antecomedor Belgica", d: "100% madera de parota.", img: "p-17" },
+  { cat: "Recámaras", n: "Recámara Gran Versalles", d: "5 piezas: cabecera, dos burós, tocador y espejo.", img: "p-39" },
+  { cat: "Recámaras", n: "Recámara Gran Pekín", d: "5 piezas: cabecera, dos burós, cajonera y espejo.", img: "p-38" },
+  { cat: "Recámaras", n: "Recámara Mini Pekín", d: "5 piezas: cabecera, dos burós, tocador y espejo.", img: "p-35" },
+  { cat: "Recámaras", n: "Recámara Zell Parota", d: "Cabecera y burós de parota.", img: "p-36" },
+  { cat: "Recámaras", n: "Recámara Enzo Parota", d: "Cabecera y burós de parota.", img: "p-41" },
+  { cat: "Recámaras", n: "Recámara KS Amber", d: "5 piezas: cabecera, dos burós, cajonera y espejo.", img: "p-00" },
+  { cat: "Sillas", n: "Silla Concha", d: "100% madera de parota.", img: "p-27", fit: "contain" },
+  { cat: "Sillas", n: "Silla Nápoles", d: "100% madera de parota.", img: "p-28", fit: "contain" },
+  { cat: "Sillas", n: "Silla Estocolmo", d: "Parota, forro de piel.", img: "p-68", fit: "contain" },
+  { cat: "Sillas", n: "Silla Garza", d: "Madera de parota.", img: "p-71", fit: "contain" },
+  { cat: "Sillas", n: "Silla Galluci", d: "Pino entintado en parota.", img: "p-21", fit: "contain" },
+  { cat: "Sillas", n: "Silla Tejida", d: "Tejido, herrería y madera de rosa morada.", img: "p-20", fit: "contain" },
+  { cat: "Ocasionales", n: "Mueble de TV Bruselas", d: "100% parota. 1.80 × 0.40 × 0.61 m.", img: "p-04" },
+  { cat: "Ocasionales", n: "Carrito de servicio", d: "Madera de parota.", img: "p-05" },
+  { cat: "Ocasionales", n: "Espejo Santa Cruz", d: "Chapa de parota, redondo.", img: "p-59", fit: "contain" },
+  { cat: "Ocasionales", n: "Espejo Andrey", d: "Chapa de parota, 2.20 × 0.90 m.", img: "p-58", fit: "contain" },
+];
+const cats = ["Salas", "Comedores", "Recámaras", "Sillas", "Ocasionales"];
+const single: Record<string, string> = { Salas: "Sala", Comedores: "Comedor", Recámaras: "Recámara", Sillas: "Silla", Ocasionales: "Ocasional" };
+---
+<Base site={site} theme="decomuebles" themeColor="#942D1F" colors={{ bg: "#F7F3EE", ink: "#1E1714", brand: "#942D1F", paper: "#ECE4DA", "on-brand": "#FFFFFF", walnut: "#3A2418", parota: "#9C5A2C" }}>
+  <style>
+    :global(html[data-theme="decomuebles"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 64%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 13%, transparent);
+      --f-display: "Jost Variable", system-ui, sans-serif;
+      --f-body: "Libre Franklin Variable", system-ui, sans-serif;
+    }
+    :global(html[data-theme="decomuebles"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1180px; margin-inline: auto; }
+    .disp { font-family: var(--f-display); }
+
+    .promo { background: var(--walnut); color: #F3E6DA; text-align: center; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; padding: 9px 16px; font-family: var(--f-display); font-weight: 500; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+    .top img { width: 58px; height: 58px; }
+    .top nav { display: none; gap: 26px; font-family: var(--f-display); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; font-size: .86rem; }
+    .top nav a { text-decoration: none; }
+    @media (min-width: 860px) { .top nav { display: flex; } }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 4px; background: var(--brand); color: #fff; font-family: var(--f-display); font-weight: 500; letter-spacing: .04em; font-size: .9rem; text-decoration: none; }
+
+    /* Hero: their own photo, with the text actually readable */
+    .hero { position: relative; min-height: min(78svh, 680px); display: grid; align-items: end; color: #fff; overflow: hidden; }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,12,8,.05) 0%, rgba(20,12,8,.25) 40%, rgba(20,12,8,.82) 100%); }
+    .hero .in { position: relative; z-index: 1; padding-block: 40px 34px; }
+    .hero .kick { font-family: var(--f-display); letter-spacing: .2em; text-transform: uppercase; font-size: .78rem; opacity: .9; }
+    .hero h1 { margin-top: 10px; font-family: var(--f-display); font-weight: 600; font-size: clamp(2.5rem, 8vw, 5rem); line-height: .95; letter-spacing: -.01em; text-transform: uppercase; max-width: 14ch; }
+    .hero p { margin-top: 14px; max-width: 46ch; font-size: 1.05rem; color: rgba(255,255,255,.88); }
+    .hero .ctas { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 50px; padding: 0 20px; border-radius: 4px; font-family: var(--f-display); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; font-size: .9rem; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), background var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.red { background: var(--brand); color: #fff; } .btn.red:hover { background: #7A2418; }
+    .btn.ghost { border: 1px solid rgba(255,255,255,.6); color: #fff; } .btn.ghost:hover { background: rgba(255,255,255,.1); }
+
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border-block: 1px solid var(--line); }
+    @media (min-width: 860px) { .facts { grid-template-columns: repeat(4, 1fr); } }
+    .facts div { background: var(--bg); padding: 16px 14px; }
+    .facts b { display: block; font-family: var(--f-display); font-weight: 600; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .03em; }
+    .facts span { font-size: .86rem; color: var(--ink-2); }
+
+    /* Catalog */
+    .catalog { padding-block: 40px 30px; }
+    .head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .head h2 { font-family: var(--f-display); font-weight: 600; font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase; line-height: 1; letter-spacing: -.005em; }
+    .head p { color: var(--ink-2); max-width: 48ch; }
+    .chips { margin-top: 18px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip { flex: 0 0 auto; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-family: var(--f-display); font-weight: 500; font-size: .92rem; transition: background var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out); }
+    .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .grid { margin-top: 18px; display: grid; gap: 16px 12px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 860px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 26px 20px; } }
+    @media (min-width: 1100px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+    .item { display: grid; gap: 8px; align-content: start; }
+    .item[hidden] { display: none; }
+    .ph { position: relative; aspect-ratio: 4 / 3; background: #fff; border-radius: 6px; overflow: hidden; }
+    .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .ph img.contain { object-fit: contain; padding: 8px; background: #EEEDED; }
+    .tag { position: absolute; left: 8px; top: 8px; background: rgba(255,255,255,.92); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; padding: 4px 8px; border-radius: 3px; font-family: var(--f-display); font-weight: 500; }
+    .item h3 { font-family: var(--f-display); font-weight: 600; font-size: 1.04rem; line-height: 1.15; }
+    .item p { font-size: .86rem; color: var(--ink-2); line-height: 1.35; }
+    .want { justify-self: start; display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 12px; border-radius: 4px; border: 1px solid var(--line); background: #fff; font-family: var(--f-display); font-weight: 500; font-size: .86rem; transition: background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out); }
+    .want .box { width: 16px; height: 16px; border-radius: 3px; border: 1.5px solid var(--ink-2); display: grid; place-items: center; }
+    .want[aria-pressed="true"] { background: color-mix(in oklab, var(--brand) 10%, #fff); border-color: var(--brand); color: var(--brand); }
+    .want[aria-pressed="true"] .box { background: var(--brand); border-color: var(--brand); }
+    .want[aria-pressed="true"] .box::after { content: ""; width: 8px; height: 4px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: translateY(-1px) rotate(-45deg); }
+
+    /* Parota */
+    .parota { margin-block: 30px; background: var(--walnut); color: #F3E6DA; border-radius: 8px; overflow: hidden; display: grid; }
+    @media (min-width: 860px) { .parota { grid-template-columns: 1fr 1fr; } }
+    .parota img { width: 100%; height: 100%; object-fit: cover; min-height: 220px; }
+    .parota .txt { padding: 28px 22px; display: grid; gap: 12px; align-content: center; }
+    .parota h2 { font-family: var(--f-display); font-weight: 600; text-transform: uppercase; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1; }
+    .parota p { color: color-mix(in oklab, #F3E6DA 80%, var(--walnut)); }
+
+    .visit { padding-block: 20px 40px; display: grid; gap: 24px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-weight: 600; text-transform: uppercase; font-size: 1.8rem; margin-bottom: 10px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
+
+    footer { background: var(--ink); color: #CFC6BE; padding-block: 22px calc(22px + 80px); font-size: .88rem; }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    footer a { color: #fff; text-decoration: none; }
+
+    /* Shortlist bar: the primary action */
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .in { max-width: 1180px; margin-inline: auto; display: flex; gap: 12px; align-items: center; }
+    .bar .count { font-size: .86rem; color: var(--ink-2); flex: 1; line-height: 1.3; }
+    .bar .count b { color: var(--ink); }
+    .bar .btn { flex: 0 0 auto; }
+    @media (min-width: 860px) { footer { padding-bottom: 90px; } }
+  </style>
+
+  <div class="promo">30% de descuento + 9 MSI en tienda</div>
+  <header class="gutter">
+    <div class="top wrap">
+      <a href="#top"><img src={`${P}/logo.webp`} alt="DecoMuebles" width="58" height="58" /></a>
+      <nav><a href="#catalogo">Catálogo</a><a href="#parota">Parota</a><a href="#visita">Visítanos</a></nav>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> WhatsApp</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <img src={`${P}/hero.webp`} alt="Sala y mesa de centro de parota en la exhibición de DecoMuebles" width="1800" height="900" fetchpriority="high" />
+      <div class="in gutter"><div class="wrap">
+        <span class="kick">Exhibición en Av. Vicente Guerrero · Cuernavaca</span>
+        <h1>Muebles de parota para toda la casa</h1>
+        <p>Salas, comedores y recámaras con diseño y madera de verdad. Lo que ves aquí lo encuentras en tienda, sin los precios inflados de las tiendas departamentales.</p>
+        <div class="ctas">
+          <a class="btn red" href="#catalogo">Ver catálogo</a>
+          {wa && <a class="btn ghost" href={`https://wa.me/${wa}?text=${encodeURIComponent("Hola, DecoMuebles. Quiero agendar una visita a la tienda para conocer los muebles (y el 10% adicional).")}`} target="_blank" rel="noreferrer">Agendar visita · 10% extra</a>}
+        </div>
+      </div></div>
+    </section>
+
+    <div class="facts">
+      <div><b>Parota</b><span>Madera maciza y chapa de parota</span></div>
+      <div><b>9 MSI</b><span>Meses sin intereses en tienda</span></div>
+      <div><b>En exhibición</b><span>Ves y tocas antes de comprar</span></div>
+      <div><b>★ {site.rating?.stars}</b><span>{site.rating?.count} reseñas en Google</span></div>
+    </div>
+
+    <section class="catalog gutter" id="catalogo">
+      <div class="wrap">
+        <div class="head">
+          <h2>Catálogo de exhibición</h2>
+          <p>Marca lo que te interesa y te mandamos precio y disponibilidad de todo junto por WhatsApp.</p>
+        </div>
+        <div class="chips" role="toolbar" aria-label="Filtrar por tipo de mueble">
+          <button class="chip" type="button" data-cat="" aria-pressed="true">Todo</button>
+          {cats.map((c) => <button class="chip" type="button" data-cat={c} aria-pressed="false">{c}</button>)}
+        </div>
+        <div class="grid">
+          {items.map((it) => (
+            <article class="item" data-cat={it.cat}>
+              <div class="ph"><img class={it.fit === "contain" ? "contain" : ""} src={`${P}/${it.img}.webp`} alt={it.n} loading="lazy" /><span class="tag">{single[it.cat]}</span></div>
+              <h3>{it.n}</h3>
+              <p>{it.d}</p>
+              <button class="want" type="button" data-name={it.n} aria-pressed="false"><span class="box" aria-hidden="true"></span> Me interesa</button>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="gutter" id="parota">
+      <div class="parota wrap">
+        <img src={`${P}/p-49.webp`} alt="Antecomedor Chuleta de parota con 8 sillas" loading="lazy" />
+        <div class="txt">
+          <h2>¿Por qué parota?</h2>
+          <p>Es una madera tropical mexicana de veta marcada y tonos cálidos. Aguanta el uso diario, se puede restaurar y con los años se ve mejor.</p>
+          <p>La mayoría de nuestros muebles son de parota maciza o chapa de parota. Pregúntanos por la medida que necesitas.</p>
+          {wa && <a class="btn red" style="justify-self:start" href={`https://wa.me/${wa}?text=${encodeURIComponent("Hola, DecoMuebles. Busco un mueble de parota a medida. ¿Me pueden orientar?")}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> Preguntar por medidas</a>}
+        </div>
+      </div>
+    </section>
+
+    <section class="visit wrap gutter" id="visita">
+      <div>
+        <h2>Visítanos</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {tel && <a href={tel}><Icon name="phone" /> <span>{site.phone}</span></a>}
+        {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+        {site.facebook && <a href={`https://facebook.com/${site.facebook}`} target="_blank" rel="noreferrer"><Icon name="facebook" /> <span>Facebook</span></a>}
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>DecoMuebles · Av. Vicente Guerrero 706, Cuernavaca</span>{site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer">@{site.instagram}</a>}</div></footer>
+
+  {wa && (
+    <div class="bar"><div class="in">
+      <span class="count" id="count">Marca los muebles que te gusten y pide precio de todos en un mensaje.</span>
+      <a class="btn red" id="send" href={`https://wa.me/${wa}`} data-wa={wa} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> Pedir precio</a>
+    </div></div>
+  )}
+
+  <script>
+    const chips = [...document.querySelectorAll<HTMLButtonElement>(".chip")];
+    const cards = [...document.querySelectorAll<HTMLElement>(".item")];
+    chips.forEach((c) => c.addEventListener("click", () => {
+      chips.forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
+      const cat = c.dataset.cat;
+      cards.forEach((card) => { card.hidden = !!cat && card.dataset.cat !== cat; });
+    }));
+
+    const picked = new Set<string>();
+    const count = document.getElementById("count");
+    const send = document.getElementById("send") as HTMLAnchorElement | null;
+    const update = () => {
+      if (!count || !send) return;
+      const list = [...picked];
+      count.innerHTML = list.length ? `<b>${list.length} ${list.length === 1 ? "mueble" : "muebles"}</b> en tu lista` : "Marca los muebles que te gusten y pide precio de todos en un mensaje.";
+      const text = list.length
+        ? `Hola, DecoMuebles. Me interesan estos muebles:\n${list.map((n) => `• ${n}`).join("\n")}\n¿Qué precio tienen y están en exhibición?`
+        : "Hola, DecoMuebles. Quiero información de sus muebles.";
+      send.href = `https://wa.me/${send.dataset.wa}?text=${encodeURIComponent(text)}`;
+    };
+    document.querySelectorAll<HTMLButtonElement>(".want").forEach((b) => b.addEventListener("click", () => {
+      const on = b.getAttribute("aria-pressed") !== "true";
+      b.setAttribute("aria-pressed", String(on));
+      on ? picked.add(b.dataset.name!) : picked.delete(b.dataset.name!);
+      update();
+    }));
+    update();
+  </script>
+</Base>

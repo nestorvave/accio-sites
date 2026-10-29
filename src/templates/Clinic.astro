@@ -4,6 +4,9 @@
  * Visual world: the appointment card. Clinic light (cool, bright background), one trust color,
  * a serious serif + a clear sans. The primary action is the card itself: treatment + date + shift → WhatsApp.
  */
+import "@fontsource/dm-serif-display/400.css";
+import "@fontsource/dm-serif-display/400-italic.css";
+import "@fontsource-variable/figtree";
 import Base from "../layouts/Base.astro";
 import Icon from "../components/Icon.astro";
 import Mark from "../components/Mark.astro";
@@ -15,7 +18,6 @@ const c = { bg: "#F6F9FA", ink: "#10232B", brand: "#0E6F7A", paper: "#E4EEF0", .
 const cta = bookingLink(site);
 const tel = telLink(site);
 const wa = waNumber(site);
-const fonts = "https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap";
 const v = {
   dental: { who: "patient", action: "Agenda tu cita", list: "Tratamientos", note: "Primera consulta con valoración y plan de tratamiento por escrito.", hint: "Te confirmamos horario en minutos. Urgencias: escríbenos directo." },
   aesthetic: { who: "patient", action: "Agenda tu valoración", list: "Tratamientos", note: "Toda valoración incluye diagnóstico y propuesta a tu medida; sin compromiso.", hint: "Te confirmamos horario en minutos." },
@@ -26,15 +28,15 @@ const v = {
 const today = new Date().toISOString().slice(0, 10);
 const shifts = ["Mañana", "Mediodía", "Tarde"];
 ---
-<Base site={site} fonts={fonts} themeColor={c.brand} colors={{ ...c, "on-brand": textOn(c.brand) }}>
+<Base site={site} theme="clinic" themeColor={c.brand} colors={{ ...c, "on-brand": textOn(c.brand) }}>
   <style>
-    :global(:root) {
+    :global(html[data-theme="clinic"]) {
       --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
       --line: color-mix(in oklab, var(--ink) 14%, transparent);
       --f-display: "DM Serif Display", Georgia, serif;
-      --f-body: "Figtree", system-ui, sans-serif;
+      --f-body: "Figtree Variable", system-ui, sans-serif;
     }
-    :global(body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    :global(html[data-theme="clinic"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
     .wrap { max-width: 1040px; margin-inline: auto; }
 
     .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }

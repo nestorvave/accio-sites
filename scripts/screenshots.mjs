@@ -8,7 +8,7 @@ import { join, extname } from "node:path";
 const dist = new URL("../dist/", import.meta.url).pathname;
 const out = new URL("../shots/", import.meta.url).pathname;
 const only = process.argv[2];
-const types = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".png": "image/png", ".jpg": "image/jpeg", ".svg": "image/svg+xml", ".webp": "image/webp" };
+const types = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".png": "image/png", ".jpg": "image/jpeg", ".svg": "image/svg+xml", ".webp": "image/webp", ".woff2": "font/woff2" };
 
 const server = createServer(async (req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);
@@ -31,6 +31,13 @@ for (const slug of slugs) {
     const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 2, isMobile: mobile, hasTouch: mobile, locale: "es-MX" });
     const page = await ctx.newPage();
     await page.goto(`http://localhost:${port}/${slug}/`, { waitUntil: "networkidle" });
+    // Scroll through the page so lazy images load, then return to the top.
+    await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 80)); } window.scrollTo(0, 0); });
+    await page.evaluate(() => { document.querySelectorAll('img[loading="lazy"]').forEach((i) => { i.loading = "eager"; }); });
+    await page.evaluate(() => Promise.race([
+      Promise.all([document.fonts.ready, ...[...document.images].filter((i) => !i.complete).map((i) => new Promise((r) => { i.onload = i.onerror = r; }))]),
+      new Promise((r) => setTimeout(r, 6000)),
+    ]));
     await page.waitForTimeout(900); // let the entrance animation finish
     await page.addStyleTag({ content: ".bar,.demo-tag{display:none!important}" }); // fixed elements do not belong in a full-page capture
     await page.screenshot({ path: join(out, `${slug}-${name}.png`), fullPage: true });

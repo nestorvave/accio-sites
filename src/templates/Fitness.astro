@@ -4,6 +4,8 @@
  * Visual world: the studio's schedule board. Big condensed poster type, warm paper, one energetic accent.
  * The action is "book your trial class" and the weekly schedule is the centerpiece.
  */
+import "@fontsource-variable/big-shoulders-display";
+import "@fontsource-variable/archivo";
 import Base from "../layouts/Base.astro";
 import Icon from "../components/Icon.astro";
 import Mark from "../components/Mark.astro";
@@ -15,21 +17,20 @@ const c = { bg: "#F3EFE7", ink: "#16171B", brand: "#E4572E", paper: "#E7E1D6", .
 const cta = bookingLink(site);
 const tel = telLink(site);
 const wa = waNumber(site);
-const fonts = "https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&display=swap";
 const weekDays = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 const classesByDay = weekDays.map((d) => ({ day: d, classes: (site.classes ?? []).filter((k) => k.day === d) })).filter((x) => x.classes.length);
 const classTypes = [...new Set((site.classes ?? []).map((k) => k.name))];
 const options = classTypes.length ? classTypes : site.sections.flatMap((s) => s.items.map((i) => i.name));
 ---
-<Base site={site} fonts={fonts} themeColor={c.ink} colors={{ ...c, "on-brand": textOn(c.brand) }}>
+<Base site={site} theme="fitness" themeColor={c.ink} colors={{ ...c, "on-brand": textOn(c.brand) }}>
   <style>
-    :global(:root) {
+    :global(html[data-theme="fitness"]) {
       --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
       --line: color-mix(in oklab, var(--ink) 16%, transparent);
-      --f-display: "Big Shoulders Display", Impact, sans-serif;
-      --f-body: "Archivo", system-ui, sans-serif;
+      --f-display: "Big Shoulders Display Variable", Impact, sans-serif;
+      --f-body: "Archivo Variable", system-ui, sans-serif;
     }
-    :global(body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.5; }
+    :global(html[data-theme="fitness"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.5; }
     .wrap { max-width: 1080px; margin-inline: auto; }
 
     .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; }

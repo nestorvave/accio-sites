@@ -1,0 +1,31 @@
+{
+  "slug": "decomuebles",
+  "category": "store",
+  "name": "DecoMuebles",
+  "tagline": "Muebles de parota en Cuernavaca",
+  "description": "Salas, comedores, recámaras y sillas de madera de parota, en exhibición en Av. Vicente Guerrero. Lo que ves aquí lo encuentras en tienda, sin precios inflados de tienda departamental.",
+  "logo": "/photos/decomuebles/logo.webp",
+  "phone": "777 167 4143",
+  "whatsapp": "527771674143",
+  "instagram": "decomuebles_cuernavaca",
+  "facebook": "decomueblescuernavaca",
+  "address": "Av. Vicente Guerrero 706, Prados de Cuernavaca, 62239 Cuernavaca, Mor.",
+  "mapUrl": "https://www.google.com/maps/place/?q=place_id:ChIJyzfLONLfzYUR4VfbLP3XrfE",
+  "hours": [
+    {
+      "days": "Lunes a sábado",
+      "time": "10:00 – 19:30"
+    },
+    {
+      "days": "Domingo",
+      "time": "11:00 – 16:30"
+    }
+  ],
+  "rating": {
+    "stars": 4.8,
+    "count": 93
+  },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (redesign). Shopify store deco-muebles.com.mx: all 60 products show 'Precio habitual $0.00 MXN'; hero text hard to read over the photo. Has WhatsApp button (777 167 4143, verified). 93 reviews 4.8. Product names, descriptions and photos from their own store."
+}

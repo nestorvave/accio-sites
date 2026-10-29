@@ -1,0 +1,267 @@
+---
+/**
+ * Flores D'el Rosedal — built from their own catalog: every arrangement photo, code and price
+ * is theirs (burned into their own images), plus the green of their shop walls and their logo.
+ * Primary action: order an arrangement by code over WhatsApp.
+ */
+import "@fontsource-variable/bodoni-moda";
+import "@fontsource-variable/nunito-sans";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber, telLink } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const tel = telLink(site);
+const P = "/photos/flores-del-rosedal";
+
+type A = { code: string; price: number; img: string; kind: "Ramos" | "Arreglos" | "Corazones" };
+const catalog: A[] = [
+  { code: "R5", price: 2800, img: "r-00", kind: "Ramos" },
+  { code: "R4", price: 1800, img: "r-07", kind: "Arreglos" },
+  { code: "R41", price: 2800, img: "r-04", kind: "Corazones" },
+  { code: "R26", price: 3600, img: "r-03", kind: "Arreglos" },
+  { code: "R33", price: 2800, img: "r-01", kind: "Arreglos" },
+  { code: "R2", price: 980, img: "r-02", kind: "Arreglos" },
+  { code: "R36", price: 450, img: "r-06", kind: "Ramos" },
+  { code: "R18", price: 7200, img: "r-08", kind: "Corazones" },
+  { code: "R9", price: 780, img: "r-09", kind: "Arreglos" },
+  { code: "R19", price: 1100, img: "r-10", kind: "Corazones" },
+  { code: "R27", price: 2800, img: "r-11", kind: "Ramos" },
+  { code: "R21", price: 600, img: "r-12", kind: "Ramos" },
+  { code: "R8", price: 980, img: "r-05", kind: "Arreglos" },
+  { code: "58R", price: 550, img: "r-13", kind: "Arreglos" },
+  { code: "R34", price: 1100, img: "r-14", kind: "Ramos" },
+  { code: "R3", price: 600, img: "r-17", kind: "Ramos" },
+  { code: "R6", price: 2800, img: "r-20", kind: "Arreglos" },
+  { code: "R7", price: 1700, img: "r-21", kind: "Arreglos" },
+  { code: "R10", price: 1800, img: "r-24", kind: "Arreglos" },
+  { code: "R13", price: 1100, img: "r-25", kind: "Ramos" },
+  { code: "R15", price: 1800, img: "r-27", kind: "Arreglos" },
+  { code: "R16", price: 880, img: "r-28", kind: "Ramos" },
+  { code: "R17", price: 950, img: "r-29", kind: "Ramos" },
+  { code: "R23", price: 7200, img: "r-34", kind: "Corazones" },
+  { code: "R24", price: 2800, img: "r-35", kind: "Ramos" },
+  { code: "R25", price: 1100, img: "r-36", kind: "Arreglos" },
+  { code: "R11", price: 2800, img: "r-39", kind: "Arreglos" },
+  { code: "R35", price: 1100, img: "r-42", kind: "Arreglos" },
+  { code: "R37", price: 450, img: "r-44", kind: "Ramos" },
+  { code: "R38", price: 750, img: "r-45", kind: "Ramos" },
+  { code: "R39", price: 350, img: "r-46", kind: "Ramos" },
+  { code: "R42", price: 180, img: "r-49", kind: "Arreglos" },
+  { code: "48R", price: 7200, img: "r-51", kind: "Arreglos" },
+  { code: "49R", price: 980, img: "r-52", kind: "Arreglos" },
+  { code: "50R", price: 2800, img: "r-53", kind: "Arreglos" },
+  { code: "52R", price: 1100, img: "r-54", kind: "Arreglos" },
+  { code: "57R", price: 980, img: "r-56", kind: "Arreglos" },
+  { code: "56R", price: 13500, img: "r-57", kind: "Ramos" },
+];
+const money = (n: number) => `$${n.toLocaleString("es-MX")}`;
+const occasions = ["Cumpleaños", "Aniversario", "Amor y amistad", "XV años y bodas", "Funeral", "Eventos"];
+const today = new Date().toISOString().slice(0, 10);
+---
+<Base site={site} theme="flores-del-rosedal" themeColor="#1F5B45" colors={{ bg: "#FFF9F7", ink: "#1D1416", brand: "#B3122E", paper: "#F8E8E6", "on-brand": "#FFFFFF", leaf: "#1F5B45" }}>
+  <style>
+    :global(html[data-theme="flores-del-rosedal"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 64%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 12%, transparent);
+      --f-display: "Bodoni Moda Variable", Georgia, serif;
+      --f-body: "Nunito Sans Variable", system-ui, sans-serif;
+    }
+    :global(html[data-theme="flores-del-rosedal"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1180px; margin-inline: auto; }
+
+    .strip { background: var(--leaf); color: #E9F2EC; font-size: .84rem; text-align: center; padding: 8px 16px; }
+    .strip a { color: #fff; font-weight: 700; text-decoration: none; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+    .top img { height: 44px; width: auto; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 700; font-size: .9rem; text-decoration: none; }
+
+    .hero { padding-block: 16px 30px; display: grid; gap: 22px; }
+    @media (min-width: 900px) { .hero { grid-template-columns: 1fr 1.1fr; align-items: center; gap: 48px; padding-block: 30px 50px; } }
+    .hero h1 { font-family: var(--f-display); font-weight: 600; font-size: clamp(2.6rem, 8vw, 4.8rem); line-height: .98; letter-spacing: -.02em; text-wrap: balance; }
+    .hero h1 em { font-style: italic; color: var(--brand); font-weight: 500; }
+    .hero p { margin-top: 14px; font-size: 1.06rem; color: var(--ink-2); max-width: 46ch; }
+    .proof { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: .9rem; color: var(--ink-2); }
+    .proof b { color: var(--ink); }
+    .collage { display: grid; grid-template-columns: 1.1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; aspect-ratio: 1 / 1; }
+    .collage img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; background: #fff; }
+    .collage img:first-child { grid-row: span 2; }
+    .collage img { opacity: 1; transform: none; transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
+    .collage img:nth-child(2) { transition-delay: 80ms; } .collage img:nth-child(3) { transition-delay: 160ms; }
+    @starting-style { .collage img { opacity: 0; transform: translateY(12px); } }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 50px; padding: 0 20px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 700; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), background var(--t-fast) var(--ease-out); }
+    .btn:hover { background: #8F0E25; } .btn:active { transform: scale(.98); }
+    .hero .btn { margin-top: 20px; }
+
+    .steps { display: grid; gap: 10px; grid-template-columns: 1fr; padding-block: 6px 30px; }
+    @media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .step { background: #fff; border-radius: 16px; padding: 16px; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; box-shadow: 0 1px 0 var(--line); }
+    .step b.n { font-family: var(--f-display); font-size: 2rem; line-height: 1; color: var(--brand); }
+    .step h3 { font-size: 1rem; font-weight: 800; }
+    .step p { font-size: .9rem; color: var(--ink-2); }
+
+    .catalog { padding-block: 20px 30px; }
+    .catalog h2 { font-family: var(--f-display); font-weight: 600; font-size: clamp(2rem, 5vw, 3rem); line-height: 1; }
+    .catalog .sub { color: var(--ink-2); margin-top: 8px; }
+    .filters { margin-top: 16px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+    .filters::-webkit-scrollbar { display: none; }
+    .chip { flex: 0 0 auto; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-weight: 700; font-size: .9rem; transition: background var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out); }
+    .chip[aria-pressed="true"] { background: var(--leaf); color: #fff; border-color: var(--leaf); }
+    .grid { margin-top: 16px; display: grid; gap: 14px 10px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 760px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1080px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 22px 18px; } }
+    .card { display: grid; gap: 8px; align-content: start; }
+    .card[hidden] { display: none; }
+    .ph { position: relative; aspect-ratio: 3 / 4; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 1px 0 var(--line); }
+    .ph img { width: 100%; height: 100%; object-fit: contain; }
+    .code { position: absolute; left: 8px; top: 8px; background: #fff; color: var(--ink); font-weight: 800; font-size: .86rem; padding: 4px 9px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+    .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+    .meta span { font-size: .84rem; color: var(--ink-2); }
+    .meta b { font-family: var(--f-display); font-size: 1.3rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .order { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; border-radius: 999px; border: 1px solid var(--brand); color: var(--brand); font-weight: 800; font-size: .88rem; text-decoration: none; transition: background var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out); }
+    .order:hover { background: var(--brand); color: #fff; }
+    .fine { margin-top: 14px; font-size: .84rem; color: var(--ink-2); }
+
+    .custom { margin-block: 20px 30px; background: var(--leaf); color: #EAF3EE; border-radius: 24px; padding: 26px 20px; display: grid; gap: 16px; }
+    @media (min-width: 900px) { .custom { grid-template-columns: 1fr 1fr; padding: 36px; align-items: center; } }
+    .custom h2 { font-family: var(--f-display); font-weight: 600; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.05; color: #fff; }
+    .custom p { color: #CFE2D7; }
+    .custom form { display: grid; gap: 10px; }
+    .custom label { display: grid; gap: 6px; font-size: .8rem; font-weight: 700; color: #CFE2D7; }
+    .custom select, .custom input { height: 48px; border-radius: 12px; border: 0; padding: 0 14px; font: inherit; font-size: 1rem; color: var(--ink); width: 100%; appearance: none; background: #fff; }
+    .custom .row { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+    .custom .btn { background: #fff; color: var(--leaf); } .custom .btn:hover { background: #F1F7F3; }
+
+    .visit { padding-block: 20px 40px; display: grid; gap: 24px; }
+    @media (min-width: 900px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-weight: 600; font-size: 1.9rem; margin-bottom: 10px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .88rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 900px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <div class="strip">Entregas en Cuernavaca · Pedidos por WhatsApp {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer">777 135 1209</a>}</div>
+  <header class="gutter">
+    <div class="top wrap">
+      <a href="#top"><img src={`${P}/logo.webp`} alt="Flores D'el Rosedal Cuernavaca" width="394" height="105" /></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> Pedir</a>}
+    </div>
+  </header>
+
+  <main class="gutter" id="top">
+    <section class="hero wrap">
+      <div>
+        <h1>Arreglos florales en <em>Cuernavaca</em></h1>
+        <p>Rosas, girasoles, gerberas, tulipanes y orquídeas para toda ocasión. Elige tu arreglo por clave, pídelo por WhatsApp y nosotros lo entregamos.</p>
+        <div class="proof"><span><b>★ {site.rating?.stars}</b> en Google · {site.rating?.count} reseñas</span><span>Abierto todos los días</span><span>Pagos desde México o el extranjero</span></div>
+        <a class="btn" href="#catalogo">Ver catálogo con precios</a>
+      </div>
+      <div class="collage">
+        <img src={`${P}/r-00.webp`} alt="Ramo R5 de rosas rojas y blancas" fetchpriority="high" />
+        <img src={`${P}/r-04.webp`} alt="Corazón R41 de rosas blancas y rojas" />
+        <img src={`${P}/r-07.webp`} alt="Arreglo R4 de rosas rojas" />
+      </div>
+    </section>
+
+    <section class="steps wrap" aria-label="Cómo pedir">
+      <div class="step"><b class="n">1</b><div><h3>Elige la clave</h3><p>Cada arreglo del catálogo tiene su clave y su precio.</p></div></div>
+      <div class="step"><b class="n">2</b><div><h3>Escríbenos por WhatsApp</h3><p>Con la clave, el día y la colonia de entrega.</p></div></div>
+      <div class="step"><b class="n">3</b><div><h3>Pagas y lo entregamos</h3><p>Transferencia, efectivo o PayPal si mandas flores desde fuera.</p></div></div>
+    </section>
+
+    <section class="catalog wrap" id="catalogo">
+      <h2>Catálogo</h2>
+      <p class="sub">{catalog.length} arreglos de nuestro catálogo, con su clave y precio.</p>
+      <div class="filters" role="toolbar" aria-label="Filtrar catálogo">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">Todos</button>
+        <button class="chip" type="button" data-f="Ramos" aria-pressed="false">Ramos</button>
+        <button class="chip" type="button" data-f="Arreglos" aria-pressed="false">Arreglos</button>
+        <button class="chip" type="button" data-f="Corazones" aria-pressed="false">Corazones</button>
+        <button class="chip" type="button" data-f="lt1000" aria-pressed="false">Menos de $1,000</button>
+        <button class="chip" type="button" data-f="1000-3000" aria-pressed="false">$1,000 – $3,000</button>
+        <button class="chip" type="button" data-f="gt3000" aria-pressed="false">Más de $3,000</button>
+      </div>
+      <div class="grid">
+        {catalog.map((a) => (
+          <article class="card" data-kind={a.kind} data-price={a.price}>
+            <div class="ph"><img src={`${P}/${a.img}.webp`} alt={`Arreglo ${a.code}`} loading="lazy" /><span class="code">{a.code}</span></div>
+            <div class="meta"><span>{a.kind.replace(/s$/, "").replace("Corazone", "Corazón")}</span><b>{money(a.price)}</b></div>
+            {wa && <a class="order" href={`https://wa.me/${wa}?text=${encodeURIComponent(`Hola, Flores D'el Rosedal. Quiero pedir el arreglo ${a.code} (${money(a.price)}). ¿Lo pueden entregar?`)}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={16} /> Pedir {a.code}</a>}
+          </article>
+        ))}
+      </div>
+      <p class="fine">Precios de nuestro catálogo; pueden variar según la temporada y la flor disponible. Confírmalos por WhatsApp.</p>
+    </section>
+
+    <section class="custom wrap" id="a-tu-gusto">
+      <div>
+        <h2>¿Buscas algo a tu gusto?</h2>
+        <p>Cuéntanos la ocasión y tu presupuesto y te mandamos opciones con foto. También hacemos arreglos para eventos, XV años, bodas y funerales.</p>
+      </div>
+      {wa && (
+        <form id="custom" data-wa={wa}>
+          <div class="row">
+            <label>Ocasión<select id="occ">{occasions.map((o) => <option>{o}</option>)}</select></label>
+            <label>Presupuesto<select id="budget"><option>Hasta $600</option><option>$600 – $1,500</option><option>$1,500 – $3,000</option><option>Más de $3,000</option></select></label>
+          </div>
+          <div class="row">
+            <label>Fecha de entrega<input id="date" type="date" min={today} value={today} /></label>
+            <label>Colonia<input id="col" type="text" placeholder="Ej. Vista Hermosa" /></label>
+          </div>
+          <button class="btn" type="submit"><Icon name="whatsapp" size={18} /> Pedir opciones por WhatsApp</button>
+        </form>
+      )}
+    </section>
+
+    <section class="visit wrap" id="visita">
+      <div>
+        <h2>Horario</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 777 135 1209</span></a>}
+        <a href="tel:+527773181115"><Icon name="phone" /> <span>777 318 1115</span></a>
+        <p><Icon name="clock" /> <span>Abierto los 7 días de la semana.</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Flores D'el Rosedal · Francisco Leyva 157, Cuernavaca</span><span>Arreglos florales para toda ocasión</span></div></footer>
+  {wa && <div class="bar"><a class="btn" href="#catalogo"><Icon name="whatsapp" size={18} /> Elegir y pedir</a></div>}
+
+  <script>
+    const chips = [...document.querySelectorAll<HTMLButtonElement>(".chip")];
+    const cards = [...document.querySelectorAll<HTMLElement>(".card")];
+    chips.forEach((c) => c.addEventListener("click", () => {
+      chips.forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
+      const f = c.dataset.f!;
+      cards.forEach((card) => {
+        const p = Number(card.dataset.price), k = card.dataset.kind;
+        const ok = f === "all" || f === k || (f === "lt1000" && p < 1000) || (f === "1000-3000" && p >= 1000 && p <= 3000) || (f === "gt3000" && p > 3000);
+        card.hidden = !ok;
+      });
+    }));
+    const f = document.getElementById("custom") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long" });
+      const msg = `Hola, Flores D'el Rosedal. Busco un arreglo para ${v("occ").toLowerCase()}, presupuesto ${v("budget")}, para el ${date}${v("col") ? ` en la colonia ${v("col")}` : ""}. ¿Qué opciones tienen?`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

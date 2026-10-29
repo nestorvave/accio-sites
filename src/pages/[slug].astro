@@ -1,4 +1,5 @@
 ---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 import { sites } from "../lib/sites";
 import Spa from "../templates/Spa.astro";
 import Restaurant from "../templates/Restaurant.astro";
@@ -9,8 +10,13 @@ export function getStaticPaths() {
   return sites.map((site) => ({ params: { slug: site.slug }, props: { site } }));
 }
 const { site } = Astro.props;
-const templates = { spa: Spa, restaurant: Restaurant, clinic: Clinic, fitness: Fitness } as const;
-const Template = templates[site.category];
-if (!Template) throw new Error(`No template for category: ${site.category} (${site.slug})`);
+
+// A business with its own page (built from its own brand, photos and copy) lives in src/custom/<slug>.astro.
+const customPages = import.meta.glob<{ default: AstroComponentFactory }>("../custom/*.astro", { eager: true });
+const custom = customPages[`../custom/${site.slug}.astro`]?.default;
+
+const templates = { spa: Spa, restaurant: Restaurant, clinic: Clinic, fitness: Fitness } as Record<string, AstroComponentFactory>;
+const Page = custom ?? templates[site.category];
+if (!Page) throw new Error(`No template or custom page for ${site.slug} (${site.category})`);
 ---
-<Template site={site} />
+<Page site={site} />

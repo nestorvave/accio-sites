@@ -1,0 +1,29 @@
+{
+  "slug": "flores-del-rosedal",
+  "category": "florist",
+  "name": "Flores D'el Rosedal",
+  "tagline": "Arreglos florales en Cuernavaca",
+  "description": "Una de las florerías de más tradición en Cuernavaca: rosas, girasoles, tulipanes, orquídeas y arreglos para toda ocasión. Pides por WhatsApp, pagas como prefieras y lo entregamos.",
+  "logo": "/photos/flores-del-rosedal/logo.webp",
+  "phone": "777 135 1209",
+  "whatsapp": "527771351209",
+  "address": "Francisco Leyva 157, Miguel Hidalgo, 62040 Cuernavaca, Mor.",
+  "mapUrl": "https://www.google.com/maps/place/?q=place_id:ChIJC1R_kADfzYURNOr1qiQrs08",
+  "hours": [
+    {
+      "days": "Lunes a sábado",
+      "time": "8:00 – 20:00"
+    },
+    {
+      "days": "Domingo",
+      "time": "8:00 – 17:00"
+    }
+  ],
+  "rating": {
+    "stars": 4.3,
+    "count": 119
+  },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (redesign). floresdelrosedal.com.mx (Network Solutions builder): Google Maps links to the http version (no SSL), menu shows a page literally named 'escriba-el-nombre-de-la-página-nueva', first menu item is still '14 de febrero', no clickable WhatsApp. WhatsApp Business verified: 777 135 1209 (777 318 1115 is not on WhatsApp). 119 reviews 4.3. Catalog photos with codes and prices are their own."
+}

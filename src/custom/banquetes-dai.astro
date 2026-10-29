@@ -1,0 +1,276 @@
+---
+/**
+ * Banquetes DAI — built from their own material: the gold of their logo, their event and dish photos
+ * (watermarked by them), their services, suggested menu and values from banquetesdai.com.
+ * Primary action: request a quote by WhatsApp with event type, date, guests and what they need.
+ */
+import "@fontsource/marcellus";
+import "@fontsource-variable/karla";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber, telLink } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const tel = telLink(site);
+const P = "/photos/banquetes-dai";
+const today = new Date().toISOString().slice(0, 10);
+
+const services = [
+  { t: "Eventos sociales", img: "montaje-3", l: ["Bodas", "XV años", "Bautizos", "Taquizas", "Fiestas infantiles y cumpleaños"], note: "Servicio completo con mobiliario de lujo o económico." },
+  { t: "Empresariales", img: "buffet", l: ["Coffee break", "Box lunch", "Reuniones de trabajo", "Sedes para sesionar"], note: "Calidad, discreción y precios especiales a clientes recurrentes." },
+  { t: "Repostería", img: "canapes", l: ["Mesa de dulces", "Mesa de postres", "Pasteles fondant", "Pasteles tradicionales"], note: "Con el dulce gusto de atenderle." },
+  { t: "Renta de mobiliario", img: "montaje-1", l: ["Sillas Tiffany, Crossback, Phoenix, Chanel y Primavera", "Mesas vintage y con sombrilla", "Salas lounge y carpas", "Vajilla, cristalería y bufeteras"], note: "Para montar tu evento con cualquier presupuesto." },
+];
+const dishes = [
+  { n: "Filete de res con papa al horno", img: "filete-res" },
+  { n: "Medallones de res rellenos de queso azul", img: "medallones" },
+  { n: "Medallón de ternera", img: "medallon-ternera" },
+  { n: "Lomo de cerdo en salsa de ciruela", img: "lomo-cerdo" },
+  { n: "Crema de la casa", img: "crema" },
+  { n: "Ensalada de la casa", img: "ensalada" },
+  { n: "Ratatouille", img: "ratatouille" },
+  { n: "Canapés y bocadillos", img: "canapes" },
+];
+const gallery = ["montaje-4", "jardin", "montaje-2", "pasillo", "montaje-5", "mesa-camino", "montaje-6", "montaje-7", "montaje-8"];
+---
+<Base site={site} theme="banquetes-dai" themeColor="#1B1814" colors={{ bg: "#FBF8F1", ink: "#1B1814", brand: "#A98A47", paper: "#F2EBDD", "on-brand": "#1B1814", gold: "#C9A85A" }}>
+  <style>
+    :global(html[data-theme="banquetes-dai"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 64%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 13%, transparent);
+      --f-display: "Marcellus", Georgia, serif;
+      --f-body: "Karla Variable", system-ui, sans-serif;
+      --gold-grad: linear-gradient(135deg, #8A6A2C 0%, #D9BC6E 45%, #A98A47 100%);
+    }
+    :global(html[data-theme="banquetes-dai"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1160px; margin-inline: auto; }
+    .disp { font-family: var(--f-display); font-weight: 400; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+    .top img { height: 54px; width: auto; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--brand); color: var(--ink); font-weight: 600; font-size: .9rem; text-decoration: none; }
+
+    .hero { position: relative; color: #fff; min-height: min(84svh, 720px); display: grid; align-items: end; overflow: hidden; }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,12,8,.1) 0%, rgba(15,12,8,.35) 45%, rgba(15,12,8,.88) 100%); }
+    .hero .in { position: relative; z-index: 1; padding-block: 40px 36px; }
+    .hero .rule { width: 64px; height: 2px; background: var(--gold-grad); margin-bottom: 18px; }
+    .hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.4rem, 7.5vw, 4.6rem); line-height: 1.02; max-width: 15ch; text-wrap: balance; }
+    .hero p { margin-top: 14px; max-width: 48ch; font-size: 1.06rem; color: rgba(255,255,255,.86); }
+    .hero .ctas { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 999px; font-weight: 700; letter-spacing: .02em; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.gold { background: var(--gold-grad); color: #1B1814; } .btn.gold:hover { filter: brightness(1.06); }
+    .btn.line { border: 1px solid rgba(255,255,255,.55); color: #fff; }
+    .proof { margin-top: 18px; font-size: .9rem; color: rgba(255,255,255,.8); }
+
+    /* Quote */
+    .quote-wrap { padding-block: 34px 10px; }
+    .quote { background: #fff; border-radius: 22px; padding: 22px 18px; box-shadow: 0 1px 0 var(--line), 0 30px 50px -36px rgba(27,24,20,.5); display: grid; gap: 14px; }
+    @media (min-width: 860px) { .quote { grid-template-columns: 1fr 1.4fr; gap: 28px; padding: 32px; } }
+    .quote h2 { font-family: var(--f-display); font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.05; }
+    .quote .lede { color: var(--ink-2); margin-top: 8px; }
+    .fields { display: grid; gap: 12px; }
+    .fields .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .fields label { display: grid; gap: 6px; font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); }
+    .fields select, .fields input { height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); padding: 0 14px; font: inherit; font-size: 1rem; color: var(--ink); width: 100%; appearance: none; }
+    .needs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .needs label { position: relative; }
+    .needs input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+    .needs span { display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); font-size: .92rem; cursor: pointer; transition: background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out); }
+    .needs input:checked + span { background: #1B1814; color: #F5E0A2; border-color: #1B1814; }
+    .needs input:focus-visible + span { outline: 2px solid var(--brand); outline-offset: 2px; }
+    .quote .hint { font-size: .84rem; color: var(--ink-2); }
+
+    section.block { padding-block: 44px 10px; }
+    .eyebrow { font-size: .76rem; letter-spacing: .18em; text-transform: uppercase; color: #8A6A2C; font-weight: 700; }
+    h2.sec { font-family: var(--f-display); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; margin-top: 6px; }
+    .sub { color: var(--ink-2); margin-top: 10px; max-width: 58ch; }
+
+    .services { margin-top: 22px; display: grid; gap: 16px; }
+    @media (min-width: 860px) { .services { grid-template-columns: 1fr 1fr; } }
+    .svc { background: #fff; border-radius: 18px; overflow: hidden; display: grid; grid-template-columns: 120px 1fr; box-shadow: 0 1px 0 var(--line); }
+    @media (min-width: 560px) { .svc { grid-template-columns: 200px 1fr; } }
+    .svc img { width: 100%; height: 100%; object-fit: cover; }
+    .svc div { padding: 16px; }
+    .svc h3 { font-family: var(--f-display); font-size: 1.35rem; }
+    .svc ul { margin-top: 8px; display: grid; gap: 4px; font-size: .92rem; }
+    .svc li { padding-left: 14px; position: relative; }
+    .svc li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
+    .svc p { margin-top: 8px; font-size: .86rem; color: var(--ink-2); }
+
+    .dishes { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (min-width: 860px) { .dishes { grid-template-columns: repeat(4, 1fr); } }
+    .dish { margin: 0; }
+    .dish img { border-radius: 14px; aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+    .dish h3 { margin-top: 8px; font-family: var(--f-display); font-size: 1.05rem; line-height: 1.2; }
+    .menu-note { margin-top: 18px; background: var(--paper); border-radius: 16px; padding: 16px 18px; font-size: .95rem; }
+    .menu-note b { font-family: var(--f-display); font-weight: 400; font-size: 1.1rem; display: block; margin-bottom: 4px; }
+
+    .gallery { margin-top: 20px; display: grid; grid-auto-flow: column; grid-auto-columns: min(78vw, 420px); gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: thin; }
+    .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; scroll-snap-align: start; }
+
+    .values { margin-block: 44px 10px; background: #1B1814; color: #EDE3CC; border-radius: 24px; padding: 28px 22px; display: grid; gap: 18px; }
+    @media (min-width: 860px) { .values { grid-template-columns: 1fr 1.4fr; padding: 40px; } }
+    .values h2 { font-family: var(--f-display); font-size: clamp(1.8rem, 4vw, 2.4rem); color: #F5E0A2; line-height: 1.1; }
+    .values ul { display: grid; gap: 12px; }
+    .values li b { color: #F5E0A2; font-weight: 700; }
+    .values li { color: color-mix(in oklab, #EDE3CC 85%, #1B1814); }
+
+    .visit { padding-block: 44px 40px; display: grid; gap: 24px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-size: 1.9rem; margin-bottom: 10px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: #8A6A2C; }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .88rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a href="#top"><img src={`${P}/logo.webp`} alt="Banquetes DAI" width="229" height="143" /></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> 777 563 8083</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <img src={`${P}/hero.webp`} alt="Montaje de boda en jardín por Banquetes DAI" width="1225" height="908" fetchpriority="high" />
+      <div class="in gutter"><div class="wrap">
+        <div class="rule"></div>
+        <h1>Banquetes y montajes para tu evento en Morelos</h1>
+        <p>Empresa 100% morelense. Nos encargamos de todo: comida, mobiliario, repostería y montaje, para bodas, XV años, bautizos y eventos de empresa.</p>
+        <div class="ctas">
+          <a class="btn gold" href="#cotizar">Cotizar mi evento</a>
+          <a class="btn line" href="#menu">Ver menú</a>
+        </div>
+        <p class="proof">★ {site.rating?.stars} en Google · {site.rating?.count} reseñas</p>
+      </div></div>
+    </section>
+
+    <section class="quote-wrap gutter" id="cotizar">
+      {wa && (
+        <form class="quote wrap" id="quote" data-wa={wa}>
+          <div>
+            <span class="eyebrow">Cotización sin compromiso</span>
+            <h2>Cuéntanos de tu evento</h2>
+            <p class="lede">Con estos datos te mandamos opciones de menú, mobiliario y precio por persona.</p>
+          </div>
+          <div class="fields">
+            <div class="row">
+              <label>Tipo de evento
+                <select id="type"><option>Boda</option><option>XV años</option><option>Bautizo</option><option>Taquiza</option><option>Fiesta infantil</option><option>Evento empresarial</option><option>Otro</option></select>
+              </label>
+              <label>Invitados<input id="guests" type="number" inputmode="numeric" min="10" step="10" value="100" /></label>
+            </div>
+            <div class="row">
+              <label>Fecha<input id="date" type="date" min={today} required /></label>
+              <label>Lugar<input id="place" type="text" placeholder="Cuernavaca, jardín…" /></label>
+            </div>
+            <span class="eyebrow" style="color:var(--ink-2)">¿Qué necesitas?</span>
+            <div class="needs">
+              {["Banquete", "Mobiliario", "Mesa de postres", "Bebidas", "Organización completa"].map((n, i) => (
+                <label><input type="checkbox" name="need" value={n} checked={i === 0} /><span>{n}</span></label>
+              ))}
+            </div>
+            <button class="btn gold" type="submit"><Icon name="whatsapp" size={18} /> Pedir cotización por WhatsApp</button>
+            <p class="hint">Atendemos de lunes a sábado. También por teléfono al {site.phone}.</p>
+          </div>
+        </form>
+      )}
+    </section>
+
+    <section class="block gutter">
+      <div class="wrap">
+        <span class="eyebrow">Servicios</span>
+        <h2 class="sec">Nos encargamos de todo</h2>
+        <div class="services">
+          {services.map((s) => (
+            <article class="svc">
+              <img src={`${P}/${s.img}.webp`} alt={s.t} loading="lazy" />
+              <div><h3>{s.t}</h3><ul>{s.l.map((x) => <li>{x}</li>)}</ul><p>{s.note}</p></div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter" id="menu">
+      <div class="wrap">
+        <span class="eyebrow">De nuestra cocina</span>
+        <h2 class="sec">Platillos que servimos</h2>
+        <p class="sub">Fotos de eventos reales. Armamos el menú contigo según el evento y el presupuesto.</p>
+        <div class="dishes">
+          {dishes.map((d) => <figure class="dish"><img src={`${P}/${d.img}.webp`} alt={d.n} loading="lazy" /><h3>{d.n}</h3></figure>)}
+        </div>
+        <div class="menu-note">
+          <b>Algunas sugerencias de la casa</b>
+          Ensalada de espinacas con queso de cabra y mango con aderezo de mango y chile piquín · Filete de res relleno de queso azul en salsa de pimienta · Pechuga rellena de plátano macho con salsa de tamarindo y guajillo · Strudel de manzana tibio con helado de vainilla.
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter" id="montajes">
+      <div class="wrap">
+        <span class="eyebrow">Montajes</span>
+        <h2 class="sec">Eventos que hemos montado</h2>
+        <div class="gallery" tabindex="0" aria-label="Galería de montajes">
+          {gallery.map((g) => <img src={`${P}/${g}.webp`} alt="Montaje de evento de Banquetes DAI" loading="lazy" />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="gutter">
+      <div class="values wrap">
+        <h2>Cómo trabajamos</h2>
+        <ul>
+          <li><b>Honestidad:</b> te damos el servicio que estás pagando.</li>
+          <li><b>Producto local:</b> compramos a productores de la región y separamos residuos para reciclar.</li>
+          <li><b>Higiene y calidad:</b> los más altos estándares, al precio justo.</li>
+          <li><b>Equipo digno:</b> tratamos y pagamos bien a quienes atienden tu evento.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="visit wrap gutter" id="contacto">
+      <div>
+        <h2>Horario de atención</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {tel && <a href={tel}><Icon name="phone" /> <span>{site.phone}</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 777 563 8083</span></a>}
+        {site.facebook && <a href={`https://facebook.com/${site.facebook}`} target="_blank" rel="noreferrer"><Icon name="facebook" /> <span>Facebook</span></a>}
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Banquetes DAI · Cuernavaca, Morelos</span><span>Banquetes · Mobiliario · Repostería</span></div></footer>
+  {wa && <div class="bar"><a class="btn gold" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar mi evento</a></div>}
+
+  <script>
+    const f = document.getElementById("quote") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      if (!v("date")) { f.querySelector<HTMLInputElement>("#date")?.focus(); return; }
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" });
+      const needs = [...f.querySelectorAll<HTMLInputElement>('input[name="need"]:checked')].map((i) => i.value);
+      const msg = `Hola, Banquetes DAI. Quiero cotizar un evento:\n• Tipo: ${v("type")}\n• Fecha: ${date}\n• Invitados: ${v("guests") || "por definir"}\n• Lugar: ${v("place") || "por definir"}\n• Necesito: ${needs.join(", ") || "información general"}`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

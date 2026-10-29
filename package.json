@@ -12,6 +12,24 @@
     "shots": "node scripts/screenshots.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/big-shoulders-display": "^5.3.0",
+    "@fontsource-variable/bodoni-moda": "^5.3.0",
+    "@fontsource-variable/cormorant-garamond": "^5.3.0",
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/instrument-sans": "^5.3.0",
+    "@fontsource-variable/jost": "^5.3.0",
+    "@fontsource-variable/karla": "^5.3.0",
+    "@fontsource-variable/libre-franklin": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource-variable/mulish": "^5.3.0",
+    "@fontsource-variable/nunito-sans": "^5.3.0",
+    "@fontsource-variable/outfit": "^5.3.0",
+    "@fontsource/allura": "^5.3.0",
+    "@fontsource/dm-serif-display": "^5.3.0",
+    "@fontsource/gilda-display": "^5.3.0",
+    "@fontsource/marcellus": "^5.3.0",
     "astro": "^5.13.0"
   },
   "devDependencies": {

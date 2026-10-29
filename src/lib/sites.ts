@@ -3,7 +3,7 @@
  * To add one: `npm run new -- --slug name --category spa ...`, or copy a JSON and edit it.
  */
 
-export type Category = "spa" | "restaurant" | "clinic" | "fitness";
+export type Category = "spa" | "restaurant" | "clinic" | "fitness" | "bakery" | "store" | "florist" | "catering";
 /** Refines the vocabulary of the clinic template. */
 export type Subcategory = "dental" | "aesthetic" | "veterinary" | "medical" | "firm";
 
@@ -81,6 +81,8 @@ export interface Site {
   promo?: string;
   /** Shows a discreet "demo" badge: keep it on while the page is a proposal, not a delivered site. */
   demo?: boolean;
+  /** Google rating shown as social proof, copied from Maps: { stars, count } */
+  rating?: { stars: number; count: number };
   /** Internal notes (never rendered) */
   notes?: string;
 }
@@ -114,7 +116,7 @@ export function bookingLink(s: Site): { label: string; url: string } | null {
   if (s.booking?.url) return { label: s.booking.label ?? "Reservar", url: s.booking.url };
   const url = waLink(s);
   if (!url) return null;
-  const labels: Record<Category, string> = { restaurant: "Reservar mesa", spa: "Agendar cita", clinic: "Agendar cita", fitness: "Reservar clase" };
+  const labels: Record<Category, string> = { restaurant: "Reservar mesa", spa: "Agendar cita", clinic: "Agendar cita", fitness: "Reservar clase", bakery: "Hacer pedido", store: "Preguntar por WhatsApp", florist: "Pedir arreglo", catering: "Cotizar evento" };
   return { label: s.booking?.label ?? labels[s.category], url };
 }
 

@@ -1,0 +1,271 @@
+---
+/**
+ * Ágora Bakery — built from their own brand: the caramel badge and soft serif of the logo,
+ * their product photography and the stories they tell in their Instagram captions.
+ * Primary action: order by WhatsApp (product + occasion + date).
+ */
+import "@fontsource-variable/fraunces/full.css";
+import "@fontsource-variable/outfit";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber, telLink } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const tel = telLink(site);
+const P = "/photos/agora-bakery";
+
+const classics = [
+  { n: "Pastel de caramelo salado", d: "Bizcocho suave, mantequilla con queso Philadelphia y caramelo artesanal que se derrama.", img: "caramelo-salado", big: true },
+  { n: "Red velvet", d: "Húmedo, con ese sabor a cocoa, cubierto de betún de queso Philadelphia y mantequilla.", img: "red-velvet" },
+  { n: "Triple chocolate", d: "Bizcocho húmedo y betún de chocolate intenso, para los de chocolate de verdad.", img: "triple-chocolate" },
+  { n: "Naranja, almendra y chabacano", d: "Nació para el cumpleaños ochenta y tantos de Don Augusto. Se quedó en el catálogo.", img: "naranja-almendra" },
+  { n: "Pastel de plátano", d: "Ligero, con glaseado cremoso de queso y chocolate blanco.", img: "pastel-platano" },
+  { n: "Pastel de elote", d: "Esponjoso y suave, con un toque de azúcar glass. Sabe a casa.", img: "pastel-elote" },
+  { n: "Panqué de naranja con queso", d: "Empezó como pastel, luego fue rosca; hoy es panqué glaseado.", img: "panque-naranja" },
+  { n: "Tarta de pistache con toronja", d: "Cremosa y cítrica, con un final fresco que no esperas.", img: "pistache-toronja" },
+  { n: "Tarta de plátano y dulce de leche", d: "Fruta suave y caramelo sobre una base que se deshace.", img: "tarta-platano" },
+  { n: "Mini tartas de higo", d: "Base crujiente, crema suave y el dulzor del higo fresco.", img: "mini-tartas-higo" },
+  { n: "Galletas sándwich red velvet", d: "Rellenas y decoradas a mano con chocolate blanco.", img: "galleta-red-velvet" },
+];
+const gifts = [
+  { n: "Cajas para regalar", d: "Galletas, brownies, muffins y combinaciones listas para entregar.", img: "caja-regalo" },
+  { n: "Besos de nuez", d: "En cajita, desde $85.", img: "besos-de-nuez" },
+  { n: "Cajas de temporada", d: "Navidad, Día de las Madres, Día del Padre: pide el catálogo del momento.", img: "caja-navidena" },
+];
+const options = [...classics.map((c) => c.n), "Pan de muerto", ...gifts.map((g) => g.n)];
+const today = new Date().toISOString().slice(0, 10);
+---
+<Base site={site} theme="agora-bakery" themeColor="#C59A6D" colors={{ bg: "#F8F2E9", ink: "#2A1C14", brand: "#C59A6D", paper: "#EFE4D3", "on-brand": "#FFFFFF", berry: "#7E1E2C" }}>
+  <style>
+    :global(html[data-theme="agora-bakery"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 66%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 14%, transparent);
+      --f-display: "Fraunces Variable", Georgia, serif;
+      --f-body: "Outfit Variable", system-ui, sans-serif;
+      --caramel-deep: #8C6239;
+    }
+    :global(html[data-theme="agora-bakery"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .soft { font-family: var(--f-display); font-variation-settings: "SOFT" 100, "WONK" 1; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1120px; margin-inline: auto; }
+
+    .ribbon { background: var(--berry); color: #F8E9E2; font-size: .86rem; text-align: center; padding: 8px 16px; }
+    .ribbon b { font-weight: 600; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 14px; }
+    .badge { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .badge img { width: 48px; height: 48px; border-radius: 14px; }
+    .badge span { font-size: 1.35rem; font-weight: 700; letter-spacing: -.01em; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: var(--bg); font-weight: 500; font-size: .92rem; text-decoration: none; transition: transform var(--t-fast) var(--ease-out); }
+    .pill:active { transform: scale(.97); }
+
+    /* Hero: their own table of cakes, full bleed on phones */
+    .hero { display: grid; gap: 22px; padding-block: 6px 34px; }
+    @media (min-width: 900px) { .hero { grid-template-columns: 1.05fr 1fr; align-items: center; gap: 48px; padding-block: 24px 56px; } }
+    .hero-img { border-radius: 26px; overflow: hidden; aspect-ratio: 1 / 1; background: var(--paper); }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1); transition: transform 1200ms var(--ease-out); }
+    @starting-style { .hero-img img { transform: scale(1.06); } }
+    .hero h1 { font-weight: 700; font-size: clamp(2.5rem, 7.4vw, 4.6rem); line-height: .98; letter-spacing: -.02em; text-wrap: balance; }
+    .hero h1 em { font-style: italic; color: var(--caramel-deep); font-weight: 600; }
+    .hero p.lead { margin-top: 16px; font-size: 1.08rem; color: var(--ink-2); max-width: 46ch; }
+    .proof { margin-top: 16px; display: flex; gap: 10px 18px; flex-wrap: wrap; font-size: .9rem; color: var(--ink-2); }
+    .proof b { color: var(--ink); }
+
+    /* Order card */
+    .order { margin-top: 22px; background: #fff; border-radius: 22px; padding: 18px; box-shadow: 0 1px 0 var(--line), 0 22px 40px -28px rgba(42, 28, 20, .45); display: grid; gap: 12px; }
+    .order h2 { font-size: 1.35rem; font-weight: 650; }
+    .order label { display: grid; gap: 6px; font-size: .8rem; font-weight: 600; color: var(--ink-2); letter-spacing: .02em; }
+    .order select, .order input { height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); padding: 0 14px; font: inherit; font-size: 1rem; color: var(--ink); width: 100%; appearance: none; }
+    .row2 { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; border-radius: 14px; background: var(--brand); color: #fff; font-weight: 600; font-size: 1rem; text-decoration: none; transition: transform var(--t-fast) var(--ease-out), background var(--t-fast) var(--ease-out); }
+    .btn:hover { background: var(--caramel-deep); } .btn:active { transform: scale(.98); }
+    .order .hint { font-size: .84rem; color: var(--ink-2); }
+
+    section h2.sec { font-weight: 700; font-size: clamp(1.9rem, 4.6vw, 2.8rem); letter-spacing: -.015em; line-height: 1.05; }
+    section .sub { color: var(--ink-2); margin-top: 8px; max-width: 56ch; }
+
+    /* Classics grid */
+    .classics { padding-block: 40px 20px; }
+    .grid { margin-top: 22px; display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 900px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+    .card { display: grid; align-content: start; gap: 10px; text-decoration: none; }
+    .card .ph { border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--paper); }
+    .card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease-out); }
+    @media (hover: hover) { .card:hover .ph img { transform: scale(1.04); } }
+    .card h3 { font-size: 1.12rem; font-weight: 650; line-height: 1.15; }
+    .card p { font-size: .9rem; color: var(--ink-2); line-height: 1.4; }
+    .card .ask { font-size: .84rem; font-weight: 600; color: var(--caramel-deep); display: inline-flex; align-items: center; gap: 6px; }
+    .card.big { grid-column: 1 / -1; }
+    .card.big .ph { aspect-ratio: 16 / 11; }
+    @media (min-width: 900px) { .card.big { grid-column: span 2; grid-row: span 2; } .card.big .ph { aspect-ratio: 4 / 5; } }
+
+    /* Seasonal: pan de muerto, dark like their photos */
+    .season { margin-block: 40px; background: #120C09; color: #F3E7DA; border-radius: 28px; overflow: hidden; display: grid; }
+    @media (min-width: 900px) { .season { grid-template-columns: 1.2fr 1fr; } }
+    .season img { width: 100%; height: 100%; object-fit: cover; min-height: 240px; }
+    .season .txt { padding: 26px 22px 30px; display: grid; gap: 14px; align-content: center; }
+    .season .kick { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brand); font-weight: 600; }
+    .season blockquote { font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.1; font-weight: 600; }
+    .season p { color: color-mix(in oklab, #F3E7DA 74%, #120C09); }
+    .season .btn { justify-self: start; padding: 0 22px; }
+
+    /* Gifts */
+    .gifts { padding-block: 10px 30px; }
+    .gift-row { margin-top: 20px; display: grid; gap: 14px; grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .gift-row { grid-template-columns: repeat(3, 1fr); } }
+    .gift { background: #fff; border-radius: 20px; overflow: hidden; display: grid; grid-template-columns: 110px 1fr; align-items: center; box-shadow: 0 1px 0 var(--line); }
+    @media (min-width: 760px) { .gift { grid-template-columns: 1fr; } }
+    .gift img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1; }
+    .gift div { padding: 14px 16px; }
+    .gift h3 { font-size: 1.1rem; font-weight: 650; }
+    .gift p { font-size: .9rem; color: var(--ink-2); }
+
+    /* Story */
+    .story { padding-block: 40px; display: grid; gap: 22px; }
+    @media (min-width: 900px) { .story { grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; } }
+    .story .txt p + p { margin-top: 12px; }
+    .story .txt p { color: var(--ink-2); font-size: 1.04rem; }
+    .story .txt p.big { font-size: 1.5rem; line-height: 1.2; color: var(--ink); font-weight: 600; }
+    .story .pics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .story .pics img { border-radius: 18px; aspect-ratio: 3 / 4; object-fit: cover; width: 100%; }
+    .story .pics img:last-child { margin-top: 36px; }
+
+    /* Visit */
+    .visit { background: var(--paper); border-radius: 26px; padding: 24px 20px; display: grid; gap: 22px; margin-bottom: 40px; }
+    @media (min-width: 900px) { .visit { grid-template-columns: 1fr 1fr; padding: 36px; } }
+    .visit h2 { font-size: 1.9rem; font-weight: 700; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+    .data { display: grid; gap: 12px; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--caramel-deep); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .9rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    footer a { color: var(--ink); text-decoration: none; }
+
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 900px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <div class="ribbon">Ya hay <b>pan de muerto</b>: ralladura de naranja, agua de azahar y mantequilla de primera.</div>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a class="badge" href="#top"><img src={`${P}/logo.webp`} alt="" width="48" height="48" /><span class="soft">Ágora</span></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> Pedir</a>}
+    </div>
+  </header>
+
+  <main class="gutter" id="top">
+    <section class="hero wrap">
+      <div class="hero-img"><img src={`${P}/hero.webp`} alt="Pastel de zanahoria, pastel de chocolate y cajas de regalo de Ágora Bakery" width="1254" height="1254" fetchpriority="high" /></div>
+      <div>
+        <h1 class="soft">Te ayudamos a <em>sorprender</em> a tus invitados</h1>
+        <p class="lead">Pastelería artesanal en Jardín Tetela. Pasteles, tartas y galletas hechos a mano, lejos de lo industrial, con ingredientes reales.</p>
+        <div class="proof"><span><b>★ {site.rating?.stars}</b> en Google ({site.rating?.count} reseñas)</span><span>Café y rebanadas en tienda</span></div>
+
+        {wa && (
+          <form class="order" id="order" data-wa={wa}>
+            <h2 class="soft">Haz tu pedido</h2>
+            <label>¿Qué se te antoja?
+              <select id="item" required>
+                <option value="">Elige un postre</option>
+                {options.map((o) => <option value={o}>{o}</option>)}
+              </select>
+            </label>
+            <div class="row2">
+              <label>¿Para cuándo?<input type="date" id="date" min={today} value={today} required /></label>
+              <label>Ocasión
+                <select id="occasion"><option>Cumpleaños</option><option>Reunión</option><option>Regalo</option><option>Solo antojo</option></select>
+              </label>
+            </div>
+            <button class="btn" type="submit"><Icon name="whatsapp" size={18} /> Pedir por WhatsApp</button>
+            <p class="hint">Te respondemos con tamaños, precio y hora de entrega. También te mandamos el catálogo completo.</p>
+          </form>
+        )}
+      </div>
+    </section>
+
+    <section class="classics wrap" id="pasteles">
+      <h2 class="sec soft">Los que ya son de la casa</h2>
+      <p class="sub">Cada uno tiene su historia: algunos llegaron al catálogo por casualidad, otros por amor.</p>
+      <div class="grid">
+        {classics.map((c) => (
+          <a class={`card ${c.big ? "big" : ""}`} href={wa ? `https://wa.me/${wa}?text=${encodeURIComponent(`Hola, Ágora. Quiero pedir: ${c.n}. ¿Qué tamaños y precios tienen?`)}` : "#order"} target="_blank" rel="noreferrer">
+            <div class="ph"><img src={`${P}/${c.img}.webp`} alt={c.n} loading="lazy" /></div>
+            <h3 class="soft">{c.n}</h3>
+            <p>{c.d}</p>
+            <span class="ask"><Icon name="whatsapp" size={14} /> Pedir este</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="season wrap" id="temporada">
+      <img src={`${P}/pan-de-muerto.webp`} alt="Pan de muerto de Ágora Bakery con altar" loading="lazy" />
+      <div class="txt">
+        <span class="kick">Temporada · Día de Muertos</span>
+        <blockquote class="soft">“Antes que tendencia, el pan de muerto es memoria.”</blockquote>
+        <p>Lo hacemos como siempre: ralladura de naranja, agua de azahar y mantequilla de primera calidad. Aparta el tuyo para el altar.</p>
+        {wa && <a class="btn" href={`https://wa.me/${wa}?text=${encodeURIComponent("Hola, Ágora. Quiero apartar pan de muerto. ¿Qué tamaños tienen?")}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> Apartar pan de muerto</a>}
+      </div>
+    </section>
+
+    <section class="gifts wrap" id="regalos">
+      <h2 class="sec soft">Para regalar</h2>
+      <p class="sub">El detalle que no se queda en un cajón. Escríbenos y te mandamos todas las cajas disponibles.</p>
+      <div class="gift-row">
+        {gifts.map((g) => (
+          <div class="gift"><img src={`${P}/${g.img}.webp`} alt={g.n} loading="lazy" /><div><h3 class="soft">{g.n}</h3><p>{g.d}</p></div></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="story wrap" id="historia">
+      <div class="txt">
+        <p class="big soft">Empezó en el horno de una estufa, en una sala convertida en taller.</p>
+        <p>La primera vez que horneamos pan de muerto para vender, la cocina no se daba abasto y mamá tuvo que venir a ayudar. De ahí salieron las recetas que hoy están en el catálogo.</p>
+        <p>Hoy Ágora tiene su propio punto de venta en Cuernavaca: un rincón con café recién hecho, rebanadas y pasteles que abrazan el alma.</p>
+      </div>
+      <div class="pics">
+        <img src={`${P}/pan-de-muerto-2.webp`} alt="Pan de muerto recién horneado" loading="lazy" />
+        <img src={`${P}/cafe.webp`} alt="Café recién hecho en Ágora Bakery" loading="lazy" />
+      </div>
+    </section>
+
+    <section class="visit wrap" id="visita">
+      <div>
+        <h2 class="soft">Ven por un café</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {wa && <a href="https://wa.me/c/5215539608774" target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>Ver catálogo en WhatsApp</span></a>}
+        {tel && <a href={tel}><Icon name="phone" /> <span>{site.phone}</span></a>}
+        {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Ágora Bakery · Pastelería artesanal · Cuernavaca</span>{site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer">@{site.instagram}</a>}</div></footer>
+
+  {wa && <div class="bar"><a class="btn" href="#order"><Icon name="whatsapp" size={18} /> Hacer pedido</a></div>}
+
+  <script>
+    const f = document.getElementById("order") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "");
+      if (!v("item")) { f.querySelector<HTMLSelectElement>("#item")?.focus(); return; }
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long" });
+      const msg = `Hola, Ágora. Quiero pedir: ${v("item")}, para el ${date} (${v("occasion").toLowerCase()}). ¿Qué tamaños y precios tienen?`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>
