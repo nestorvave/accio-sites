@@ -1,0 +1,19 @@
+{
+  "slug": "herreria-machuca",
+  "category": "store",
+  "name": "Herrería Familiar Machuca",
+  "tagline": "Especialistas en pérgolas, además todo tipo de herrería",
+  "description": "Herrería en Zapopan, Jalisco: pérgolas con deck PVC, lambrín, policarbonato o vidrio templado, portones, barandales, domos, puertas, ventanas y tapancos.",
+  "phone": "33 2351 8836",
+  "whatsapp": "523317752599",
+  "facebook": "profile.php?id=61575513341923",
+  "address": "Calle Puerto Lobo 3093, Col. Miramar, 45060 Zapopan, Jal.",
+  "mapUrl": "https://www.google.com/maps/place/Herrer%C3%ADa+familiar+machuca/@20.6385935,-103.4582091,17z",
+  "hours": [
+    { "days": "Lunes a domingo", "time": "9:00 – 19:00" }
+  ],
+  "rating": { "stars": 4.8, "count": 85 },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (no working website). Facebook page lists herreriafamiliarmachuca.com as their website, but the domain does not resolve (DNS_PROBE_FINISHED_NXDOMAIN, checked 2026-10-29); Google Maps has no website ('Add website'). Google 4.8 (85). Two WhatsApp numbers, both verified 2026-10-29: 33 1775 2599 (Ramón Machuca, on their flyer and cover: 'Cotizaciones sin compromiso') and 33 2351 8836 (Google Maps, WhatsApp Business). Photos are their own job photos from Facebook; copy from their flyer (Especialistas en pérgolas, materials list). Address from flyer ('Puerto Lobo 3093 o 59, Col. Miramar')."
+}

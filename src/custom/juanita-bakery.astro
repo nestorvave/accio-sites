@@ -1,0 +1,237 @@
+---
+/**
+ * Juanita Bakery — built from their own material: the red of their logo, their studio photos on marble
+ * (only original designs; licensed characters left out), their categories and the ordering rules from their
+ * FAQ (one week ahead, ready from 10 am, delivery from 70 people). Primary action: a quote form that opens
+ * WhatsApp with the country code (their "Cotiza ahora" button omits it).
+ */
+import "@fontsource/dm-serif-display";
+import "@fontsource-variable/figtree";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const P = "/photos/juanita-bakery";
+const week = new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10);
+
+const cakes = [
+  { t: "Bodas", img: "boda" }, { t: "XV años y celebraciones", img: "petalos-rosa" }, { t: "Bautizo y comunión", img: "comunion" },
+  { t: "Cumpleaños", img: "grieta-dorada" }, { t: "Infantiles", img: "selva" }, { t: "Temáticos", img: "pozole" },
+];
+const cookies = [
+  { t: "Corporativas", d: "Detalles con tu marca que tus clientes sí van a apreciar.", img: "galletas-ciencia" },
+  { t: "Bautizo y comunión", d: "Con nombre, palomas, cruces y flores.", img: "galletas-comunion" },
+  { t: "Bebés y baby shower", d: "Empacadas una por una, listas para regalar.", img: "galletas-conejita" },
+];
+const gallery = ["petalos-rojos", "koi", "noche", "fresas", "lambeth", "ciclista", "azul-dorado", "tropical"];
+const kinds = ["Pastel", "Galletas decoradas", "Cupcakes", "Birthday Box", "Galletas corporativas"];
+const occasions = ["Cumpleaños", "Boda", "XV años", "Bautizo o comunión", "Baby shower o gender reveal", "Empresa", "Navidad", "Otra"];
+---
+<Base site={site} theme="juanita-bakery" themeColor="#B3202A" colors={{ bg: "#FFFBF8", ink: "#2B1D1E", brand: "#B3202A", paper: "#F8ECEA", "on-brand": "#FFFFFF" }}>
+  <style>
+    :global(html[data-theme="juanita-bakery"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 12%, transparent);
+      --blush: #F3D7D5;
+      --f-display: "DM Serif Display", Georgia, serif;
+      --f-body: "Figtree Variable", system-ui, sans-serif;
+    }
+    :global(html[data-theme="juanita-bakery"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1160px; margin-inline: auto; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+    .top img { height: 62px; width: auto; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 700; font-size: .9rem; text-decoration: none; }
+
+    .hero { display: grid; gap: 22px; padding-block: 8px 34px; }
+    @media (min-width: 920px) { .hero { grid-template-columns: 1fr 1.05fr; align-items: center; gap: 48px; padding-block: 26px 56px; } }
+    .kicker { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: var(--brand); }
+    .hero h1 { margin-top: 10px; font-family: var(--f-display); font-weight: 400; font-size: clamp(2.6rem, 7.8vw, 4.8rem); line-height: 1; letter-spacing: -.01em; text-wrap: balance; }
+    .hero h1 em { color: var(--brand); }
+    .hero p { margin-top: 14px; font-size: 1.07rem; color: var(--ink-2); max-width: 44ch; }
+    .ctas { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 999px; font: inherit; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.red { background: var(--brand); color: #fff; } .btn.red:hover { filter: brightness(1.08); }
+    .btn.out { border: 1.5px solid var(--ink); color: var(--ink); }
+    .proof { margin-top: 16px; font-size: .9rem; color: var(--ink-2); }
+    .collage { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .collage img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 22px; background: #fff; }
+    .collage img:nth-child(2) { margin-top: 40px; }
+
+    section.block { padding-block: 56px 6px; }
+    h2.sec { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.1rem, 5.4vw, 3.3rem); line-height: 1.04; margin-top: 6px; text-wrap: balance; }
+    .sub { color: var(--ink-2); margin-top: 10px; max-width: 58ch; }
+
+    .cakes { margin-top: 24px; display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 900px) { .cakes { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+    .cakes a { display: grid; gap: 8px; text-decoration: none; color: inherit; }
+    .cakes img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; transition: transform .5s var(--ease-out); }
+    .cakes a:hover img { transform: translateY(-3px); }
+    .cakes span { font-family: var(--f-display); font-size: 1.3rem; display: flex; justify-content: space-between; align-items: center; }
+    .cakes :global(svg) { color: var(--brand); }
+
+    .cookies { margin-top: 56px; background: var(--paper); border-radius: 30px; padding: 26px 18px; }
+    @media (min-width: 900px) { .cookies { padding: 40px; } }
+    .cookies .grid { margin-top: 20px; display: grid; gap: 14px; }
+    @media (min-width: 860px) { .cookies .grid { grid-template-columns: repeat(3, 1fr); } }
+    .cookies article { background: #fff; border-radius: 20px; overflow: hidden; }
+    .cookies img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .cookies article div { padding: 14px 16px 18px; }
+    .cookies h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.35rem; }
+    .cookies p { font-size: .9rem; color: var(--ink-2); margin-top: 2px; }
+
+    .how { margin-top: 24px; display: grid; gap: 12px; }
+    @media (min-width: 860px) { .how { grid-template-columns: repeat(4, 1fr); } }
+    .how div { border-top: 2px solid var(--brand); padding-top: 12px; }
+    .how b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 1.35rem; }
+    .how p { font-size: .9rem; color: var(--ink-2); margin-top: 4px; }
+
+    .gallery { margin-top: 22px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    @media (min-width: 860px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+    .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 16px; }
+
+    .quote-wrap { padding-block: 56px 6px; }
+    .quote { background: var(--brand); color: #fff; border-radius: 30px; padding: 26px 18px; display: grid; gap: 18px; }
+    @media (min-width: 900px) { .quote { grid-template-columns: .9fr 1.2fr; padding: 40px; gap: 36px; } }
+    .quote h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 4.8vw, 2.8rem); line-height: 1.02; }
+    .quote .lede { margin-top: 10px; color: #F8DCDD; }
+    .fields { display: grid; gap: 12px; }
+    .fields .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .fields label { display: grid; gap: 6px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #F8DCDD; }
+    .fields select, .fields input { height: 48px; border-radius: 14px; border: 0; padding: 0 14px; font: inherit; font-size: 1rem; color: var(--ink); width: 100%; appearance: none; background: #fff; }
+    .quote .btn { background: #fff; color: var(--brand); }
+    .hint { font-size: .86rem; color: #F8DCDD; }
+
+    .visit { padding-block: 56px 40px; display: grid; gap: 20px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-weight: 400; font-size: 2.1rem; margin-bottom: 8px; }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
+    .pay { color: var(--ink-2); font-size: .95rem; }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .86rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a href="#top"><img src={`${P}/logo.webp`} alt="Juanita Bakery" width="500" height="500" /></a>
+      {wa && <a class="pill" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap gutter">
+      <div>
+        <span class="kicker">Repostería fina y diseño · Querétaro</span>
+        <h1>Pasteles y galletas <em>personalizados</em></h1>
+        <p>Creamos piezas únicas, hechas con la mejor calidad, para bodas, cumpleaños, bautizos, empresas y cualquier celebración que quieras hacer memorable.</p>
+        <div class="ctas">
+          {wa && <a class="btn red" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar mi pedido</a>}
+          <a class="btn out" href="#pasteles">Ver pasteles</a>
+        </div>
+        <p class="proof">Pedidos y cotizaciones por WhatsApp e Instagram · @juanitabakeqro</p>
+      </div>
+      <div class="collage">
+        <img src={`${P}/petalos-rojos.webp`} alt="Pastel cubierto de pétalos rojos" width="813" height="1080" fetchpriority="high" />
+        <img src={`${P}/blanco-negro-70.webp`} alt="Pastel blanco y negro con hoja de oro" width="813" height="1080" />
+      </div>
+    </section>
+
+    <section class="block gutter" id="pasteles">
+      <div class="wrap">
+        <span class="kicker">Pasteles</span>
+        <h2 class="sec">Para cada celebración, un diseño propio</h2>
+        <p class="sub">Desde 10 personas, en incrementos de 5. Cuéntanos tu idea y la convertimos en pastel.</p>
+        <div class="cakes">
+          {cakes.map((c) => <a href="#cotizar" data-occ={c.t}><img src={`${P}/${c.img}.webp`} alt={`Pastel para ${c.t.toLowerCase()}`} loading="lazy" /><span>{c.t} <Icon name="arrow" size={18} /></span></a>)}
+        </div>
+
+        <div class="cookies">
+          <span class="kicker">Galletas decoradas</span>
+          <h2 class="sec">Posicionamiento de marca con un toque de distinción</h2>
+          <div class="grid">{cookies.map((c) => <article><img src={`${P}/${c.img}.webp`} alt={`Galletas ${c.t.toLowerCase()}`} loading="lazy" /><div><h3>{c.t}</h3><p>{c.d}</p></div></article>)}</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter" id="como-pedir">
+      <div class="wrap">
+        <span class="kicker">Cómo pedir</span>
+        <h2 class="sec">Agenda con tiempo</h2>
+        <div class="how">
+          <div><b>Una semana antes</b><p>Es lo ideal para agendar. Si hay disponibilidad, podemos hacerlo con menos tiempo.</p></div>
+          <div><b>Anticipo</b><p>Para apartar tu fecha; el resto lo pagas a la entrega.</p></div>
+          <div><b>Listo a las 10 am</b><p>Del día que agendaste. Pásalo a recoger ese mismo día.</p></div>
+          <div><b>A domicilio</b><p>Pasteles desde 70 personas, en la zona metropolitana de Querétaro y Corregidora.</p></div>
+        </div>
+        <div class="gallery">{gallery.map((g) => <img src={`${P}/${g}.webp`} alt="Pastel de Juanita Bakery" loading="lazy" />)}</div>
+      </div>
+    </section>
+
+    <section class="quote-wrap gutter" id="cotizar">
+      {wa && (
+        <form class="quote wrap" id="quote" data-wa={wa}>
+          <div>
+            <h2>Cuéntanos tu idea</h2>
+            <p class="lede">Te llega directo a nuestro WhatsApp y alguien te guía con la decoración, el sabor y el tamaño.</p>
+          </div>
+          <div class="fields">
+            <div class="row">
+              <label>Quiero<select id="kind">{kinds.map((k) => <option>{k}</option>)}</select></label>
+              <label>Ocasión<select id="occ">{occasions.map((o) => <option>{o}</option>)}</select></label>
+            </div>
+            <div class="row">
+              <label>Personas o piezas<input id="qty" type="text" inputmode="numeric" placeholder="Ej. 20" /></label>
+              <label>Fecha<input id="date" type="date" min={week} value={week} /></label>
+            </div>
+            <label>Idea o temática<input id="idea" type="text" placeholder="Colores, personaje, frase…" /></label>
+            <button class="btn" type="submit"><Icon name="whatsapp" size={18} /> Enviar por WhatsApp</button>
+            <p class="hint">Si tienes fotos de referencia, mándalas en el mismo chat.</p>
+          </div>
+        </form>
+      )}
+    </section>
+
+    <section class="visit wrap gutter" id="contacto">
+      <div>
+        <h2>Dónde estamos</h2>
+        <p class="pay">Zona sur de Corregidora, Querétaro. Aceptamos transferencia, efectivo y tarjeta.</p>
+      </div>
+      <div class="data">
+        {site.mapUrl && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>Ver ubicación en Google Maps</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 442 245 7024</span></a>}
+        <a href="mailto:hola@juanitabake.com"><Icon name="arrow" /> <span>hola@juanitabake.com</span></a>
+        {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Juanita Bakery · Corregidora, Querétaro</span><span>Pasteles · Galletas · Cupcakes</span></div></footer>
+  {wa && <div class="bar"><a class="btn red" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar mi pedido</a></div>}
+
+  <script>
+    const f = document.getElementById("quote") as HTMLFormElement | null;
+    document.querySelectorAll<HTMLAnchorElement>(".cakes a").forEach((a) => a.addEventListener("click", () => {
+      const sel = f?.querySelector<HTMLSelectElement>("#kind"); if (sel) sel.value = "Pastel";
+    }));
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long" });
+      const msg = `Hola, Juanita Bakery. Quiero cotizar:\n• ${v("kind")} para ${v("occ").toLowerCase()}\n• Personas o piezas: ${v("qty") || "por definir"}\n• Fecha: ${date}${v("idea") ? `\n• Idea: ${v("idea")}` : ""}`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

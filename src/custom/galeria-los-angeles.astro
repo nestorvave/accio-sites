@@ -1,0 +1,245 @@
+---
+/**
+ * Galería Los Ángeles — built from their Instagram: their rose logo, their blue walls and milagrito mural
+ * (crops of their own reel covers), and copy from their captions (36 años, milagritos, charm bar,
+ * talleres, barro negro, envíos). Primary action: ask for a piece or a shipment over WhatsApp.
+ */
+import "@fontsource/yeseva-one";
+import "@fontsource-variable/onest";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const P = "/photos/galeria-los-angeles";
+
+const mural = ["corazon-talavera", "milagrito-plata", "calavera-azul", "corazon-nopal", "angelitos", "vela-cempasuchil", "mural-alas", "corazon-flores", "collar", "calavera-catrina", "barro-negro", "corazon-verde-pared"];
+const finds = [
+  { t: "Milagritos y corazones", d: "Corazones, manos, casitas, ojitos y animalitos: amor, protección, salud, abundancia. Hay uno para cada intención.", img: "milagrito-plata" },
+  { t: "Talavera", d: "Puebla se lleva en el corazón, y si ese corazón es de talavera, mucho mejor.", img: "corazon-talavera" },
+  { t: "Barro negro de Oaxaca", d: "Nuestra colección nueva, con un mueble hecho especialmente para ella.", img: "barro-negro" },
+  { t: "Joyería y piezas únicas", d: "Collares y diseños que se van rápido; tenemos modelos similares para seguir enamorándonos.", img: "collar" },
+  { t: "Decoración", d: "Corazones de más de un metro que además son lámpara, calaveras, vírgenes y angelitos para tu casa, restaurante o hacienda.", img: "angelitos" },
+  { t: "Detalles para tu fiesta", d: "Agitadores de vidrio soplado y piezas para tu Noche Mexicana.", img: "agitadores-nopal" },
+];
+const looking = ["Un milagrito", "Un corazón", "Talavera", "Barro negro", "Joyería", "Una pieza grande para decorar", "Un regalo"];
+---
+<Base site={site} theme="galeria-los-angeles" themeColor="#1E3A6E" colors={{ bg: "#F8EFE4", ink: "#1B2440", brand: "#D9412A", paper: "#F1E2D0", "on-brand": "#FFFFFF" }}>
+  <style>
+    :global(html[data-theme="galeria-los-angeles"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 64%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 13%, transparent);
+      --navy: #1E3A6E;
+      --wall: #2D56B3;
+      --gold: #E2A53A;
+      --f-display: "Yeseva One", Georgia, serif;
+      --f-body: "Onest Variable", system-ui, sans-serif;
+    }
+    :global(html[data-theme="galeria-los-angeles"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1160px; margin-inline: auto; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+    .top img { height: 62px; width: auto; border-radius: 50%; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 700; font-size: .9rem; text-decoration: none; }
+
+    .hero { display: grid; gap: 22px; padding-block: 6px 34px; }
+    @media (min-width: 920px) { .hero { grid-template-columns: 1fr 1.05fr; align-items: center; gap: 44px; padding-block: 20px 52px; } }
+    .kicker { display: inline-flex; gap: 8px; align-items: center; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--wall); }
+    .hero h1 { margin-top: 10px; font-family: var(--f-display); font-weight: 400; font-size: clamp(2.5rem, 7.4vw, 4.6rem); line-height: 1.02; color: var(--navy); text-wrap: balance; }
+    .hero h1 em { font-style: normal; color: var(--brand); }
+    .hero p { margin-top: 14px; font-size: 1.06rem; color: var(--ink-2); max-width: 44ch; }
+    .ctas { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 999px; font: inherit; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.red { background: var(--brand); color: #fff; } .btn.red:hover { filter: brightness(1.07); }
+    .btn.blue { background: var(--navy); color: #fff; }
+    .proof { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .9rem; color: var(--ink-2); }
+    .proof b { color: var(--ink); }
+
+    .wall { background: var(--wall); border-radius: 28px; padding: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; box-shadow: 0 30px 50px -36px rgba(30,58,110,.8); }
+    .wall img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; }
+    .wall img:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .wall img { opacity: 1; transition: opacity .7s var(--ease-out), scale .7s var(--ease-out); }
+    @starting-style { .wall img { opacity: 0; scale: .96; } }
+
+    .quote { background: var(--navy); color: #F8EFE4; text-align: center; padding: 34px 20px; }
+    .quote p { font-family: var(--f-display); font-size: clamp(1.6rem, 4.6vw, 2.6rem); line-height: 1.15; max-width: 22ch; margin-inline: auto; }
+    .quote small { display: block; margin-top: 10px; color: var(--gold); letter-spacing: .14em; text-transform: uppercase; font-size: .76rem; font-weight: 700; }
+
+    section.block { padding-block: 54px 6px; }
+    .eyebrow { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--brand); }
+    h2.sec { font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; margin-top: 6px; color: var(--navy); text-wrap: balance; }
+    .sub { color: var(--ink-2); margin-top: 10px; max-width: 58ch; }
+
+    .finds { margin-top: 24px; display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 960px) { .finds { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
+    .finds article { display: grid; gap: 10px; align-content: start; }
+    .finds img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 22px 22px 22px 4px; }
+    .finds h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.3rem; color: var(--navy); line-height: 1.15; }
+    .finds p { font-size: .9rem; color: var(--ink-2); }
+
+    .ritual { margin-top: 24px; display: grid; gap: 12px; }
+    @media (min-width: 860px) { .ritual { grid-template-columns: repeat(3, 1fr); } }
+    .ritual li { background: #fff; border-radius: 22px; padding: 20px; box-shadow: 0 1px 0 var(--line); display: grid; gap: 6px; }
+    .ritual b { font-family: var(--f-display); font-weight: 400; font-size: 2.6rem; line-height: 1; color: var(--brand); }
+    .ritual h3 { font-weight: 800; font-size: 1.05rem; }
+    .ritual p { font-size: .93rem; color: var(--ink-2); }
+
+    .story { margin-top: 54px; display: grid; gap: 0; background: var(--paper); border-radius: 28px; overflow: hidden; }
+    @media (min-width: 900px) { .story { grid-template-columns: 1fr 1fr; } }
+    .story img { width: 100%; height: 100%; min-height: 300px; object-fit: cover; }
+    .story .in { padding: 26px 22px; display: grid; gap: 12px; align-content: center; }
+    .story h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.9rem, 4.4vw, 2.6rem); color: var(--navy); line-height: 1.08; }
+    .story p { color: var(--ink-2); }
+    .story .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .story .tags span { height: 32px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: #fff; font-size: .84rem; font-weight: 600; }
+
+    .order-wrap { padding-block: 54px 6px; }
+    .order { background: var(--wall); color: #fff; border-radius: 28px; padding: 26px 18px; display: grid; gap: 18px; }
+    @media (min-width: 900px) { .order { grid-template-columns: .9fr 1.2fr; padding: 38px; gap: 36px; } }
+    .order h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.9rem, 4.4vw, 2.6rem); line-height: 1.08; }
+    .order .lede { margin-top: 10px; color: #DCE5FA; }
+    .fields { display: grid; gap: 12px; }
+    .fields .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .fields label { display: grid; gap: 6px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #DCE5FA; }
+    .fields select, .fields input { height: 48px; border-radius: 14px; border: 0; padding: 0 14px; font: inherit; font-size: 1rem; color: var(--ink); width: 100%; appearance: none; background: #fff; }
+    .toggle { display: flex; gap: 8px; flex-wrap: wrap; }
+    .toggle label { position: relative; text-transform: none; letter-spacing: 0; font-size: .95rem; color: #fff; }
+    .toggle input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+    .toggle span { display: inline-flex; align-items: center; height: 42px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.4); cursor: pointer; }
+    .toggle input:checked + span { background: #fff; color: var(--navy); border-color: #fff; }
+    .toggle input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+    .visit { padding-block: 54px 40px; display: grid; gap: 24px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; align-items: center; } }
+    .visit img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 22px; }
+    .visit h2 { font-family: var(--f-display); font-weight: 400; font-size: 2rem; color: var(--navy); margin-bottom: 12px; }
+    .data { display: grid; gap: 12px; align-content: start; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
+    .note { font-size: .88rem; color: var(--ink-2); margin-top: 6px; }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .86rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a href="#top"><img src={`${P}/logo.webp`} alt="Galería Los Ángeles" width="500" height="500" /></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> 222 469 2846</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap gutter">
+      <div>
+        <span class="kicker"><Icon name="pin" size={16} /> Callejón de los Sapos · Puebla</span>
+        <h1>Artesanías mexicanas y <em>milagritos</em> con historia</h1>
+        <p>Una galería poblana con 36 años celebrando nuestras raíces: piezas hechas a mano por artesanos mexicanos, para tu casa, para regalar o para intencionar un deseo.</p>
+        <div class="ctas">
+          {wa && <a class="btn red" href="#pedir"><Icon name="whatsapp" size={18} /> Pedir por WhatsApp</a>}
+          <a class="btn blue" href="#visita">Cómo llegar</a>
+        </div>
+        <p class="proof"><span><b>{site.rating?.stars} ★</b> en Google · {site.rating?.count} reseñas</span><span>Abierto todos los días</span><span>Hacemos envíos</span></p>
+      </div>
+      <div class="wall" aria-label="Mural de milagritos">
+        {mural.slice(0, 9).map((m, i) => <img src={`${P}/${m}.webp`} alt="" loading={i < 3 ? "eager" : "lazy"} width="608" height="608" />)}
+      </div>
+    </section>
+
+    <div class="quote"><p>Cuando no sepas qué pedirle a la vida, pide un milagrito.</p><small>Mural de milagritos · Galería Los Ángeles</small></div>
+
+    <section class="block gutter" id="piezas">
+      <div class="wrap">
+        <span class="eyebrow">Qué vas a encontrar</span>
+        <h2 class="sec">Un pedacito de México en cada pieza</h2>
+        <p class="sub">El barro, la madera, los textiles y las manos de nuestra gente convertidos en arte. Cada pieza lleva detrás el talento de un artesano.</p>
+        <div class="finds">
+          {finds.map((f) => <article><img src={`${P}/${f.img}.webp`} alt={f.t} loading="lazy" width="608" height="608" /><h3>{f.t}</h3><p>{f.d}</p></article>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter" id="milagrito">
+      <div class="wrap">
+        <span class="eyebrow">El ritual</span>
+        <h2 class="sec">¿Cómo intencionar tu milagrito?</h2>
+        <ol class="ritual">
+          <li><b>1</b><h3>Escoge tu milagrito</h3><p>Déjate llevar por el que más conecte contigo y con lo que quieres atraer, agradecer o pedir.</p></li>
+          <li><b>2</b><h3>Ponle una intención</h3><p>Escribe tu deseo en una de nuestras tarjetitas.</p></li>
+          <li><b>3</b><h3>Deposita tu deseo</h3><p>Dóblala y déjala en la canasta: cada semana intencionamos los milagritos que nos dejan.</p></li>
+        </ol>
+
+        <div class="story">
+          <img src={`${P}/canasta-intenciones.webp`} alt="Canasta con las intenciones escritas por los visitantes" loading="lazy" />
+          <div class="in">
+            <span class="eyebrow">Ven a vivir la experiencia</span>
+            <h2>Charm bar, talleres y más de 1,000 intenciones</h2>
+            <p>Elige tu milagrito en el charm bar, asiste a un taller (como el de velitas de Día de Muertos) y conoce la historia detrás de las artesanías que llevas a casa. El plan para venir con tu mamá, tus amigas o tu pareja.</p>
+            <div class="tags"><span>Empresa poblana</span><span>100% mexicana</span><span>36 años</span><span>Única ubicación</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="order-wrap gutter" id="pedir">
+      {wa && (
+        <form class="order wrap" id="order" data-wa={wa}>
+          <div>
+            <span class="eyebrow" style="color:var(--gold)">Pedidos y envíos</span>
+            <h2>¿Qué estás buscando?</h2>
+            <p class="lede">Cuéntanos y te mandamos fotos de lo que tenemos. Si no estás en Puebla, te lo enviamos.</p>
+          </div>
+          <div class="fields">
+            <div class="row">
+              <label>Busco<select id="what">{looking.map((l) => <option>{l}</option>)}</select></label>
+              <label>Para<input id="for" type="text" placeholder="Mi mamá, mi casa…" /></label>
+            </div>
+            <span class="eyebrow" style="color:#DCE5FA">¿Cómo lo quieres?</span>
+            <div class="toggle">
+              <label><input type="radio" name="how" value="Paso a la galería" checked /><span>Paso a la galería</span></label>
+              <label><input type="radio" name="how" value="Envío" /><span>Envío</span></label>
+            </div>
+            <label>Ciudad (si es envío)<input id="city" type="text" placeholder="CDMX, Monterrey…" /></label>
+            <button class="btn red" type="submit"><Icon name="whatsapp" size={18} /> Enviar por WhatsApp</button>
+          </div>
+        </form>
+      )}
+    </section>
+
+    <section class="visit wrap gutter" id="visita">
+      <img src={`${P}/fachada.webp`} alt="Entrada de Galería Los Ángeles en el Callejón de los Sapos" loading="lazy" />
+      <div>
+        <h2>Visítanos</h2>
+        <div class="data">
+          {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+          <p><Icon name="clock" /> <span>{site.hours[0].days}, {site.hours[0].time}</span></p>
+          {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 222 469 2846</span></a>}
+          {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+        </div>
+        <p class="note">Somos la única Galería Los Ángeles y tenemos una sola ubicación.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Galería Los Ángeles · Calle 6 Sur 304, Puebla</span><span>Artesanías mexicanas · Milagritos</span></div></footer>
+  {wa && <div class="bar"><a class="btn red" href="#pedir"><Icon name="whatsapp" size={18} /> Pedir por WhatsApp</a></div>}
+
+  <script>
+    const f = document.getElementById("order") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      const how = f.querySelector<HTMLInputElement>('input[name="how"]:checked')?.value ?? "";
+      const msg = `Hola, Galería Los Ángeles. Busco ${v("what").toLowerCase()}${v("for") ? ` para ${v("for")}` : ""}. ${how === "Envío" ? `Me interesa envío${v("city") ? ` a ${v("city")}` : ""}.` : "Quiero pasar a la galería."} ¿Me mandan fotos de lo que tienen?`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

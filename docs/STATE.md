@@ -41,6 +41,16 @@ Sent 2026-10-29 between 12:10 and 12:17 (ACCIO intro → findings → link → i
 | queretaro-gourmet (Querétaro) | 524426114208 | 'Cotiza' WhatsApp buttons use wa.me without 52, 'CONTÁCTANO S', 'Block' menu item | pending: Fri 10:30 |
 Pending in this batch: Kuxtal (chocolate shop, CDMX Centro, WhatsApp 525534889370 verified, no website, IG @mxkuxtal) — page waits until Instagram lifts the rate limit on @accio.hub (429 after reading ~180 profiles). Rejected after checking: Toco Madera, Flores de Julia, La Fleur (sites fine); TerraCu (5 stores).
 
+### Batch 3 (prepared 2026-10-29 for Friday; trades and quote-based businesses; WhatsApp verified before building)
+| slug | WhatsApp | finding | material |
+|---|---|---|---|
+| galeria-los-angeles (Puebla) | 522224692846 | no website; Maps shows another number (222 186 5994) and 12–20 h vs 10–20 h in their posts | IG reel covers and captions |
+| juanita-bakery (Querétaro) | 524422457024 | 'Cotiza ahora' and WhatsApp icon use wa.me without 52; raw '[contact-form-7 id="" title=""]' under 'Table Reservation'; /contacto/ 404 | their studio photos, FAQ |
+| delicias-raquel (Mérida) | 529993233536 | Google Sites page titled 'Home', footer 2020, typos 'Octrubre', 'Disponble' | IG photos and captions |
+| cocinas7 (León) | 524772638300 | no website: the Maps 'Website' button opens their Instagram | IG photos, project names and materials from captions |
+| herreria-machuca (Zapopan) | 523317752599 | Facebook links herreriafamiliarmachuca.com, a domain that does not exist; Maps has no website | Facebook job photos, flyer copy |
+Rejected after checking: Mega Eventos Angelópolis (site works, WhatsApp links fine), Herrería de León (Jimdo site, but the footer threatens a USD 50,000 claim for copying its images), A-D Cancelería and Ensamble 45 (not on WhatsApp).
+
 Discarded as too big (owner unlikely to answer): Pan del Sol (6 branches), Jardín La Estancia (Grupo Paraíso), KOFFI (2 branches, 19K IG). Event venues' Maps numbers are landlines.
 
 ## Sites (template demos)

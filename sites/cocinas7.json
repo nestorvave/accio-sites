@@ -1,0 +1,22 @@
+{
+  "slug": "cocinas7",
+  "category": "store",
+  "name": "Cocinas7",
+  "tagline": "Diseñamos cocinas que inspiran",
+  "description": "Cocinas a medida en León, Guanajuato: diseño, calidad y funcionalidad. También clósets, vestidores, módulos de TV y de baño.",
+  "logo": "/photos/cocinas7/logo.webp",
+  "phone": "477 263 8300",
+  "whatsapp": "524772638300",
+  "instagram": "cocinas7mx",
+  "address": "Blvd. Juan Alonso de Torres Pte. 3702, San Cayetano de Medina, 37235 León de los Aldama, Gto.",
+  "mapUrl": "https://www.google.com/maps/place/Cocinas7/@21.1406646,-101.6333777,17z",
+  "hours": [
+    { "days": "Lunes a viernes", "time": "9:00 – 19:00" },
+    { "days": "Sábado", "time": "10:00 – 18:00" },
+    { "days": "Domingo", "time": "10:00 – 15:00" }
+  ],
+  "rating": { "stars": 4.9, "count": 38 },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (no website). Google Maps 'Website' button points to their Instagram; no site, no catalog, no quote form. Instagram @cocinas7mx 1,225 followers, 465 posts; every caption asks people to request a quote at WhatsApp 477 263 83 00. WhatsApp Business verified 524772638300. Google 4.9 (38). Photos, project names and materials from their own Instagram captions (watermark cropped)."
+}

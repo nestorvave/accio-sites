@@ -1,0 +1,26 @@
+{
+  "slug": "galeria-los-angeles",
+  "category": "store",
+  "name": "Galería Los Ángeles",
+  "tagline": "Artesanías mexicanas y milagritos en el Callejón de los Sapos, Puebla",
+  "description": "Galería poblana con 36 años de historia: milagritos, corazones, talavera, barro negro, joyería y piezas hechas a mano por artesanos mexicanos. Ven a intencionar tu milagrito.",
+  "logo": "/photos/galeria-los-angeles/logo.webp",
+  "phone": "222 469 2846",
+  "whatsapp": "522224692846",
+  "instagram": "galerialosangeles_",
+  "address": "Calle 6 Sur 304, Callejón de los Sapos, Centro, 72000 Puebla, Pue.",
+  "mapUrl": "https://www.google.com/maps/place/?q=place_id:ChIJQ0ICnOjAz4URzOMP_rb9Ke8",
+  "hours": [
+    {
+      "days": "Lunes a domingo",
+      "time": "10:00 – 20:00"
+    }
+  ],
+  "rating": {
+    "stars": 4.9,
+    "count": 134
+  },
+  "sections": [],
+  "demo": true,
+  "notes": "READY (new site; no website). Instagram @galerialosangeles_ (15.5K, 560 posts) is their only presence; bio link is a WhatsApp chat link. Google Maps lists 222 186 5994 (personal WhatsApp) and hours 12:00–20:00, while their posts say 10:00–20:00 and WhatsApp 222 469 2846 (WhatsApp Business, verified 2026-10-29). 134 reviews 4.9. Photos are bottom-square crops of their own reel covers; copy from their captions (36 años, milagritos, charm bar, taller de velitas, barro negro, envíos)."
+}

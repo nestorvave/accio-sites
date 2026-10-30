@@ -1,0 +1,22 @@
+{
+  "slug": "juanita-bakery",
+  "category": "bakery",
+  "name": "Juanita Bakery",
+  "tagline": "Pasteles y galletas personalizados en Querétaro",
+  "description": "Repostería fina y diseño en Corregidora, Querétaro: pasteles personalizados para bodas, XV años, bautizos y cumpleaños, galletas decoradas y corporativas, cupcakes y Birthday Box.",
+  "logo": "/photos/juanita-bakery/logo.webp",
+  "phone": "442 245 7024",
+  "whatsapp": "524422457024",
+  "instagram": "juanitabakeqro",
+  "address": "Zona sur de Corregidora, Querétaro",
+  "mapUrl": "https://maps.app.goo.gl/iuLgM9thoSdZJddd8",
+  "hours": [
+    {
+      "days": "Pedidos",
+      "time": "Con al menos una semana de anticipación"
+    }
+  ],
+  "sections": [],
+  "demo": true,
+  "notes": "READY (redesign). juanitabake.com (WordPress by WLT, © 2026): the 'Cotiza ahora' button and the WhatsApp icon link to wa.me/4422457024 without country code 52 (the floating button does work); every page shows a 'Table Reservation' heading followed by the raw shortcode [contact-form-7 id=\"\" title=\"\"]; /contacto/ returns a 404. WhatsApp Business verified 442 245 7024. IG @juanitabakeqro 7.3K. Photos are their own studio shots; licensed-character cakes left out. Ordering rules from their FAQ."
+}

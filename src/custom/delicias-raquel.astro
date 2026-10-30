@@ -1,0 +1,231 @@
+---
+/**
+ * Delicias Raquel — built from their own material: the purple of their "DR" logo, photos from their
+ * Instagram (licensed characters left out), their in-store menu, seasonal packages and the Caucel store
+ * hours from their site. Primary action: quote a custom order or set aside something from the store by WhatsApp.
+ */
+import "@fontsource/caprasimo";
+import "@fontsource-variable/bricolage-grotesque";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const P = "/photos/delicias-raquel";
+const today = new Date().toISOString().slice(0, 10);
+
+const custom = [
+  { t: "Pasteles personalizados", d: "Para cumpleaños, bodas o XV años, con tus temas y sabores favoritos. También pasteles de utilería.", img: "pastel-futbol" },
+  { t: "Galletas decoradas", d: "Canastas, cajas de detallitos y kits para pintar galletas.", img: "canasta-galletas" },
+  { t: "Mesas de postres", d: "Arma tu evento con tus temas favoritos y personaliza todos los detalles.", img: "mesa-postres" },
+  { t: "Casas de galleta y figuras", d: "Proyectos especiales como nuestra Mansión Embrujada o la casita navideña.", img: "mansion-embrujada" },
+];
+const store = ["Pastel de queso de bola", "Rebanadas de tres leches", "Vainilla con chocolate helado", "Flan napolitano", "Cheesecake", "Chunk cake de fresas con crema", "Chunk cake explosión de chocolate", "Mini pasteles red velvet", "Arroz con leche", "Fresas con crema y con chocolate", "Brownies", "Gomitas enchiladas (receta especial)"];
+const seasons = [
+  { t: "Halloween y Día de Muertos", img: "cupcakes-calabaza", d: "Huerto de calabazas, canastas de calaveritas y pan de muerto relleno de fresas con crema." },
+  { t: "Navidad", img: "casita-galleta", d: "Casas de galleta, calendarios de adviento y esferas de chocolate sorpresa." },
+  { t: "San Valentín", img: "ramo-chocofresas", d: "Ramos de choco-fresas, corazones de chocolate y cajas de detallitos." },
+];
+const kinds = ["Pastel personalizado", "Galletas decoradas", "Mesa de postres", "Paquete de temporada", "Apartar algo de la tienda"];
+---
+<Base site={site} theme="delicias-raquel" themeColor="#7A3FB0" colors={{ bg: "#FCF8FF", ink: "#2A1E35", brand: "#7A3FB0", paper: "#F3E8FB", "on-brand": "#FFFFFF" }}>
+  <style>
+    :global(html[data-theme="delicias-raquel"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 12%, transparent);
+      --lilac: #A368D2;
+      --pink: #F5A8C8;
+      --f-display: "Caprasimo", Georgia, serif;
+      --f-body: "Bricolage Grotesque Variable", system-ui, sans-serif;
+    }
+    :global(html[data-theme="delicias-raquel"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+    .hero > *, .visit > *, .story > * { min-width: 0; }
+    .wrap { max-width: 1160px; margin-inline: auto; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand img { height: 52px; width: 52px; border-radius: 50%; }
+    .brand span { font-family: var(--f-display); font-size: 1.3rem; color: var(--brand); line-height: 1; }
+    .brand small { display: block; font-family: var(--f-body); font-size: .74rem; color: var(--ink-2); letter-spacing: .08em; margin-top: 2px; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 700; font-size: .9rem; text-decoration: none; }
+
+    .hero { display: grid; gap: 22px; padding-block: 8px 34px; }
+    @media (min-width: 920px) { .hero { grid-template-columns: 1fr 1fr; align-items: center; gap: 48px; padding-block: 24px 54px; } }
+    .hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.7rem, 8vw, 4.8rem); line-height: 1; color: var(--brand); text-wrap: balance; }
+    .hero h1 em { font-style: normal; color: #E05C97; }
+    .hero p { margin-top: 14px; font-size: 1.07rem; color: var(--ink-2); max-width: 44ch; }
+    .ctas { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 999px; font: inherit; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.purple { background: var(--brand); color: #fff; } .btn.purple:hover { filter: brightness(1.1); }
+    .btn.soft { background: var(--paper); color: var(--brand); }
+    .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .tiles img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 22px; }
+    .tiles img:nth-child(2) { transform: translateY(24px); }
+
+    section.block { padding-block: 56px 6px; }
+    .eyebrow { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: #C2457D; }
+    h2.sec { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.1rem, 5.4vw, 3.2rem); line-height: 1.02; margin-top: 6px; color: var(--brand); text-wrap: balance; }
+    .sub { color: var(--ink-2); margin-top: 10px; max-width: 58ch; }
+
+    .custom { margin-top: 24px; display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 960px) { .custom { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+    .custom article { background: #fff; border-radius: 22px; overflow: hidden; box-shadow: 0 1px 0 var(--line); }
+    .custom img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+    .custom div { padding: 12px 14px 16px; }
+    .custom h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.2rem; color: var(--brand); line-height: 1.1; }
+    .custom p { font-size: .88rem; color: var(--ink-2); margin-top: 4px; }
+
+    .store { margin-top: 56px; display: grid; gap: 0; background: var(--brand); color: #fff; border-radius: 30px; overflow: hidden; }
+    @media (min-width: 900px) { .store { grid-template-columns: 1fr 1.2fr; } }
+    .store img { width: 100%; height: 100%; min-height: 280px; object-fit: cover; }
+    .store .in { padding: 26px 22px; display: grid; gap: 12px; }
+    @media (min-width: 900px) { .store .in { padding: 40px; } }
+    .store h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 4.6vw, 2.7rem); line-height: 1; }
+    .store p { color: #E7D6F5; }
+    .store ul { display: flex; flex-wrap: wrap; gap: 8px; }
+    .store li { background: rgba(255,255,255,.12); border-radius: 999px; padding: 6px 12px; font-size: .9rem; }
+    .store .btn { background: var(--pink); color: var(--ink); justify-self: start; }
+
+    .seasons { margin-top: 24px; display: grid; gap: 16px; }
+    @media (min-width: 860px) { .seasons { grid-template-columns: repeat(3, 1fr); } }
+    .seasons article { display: grid; gap: 10px; }
+    .seasons img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 22px; }
+    .seasons h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.35rem; color: var(--brand); }
+    .seasons p { font-size: .92rem; color: var(--ink-2); }
+
+    .quote-wrap { padding-block: 56px 6px; }
+    .quote { background: var(--paper); border-radius: 30px; padding: 26px 18px; display: grid; gap: 18px; }
+    @media (min-width: 900px) { .quote { grid-template-columns: .9fr 1.2fr; padding: 40px; gap: 36px; } }
+    .quote h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 4.8vw, 2.8rem); line-height: 1.02; color: var(--brand); }
+    .quote .lede { margin-top: 10px; color: var(--ink-2); }
+    .fields { display: grid; gap: 12px; }
+    .fields .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .fields label { display: grid; gap: 6px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--brand); }
+    .fields select, .fields input { height: 48px; border-radius: 14px; border: 1px solid var(--line); padding: 0 14px; font: inherit; font-size: 1rem; color: var(--ink); width: 100%; appearance: none; background: #fff; }
+
+    .visit { padding-block: 56px 40px; display: grid; gap: 22px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; align-items: center; } }
+    .visit img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 22px; }
+    .visit h2 { font-family: var(--f-display); font-weight: 400; font-size: 2.1rem; color: var(--brand); margin-bottom: 10px; }
+    .data { display: grid; gap: 12px; }
+    .data a, .data p { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { text-decoration: underline; }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
+    .also { margin-top: 12px; font-size: .9rem; color: var(--ink-2); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .86rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a class="brand" href="#top"><img src={`${P}/logo.webp`} alt="" width="400" height="400" /><span>Delicias Raquel<small>Dulces ideas</small></span></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> 999 323 3536</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap gutter">
+      <div>
+        <h1>Aquí hacemos realidad tus <em>dulces ideas</em></h1>
+        <p>Una marca yucateca de repostería y pastelería creativa en Mérida. Conectamos tus ideas con tus sabores favoritos para crear los mejores detalles.</p>
+        <div class="ctas">
+          {wa && <a class="btn purple" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar mi idea</a>}
+          <a class="btn soft" href="#tienda">Lo que hay en tienda</a>
+        </div>
+      </div>
+      <div class="tiles">
+        <img src={`${P}/pastel-corazon.webp`} alt="Pastel de corazón" width="864" height="1080" fetchpriority="high" />
+        <img src={`${P}/cupcakes-disco.webp`} alt="Cupcakes con bola disco" width="864" height="1080" />
+        <img src={`${P}/galletas-borrego.webp`} alt="Galletas decoradas" width="864" height="1080" />
+      </div>
+    </section>
+
+    <section class="block gutter" id="personalizados">
+      <div class="wrap">
+        <span class="eyebrow">Horno de ideas</span>
+        <h2 class="sec">¡Personaliza tus eventos!</h2>
+        <p class="sub">Cuéntanos tu idea y la cotizamos contigo: pasteles, galletas, postres, figuras de fondant y hasta casas de galleta.</p>
+        <div class="custom">{custom.map((c) => <article><img src={`${P}/${c.img}.webp`} alt={c.t} loading="lazy" /><div><h3>{c.t}</h3><p>{c.d}</p></div></article>)}</div>
+      </div>
+    </section>
+
+    <section class="wrap gutter" id="tienda">
+      <div class="store">
+        <img src={`${P}/queso-de-bola.webp`} alt="Rebanada de pastel de queso de bola" loading="lazy" />
+        <div class="in">
+          <span class="eyebrow" style="color:var(--pink)">Tienda Caucel · entrega inmediata</span>
+          <h2>¿Un antojo? Aquí lo tenemos</h2>
+          <p>Nuestro menú en tienda cambia todos los días. Algunos de los que más piden:</p>
+          <ul>{store.map((s) => <li>{s}</li>)}</ul>
+          {wa && <a class="btn" href={`https://wa.me/${wa}?text=${encodeURIComponent("Hola, Delicias Raquel. ¿Qué tienen hoy en la tienda de Caucel? Quiero apartar.")}`} target="_blank" rel="noreferrer">Preguntar qué hay hoy</a>}
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter" id="temporadas">
+      <div class="wrap">
+        <span class="eyebrow">Temporadas</span>
+        <h2 class="sec">Una idea nueva para cada fecha</h2>
+        <div class="seasons">{seasons.map((s) => <article><img src={`${P}/${s.img}.webp`} alt={s.t} loading="lazy" /><h3>{s.t}</h3><p>{s.d}</p></article>)}</div>
+      </div>
+    </section>
+
+    <section class="quote-wrap gutter" id="cotizar">
+      {wa && (
+        <form class="quote wrap" id="quote" data-wa={wa}>
+          <div>
+            <h2>Cotiza tu dulce idea</h2>
+            <p class="lede">Te llega directo a nuestro WhatsApp. Si tienes una foto de referencia, mándala en el mismo chat.</p>
+          </div>
+          <div class="fields">
+            <div class="row">
+              <label>Quiero<select id="kind">{kinds.map((k) => <option>{k}</option>)}</select></label>
+              <label>Para el<input id="date" type="date" min={today} value={today} /></label>
+            </div>
+            <div class="row">
+              <label>Personas<input id="qty" type="text" inputmode="numeric" placeholder="Ej. 25" /></label>
+              <label>Tema<input id="idea" type="text" placeholder="Colores, fiesta…" /></label>
+            </div>
+            <button class="btn purple" type="submit"><Icon name="whatsapp" size={18} /> Enviar por WhatsApp</button>
+          </div>
+        </form>
+      )}
+    </section>
+
+    <section class="visit wrap gutter" id="visita">
+      <img src={`${P}/tienda-abierto.webp`} alt="Letrero de abierto en la tienda de Ciudad Caucel" loading="lazy" />
+      <div>
+        <h2>Tienda Caucel</h2>
+        <div class="data">
+          {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+          <p><Icon name="clock" /> <span>Horario: {site.hours[0].time}</span></p>
+          {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 999 323 3536</span></a>}
+          {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+        </div>
+        <p class="also">También encuentras nuestras galletas en Frutería Select: Las Américas, Jardines del Norte y Altabrisa.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Delicias Raquel · Mérida, Yucatán</span><span>Dulces ideas</span></div></footer>
+  {wa && <div class="bar"><a class="btn purple" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotizar mi idea</a></div>}
+
+  <script>
+    const f = document.getElementById("quote") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      const [y, m, d] = v("date").split("-").map(Number);
+      const date = new Date(y, m - 1, d).toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long" });
+      const msg = `Hola, Delicias Raquel. Quiero cotizar:\n• ${v("kind")}\n• Para el: ${date}\n• Personas: ${v("qty") || "por definir"}${v("idea") ? `\n• Tema: ${v("idea")}` : ""}`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

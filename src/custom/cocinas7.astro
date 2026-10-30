@@ -1,0 +1,285 @@
+---
+/**
+ * Cocinas7 — built from their Instagram (@cocinas7mx): the black and gold of their logo, their bio
+ * ("Diseñamos cocinas que inspiran. Diseño • Calidad • Funcionalidad"), project names and materials
+ * taken from their own post captions, and the furniture they also make (TV modules, closets, bathroom
+ * modules). Primary action: a quote request (project, layout, countertop, measurements) that opens WhatsApp.
+ */
+import "@fontsource-variable/big-shoulders-display";
+import "@fontsource-variable/manrope";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const P = "/photos/cocinas7";
+
+const projects = [
+  { t: "Cocina en línea con piedra tecnológica y vitrina con luz LED", img: "vitrina" },
+  { t: "Cocina en escuadra e isla con cuarzo negro veteado", img: "cuarzo-negro" },
+  { t: "Cocina en escuadra con barra en L y piedra tecnológica", img: "barra-l" },
+  { t: "Cocina en escuadra en efecto portería con formaica", img: "porteria" },
+  { t: "Cocina en escuadra con alacenas en alto brillo", img: "alto-brillo" },
+  { t: "Cocina en escuadra con materiales de importación", img: "importacion" },
+  { t: "Cocina con luz LED bajo alacenas y zoclo", img: "led" },
+  { t: "Módulo cabecera / almacenaje con escritorio", img: "cabecera" },
+];
+const layouts = [
+  { t: "En línea", d: "Todo en un muro: ideal para espacios angostos." },
+  { t: "En escuadra", d: "En L, con barra, isla o torre de hornos y alacena." },
+  { t: "En herradura", d: "En U, para aprovechar tres muros." },
+  { t: "Con isla o barra", d: "Para desayunar, preparar y convivir." },
+];
+const materials = ["Piedra tecnológica", "Cuarzo blanco", "Cuarzo negro veteado", "Piedra de importación", "Formaica", "Alto brillo", "Splash en WPC", "Luz LED", "Tonos de madera"];
+const more = [
+  { t: "Clósets y vestidores", d: "Como el vestidor Riviera, o clóset con módulo de TV.", img: "closet" },
+  { t: "Módulos de TV", d: "A tu medida y funcionalidad, con placa de WPC.", img: "tv" },
+  { t: "Baños y áreas de lavado", d: "Módulo de baño con LED y vestidor; áreas de lavado.", img: "lavado" },
+];
+const kinds = ["Cocina", "Remodelación de cocina", "Clóset o vestidor", "Módulo de TV", "Módulo de baño", "Área de lavado", "Otro mueble"];
+const shapes = ["En línea", "En escuadra", "En herradura", "Con isla", "Aún no sé"];
+const tops = ["Piedra tecnológica", "Cuarzo", "Me asesoran"];
+---
+<Base site={site} theme="cocinas7" themeColor="#0E0D0B" colors={{ bg: "#0E0D0B", ink: "#F1ECE2", brand: "#C9A24A", paper: "#1A1815", "on-brand": "#14110A" }}>
+  <style>
+    :global(html[data-theme="cocinas7"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 66%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 14%, transparent);
+      --gold-2: #E3C77E;
+      --f-display: "Big Shoulders Display Variable", "Arial Narrow", sans-serif;
+      --f-body: "Manrope Variable", system-ui, sans-serif;
+    }
+    :global(html[data-theme="cocinas7"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; }
+    .wrap { max-width: 1200px; margin-inline: auto; }
+    .hero > *, .detail > *, .visit > *, .quote > * { min-width: 0; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+    .brandmark { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brandmark img { width: 46px; height: 46px; border-radius: 50%; }
+    .brandmark b { font-family: var(--f-display); font-weight: 800; font-size: 1.5rem; letter-spacing: .06em; text-transform: uppercase; }
+    .brandmark b span { color: var(--brand); }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 4px; border: 1px solid color-mix(in oklab, var(--brand) 55%, transparent); color: var(--gold-2); font-weight: 700; font-size: .9rem; text-decoration: none; }
+    .pill:hover { background: var(--brand); color: var(--on-brand); }
+
+    .hero { display: grid; gap: 28px; padding-block: 18px 10px; align-items: center; }
+    @media (min-width: 920px) { .hero { grid-template-columns: 1.05fr .95fr; gap: 48px; padding-block: 36px 20px; } }
+    .kicker { font-size: .76rem; letter-spacing: .24em; text-transform: uppercase; color: var(--brand); font-weight: 700; }
+    .hero h1 { margin-top: 12px; font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: clamp(3.2rem, 11vw, 6.6rem); line-height: .9; letter-spacing: .01em; text-wrap: balance; }
+    .hero h1 em { font-style: normal; color: var(--brand); }
+    .trio { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--f-display); font-weight: 600; font-size: 1.3rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-2); }
+    .trio i { font-style: normal; color: var(--ink-2); }
+    .hero p { margin-top: 16px; max-width: 46ch; color: var(--ink-2); }
+    .ctas { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 54px; padding: 0 24px; border-radius: 4px; font: inherit; font-weight: 800; text-decoration: none; border: 0; cursor: pointer; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.gold { background: linear-gradient(135deg, #E3C77E, #C9A24A 55%, #A9822F); color: var(--on-brand); }
+    .btn.gold:hover { filter: brightness(1.07); }
+    .btn.out { border: 1px solid var(--line); color: var(--ink); }
+    .btn.out:hover { border-color: var(--brand); }
+    .facts { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .facts span { display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); font-size: .84rem; }
+    .facts b { color: var(--brand); margin-right: 4px; }
+    .shot { position: relative; margin: 0; }
+    .shot img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; }
+    .shot::after { content: ""; position: absolute; inset: 14px -14px -14px 14px; border: 1px solid color-mix(in oklab, var(--brand) 60%, transparent); border-radius: 4px; z-index: -1; }
+    .shot figcaption { position: absolute; left: 14px; bottom: 14px; right: 14px; font-size: .8rem; color: #fff; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); padding: 8px 12px; border-radius: 4px; }
+    @media (max-width: 919px) { .shot::after { display: none; } .shot img { aspect-ratio: 4 / 4.4; } }
+
+    section.block { padding-block: 64px 6px; }
+    .eyebrow { font-size: .76rem; letter-spacing: .24em; text-transform: uppercase; color: var(--brand); font-weight: 700; }
+    h2.sec { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2.4rem, 7vw, 4rem); line-height: .95; margin-top: 8px; text-wrap: balance; }
+    .sub { color: var(--ink-2); margin-top: 12px; max-width: 60ch; }
+
+    .projects { margin-top: 26px; display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 960px) { .projects { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+    .projects figure { margin: 0; position: relative; overflow: hidden; border-radius: 4px; background: var(--paper); }
+    .projects img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; transition: transform .6s var(--ease-out); }
+    .projects figure:hover img { transform: scale(1.04); }
+    .projects figcaption { position: absolute; inset: auto 0 0 0; padding: 40px 12px 12px; font-size: .84rem; font-weight: 600; line-height: 1.3; background: linear-gradient(transparent, rgba(0,0,0,.82)); color: #fff; }
+
+    .layouts { margin-top: 26px; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+    @media (min-width: 820px) { .layouts { grid-template-columns: repeat(4, 1fr); } }
+    .layouts li { background: var(--bg); padding: 20px 18px; }
+    .layouts h3 { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: 1.6rem; letter-spacing: .04em; color: var(--gold-2); }
+    .layouts p { margin-top: 4px; font-size: .92rem; color: var(--ink-2); }
+
+    .detail { margin-top: 64px; display: grid; gap: 0; background: var(--paper); border-radius: 4px; overflow: hidden; }
+    @media (min-width: 900px) { .detail { grid-template-columns: .9fr 1.1fr; } }
+    .detail img { width: 100%; height: 100%; min-height: 280px; max-height: 420px; object-fit: cover; }
+    .detail .in { padding: 28px 22px; align-self: center; }
+    @media (min-width: 900px) { .detail .in { padding: 44px; } }
+    .detail h2 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2rem, 5vw, 3rem); line-height: .95; }
+    .detail p { margin-top: 12px; color: var(--ink-2); }
+    .chips { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chips span { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid color-mix(in oklab, var(--brand) 40%, transparent); font-size: .88rem; }
+
+    .more { margin-top: 26px; display: grid; gap: 16px; }
+    @media (min-width: 860px) { .more { grid-template-columns: repeat(3, 1fr); } }
+    .more article { display: grid; grid-template-columns: 110px 1fr; gap: 14px; align-items: center; background: var(--paper); border-radius: 4px; overflow: hidden; }
+    .more img { width: 110px; height: 130px; object-fit: cover; }
+    .more h3 { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: 1.4rem; letter-spacing: .03em; }
+    .more p { font-size: .9rem; color: var(--ink-2); padding-right: 12px; }
+
+    .quote-wrap { padding-block: 64px 6px; }
+    .quote { border: 1px solid color-mix(in oklab, var(--brand) 45%, transparent); background: linear-gradient(160deg, #1D1A14, #0E0D0B 60%); border-radius: 4px; padding: 26px 18px; display: grid; gap: 20px; }
+    @media (min-width: 900px) { .quote { grid-template-columns: .9fr 1.3fr; padding: 40px; gap: 40px; } }
+    .quote h2 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2.2rem, 5.6vw, 3.4rem); line-height: .95; }
+    .quote .lede { margin-top: 12px; color: var(--ink-2); }
+    .fields { display: grid; gap: 14px; }
+    .fields .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .fields label { display: grid; gap: 6px; font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-2); }
+    .fields select, .fields input { height: 48px; border-radius: 4px; border: 1px solid var(--line); background: rgba(255,255,255,.04); padding: 0 14px; font: inherit; font-size: 1rem; color: var(--ink); width: 100%; appearance: none; }
+    .fields select option { color: #111; }
+    .fields input::placeholder { color: color-mix(in oklab, var(--ink) 40%, transparent); }
+    .grp { display: grid; gap: 8px; }
+    .grp > span { font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-2); }
+    .opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .opts label { position: relative; text-transform: none; letter-spacing: 0; font-size: .92rem; font-weight: 600; color: var(--ink); display: block; }
+    .opts input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+    .opts span { display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); cursor: pointer; }
+    .opts input:checked + span { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
+    .opts input:focus-visible + span { outline: 2px solid var(--gold-2); outline-offset: 2px; }
+    .hint { font-size: .84rem; color: var(--ink-2); }
+
+    .visit { padding-block: 64px 40px; display: grid; gap: 26px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 2.4rem; line-height: 1; margin-bottom: 12px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+    .data { display: grid; gap: 14px; align-content: start; }
+    .data a { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { color: var(--gold-2); }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--brand); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .86rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a class="brandmark" href="#top"><img src={`${P}/logo.webp`} alt="" width="600" height="600" /><b>Cocinas<span>7</span></b></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> 477 263 8300</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap gutter">
+      <div>
+        <span class="kicker">León, Guanajuato</span>
+        <h1>Diseñamos cocinas que <em>inspiran</em></h1>
+        <div class="trio">Diseño <i>•</i> Calidad <i>•</i> Funcionalidad</div>
+        <p>Cocinas a tu medida, diseño y estilo, con los mejores materiales. Nos adaptamos a tu presupuesto y te acompañamos en todo el proceso hasta llegar a tu diseño soñado.</p>
+        <div class="ctas">
+          <a class="btn gold" href="#cotizar"><Icon name="whatsapp" size={18} /> Pedir cotización</a>
+          <a class="btn out" href="#proyectos">Ver proyectos</a>
+        </div>
+        <div class="facts">
+          {site.rating && <span><b>★ {site.rating.stars}</b> {site.rating.count} reseñas en Google</span>}
+          <span>Costos con base en medida y diseño</span>
+          <span>Remodelación de cocina</span>
+        </div>
+      </div>
+      <figure class="shot">
+        <img src={`${P}/hero.webp`} alt="Cocina con cubierta de piedra veteada y luz LED cálida" width="608" height="1080" fetchpriority="high" />
+      </figure>
+    </section>
+
+    <section class="block gutter" id="proyectos">
+      <div class="wrap">
+        <span class="eyebrow">Proyectos</span>
+        <h2 class="sec">Algunos de nuestros proyectos</h2>
+        <p class="sub">Cada cajón, cada acabado y cada detalle tienen un propósito.</p>
+        <div class="projects">
+          {projects.map((p) => <figure><img src={`${P}/${p.img}.webp`} alt={p.t} loading="lazy" width="608" height="864" /><figcaption>{p.t}</figcaption></figure>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter">
+      <div class="wrap">
+        <span class="eyebrow">Distribución</span>
+        <h2 class="sec">La forma de tu cocina</h2>
+        <ul class="layouts">{layouts.map((l) => <li><h3>{l.t}</h3><p>{l.d}</p></li>)}</ul>
+
+        <div class="detail">
+          <img src={`${P}/cajon.webp`} alt="Cajón de madera con organizador de cubiertos" loading="lazy" width="610" height="1080" />
+          <div class="in">
+            <span class="eyebrow">Materiales</span>
+            <h2>Lo que hoy son muestras, mañana es tu cocina</h2>
+            <p>Cada tono de madera transmite una personalidad diferente: desde espacios cálidos y acogedores hasta ambientes modernos y sofisticados. Elige cubierta, frentes e iluminación con nosotros.</p>
+            <div class="chips">{materials.map((m) => <span>{m}</span>)}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter">
+      <div class="wrap">
+        <span class="eyebrow">Más que cocinas</span>
+        <h2 class="sec">Muebles a tu medida</h2>
+        <div class="more">
+          {more.map((m) => <article><img src={`${P}/${m.img}.webp`} alt={m.t} loading="lazy" /><div><h3>{m.t}</h3><p>{m.d}</p></div></article>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-wrap gutter" id="cotizar">
+      {wa && (
+        <form class="quote wrap" id="quote" data-wa={wa}>
+          <div>
+            <span class="eyebrow">Cotización</span>
+            <h2>Cuéntanos cómo imaginas tu cocina</h2>
+            <p class="lede">Nuestros costos son con base en medida y diseño. Con estos datos te respondemos por WhatsApp y te asesoramos en todo el proceso.</p>
+          </div>
+          <div class="fields">
+            <div class="row">
+              <label>Proyecto<select id="kind">{kinds.map((k) => <option>{k}</option>)}</select></label>
+              <label>Colonia o ciudad<input id="city" type="text" placeholder="León, Silao…" /></label>
+            </div>
+            <div class="grp"><span>Distribución</span>
+              <div class="opts">{shapes.map((s, i) => <label><input type="radio" name="shape" value={s} checked={i === 4} /><span>{s}</span></label>)}</div>
+            </div>
+            <div class="grp"><span>Cubierta</span>
+              <div class="opts">{tops.map((s, i) => <label><input type="radio" name="top" value={s} checked={i === 2} /><span>{s}</span></label>)}</div>
+            </div>
+            <label>Medidas aproximadas<input id="size" type="text" placeholder="Ej. 3.20 m × 2.40 m" /></label>
+            <button class="btn gold" type="submit"><Icon name="whatsapp" size={18} /> Enviar por WhatsApp</button>
+            <p class="hint">Si tienes fotos de tu espacio o de cocinas que te gusten, mándalas en el mismo chat.</p>
+          </div>
+        </form>
+      )}
+    </section>
+
+    <section class="visit wrap gutter" id="contacto">
+      <div>
+        <h2>Visítanos</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 477 263 8300</span></a>}
+        {site.instagram && <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noreferrer"><Icon name="instagram" /> <span>@{site.instagram}</span></a>}
+        <a href="https://www.tiktok.com/@cocinaas7" target="_blank" rel="noreferrer"><Icon name="arrow" /> <span>TikTok @cocinaas7</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Cocinas7 · León, Guanajuato</span><span>Diseño • Calidad • Funcionalidad</span></div></footer>
+  {wa && <div class="bar"><a class="btn gold" href="#cotizar"><Icon name="whatsapp" size={18} /> Pedir cotización</a></div>}
+
+  <script>
+    const f = document.getElementById("quote") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      const r = (n: string) => f.querySelector<HTMLInputElement>(`input[name="${n}"]:checked`)?.value ?? "";
+      const msg = `Hola, Cocinas7. Quiero pedir una cotización:\n• Proyecto: ${v("kind")}\n• Distribución: ${r("shape")}\n• Cubierta: ${r("top")}\n• Medidas: ${v("size") || "por definir"}\n• Zona: ${v("city") || "por definir"}`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>

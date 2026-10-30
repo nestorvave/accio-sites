@@ -1,0 +1,253 @@
+---
+/**
+ * Herrería Familiar Machuca — built from their Facebook page: the blue and red of their flyer (with the
+ * script "Familiar Machuca"), their own job photos (pergolas with deck PVC and lambrín, gates, railings,
+ * glass roofs), and the copy of their flyer: "Especialistas en pérgolas. Además… todo tipo de herrería",
+ * the materials they work with, and "Cotizaciones sin compromiso".
+ * Primary action: a quote request (job, covering, measurements, area) that opens WhatsApp.
+ */
+import "@fontsource-variable/archivo/standard.css";
+import "@fontsource-variable/figtree";
+import "@fontsource/allura";
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { type Site, waNumber } from "../lib/sites";
+
+interface Props { site: Site }
+const { site } = Astro.props;
+const wa = waNumber(site);
+const P = "/photos/herreria-machuca";
+
+const materials = ["Deck PVC", "Reglas de aluminio", "Lambrín", "Policarbonato", "Vidrio templado", "Láminas PVC"];
+const pergolas = [
+  { img: "pergola-patio", t: "Pérgola en patio" },
+  { img: "pergola-lambrin", t: "Techo con lambrín" },
+  { img: "pergola-deck", t: "Celosía con deck PVC" },
+  { img: "pergola-fachada", t: "Pérgola en fachada" },
+  { img: "pergola-noche", t: "Pérgola con cubierta traslúcida" },
+  { img: "pergola-terraza", t: "Terraza cubierta" },
+];
+const works = [
+  { t: "Portones", d: "Lisos, de líneas o con forja, abatibles o corredizos.", img: "porton-forja" },
+  { t: "Barandales y escaleras", d: "Para escaleras, balcones y terrazas.", img: "barandal" },
+  { t: "Domos y cubiertas", d: "Estructura metálica con vidrio templado o policarbonato.", img: "domo" },
+  { t: "Puertas y ventanas", d: "Puertas, ventanas y protecciones a la medida.", img: "protecciones" },
+  { t: "Estructuras y tapancos", d: "Estructuras en metal para techos, tapancos y azoteas.", img: "tapanco" },
+];
+const gates = ["porton-lineal", "porton-liso", "porton-madera", "porton-gris"];
+const kinds = ["Pérgola", "Portón", "Barandal o escalera", "Domo o cubierta de vidrio", "Puertas o ventanas", "Protecciones", "Tapanco o estructura", "Otro trabajo"];
+const covers = ["Deck PVC", "Lambrín", "Policarbonato", "Vidrio templado", "Lámina PVC", "Me asesoran"];
+---
+<Base site={site} theme="herreria-machuca" themeColor="#123A86" colors={{ bg: "#F2F3F5", ink: "#11161F", brand: "#1C4DB0", paper: "#FFFFFF", "on-brand": "#FFFFFF" }}>
+  <style>
+    :global(html[data-theme="herreria-machuca"]) {
+      --ink-2: color-mix(in oklab, var(--ink) 62%, var(--bg));
+      --line: color-mix(in oklab, var(--ink) 12%, transparent);
+      --red: #D92A2E;
+      --navy: #0E2A63;
+      --f-display: "Archivo Variable", system-ui, sans-serif;
+      --f-body: "Figtree Variable", system-ui, sans-serif;
+      --f-script: "Allura", cursive;
+    }
+    :global(html[data-theme="herreria-machuca"] body) { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; }
+    .wrap { max-width: 1200px; margin-inline: auto; }
+    .hero > *, .split > *, .quote > *, .visit > * { min-width: 0; }
+    h1, h2, h3 { font-family: var(--f-display); font-stretch: 112%; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+    .mark { text-decoration: none; display: grid; line-height: .9; }
+    .mark b { font-family: var(--f-display); font-stretch: 125%; font-weight: 900; font-size: 1.35rem; letter-spacing: .02em; color: var(--red); text-transform: uppercase; }
+    .mark i { font-family: var(--f-script); font-style: normal; font-size: 1.55rem; color: var(--navy); margin-top: -2px; }
+    .pill { flex: 0 0 auto; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; background: var(--brand); color: #fff; font-weight: 700; font-size: .9rem; text-decoration: none; }
+
+    .hero { position: relative; display: grid; color: #fff; background: var(--navy); overflow: hidden; }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 899px) { .hero img { height: 300px; } }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,42,99,0) 0px, rgba(14,42,99,.2) 180px, var(--navy) 300px); }
+    @media (min-width: 900px) { .hero::after { background: linear-gradient(90deg, rgba(10,22,52,.92) 0%, rgba(14,42,99,.7) 42%, rgba(14,42,99,.1) 75%); } }
+    @media (min-width: 900px) { .hero h1 { font-stretch: 118%; } }
+    .hero .txt { position: relative; z-index: 1; padding: 250px 16px 34px; max-width: 1200px; width: 100%; margin-inline: auto; }
+    @media (min-width: 900px) { .hero .txt { padding: 120px max(16px, 4vw) 96px; } }
+    .tag { display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 999px; background: var(--red); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .hero h1 { margin-top: 14px; font-weight: 900; font-stretch: 100%; text-transform: uppercase; font-size: clamp(2.1rem, 9.6vw, 5rem); line-height: .92; max-width: 12ch; text-wrap: balance; }
+    .hero .script { display: block; font-family: var(--f-script); font-stretch: normal; text-transform: none; font-weight: 400; font-size: .62em; line-height: 1.1; color: #fff; margin-top: 6px; }
+    .hero p { margin-top: 14px; max-width: 44ch; color: rgba(255,255,255,.86); }
+    .ctas { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 54px; padding: 0 24px; border-radius: 999px; font: inherit; font-weight: 800; text-decoration: none; border: 0; cursor: pointer; transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast) var(--ease-out); }
+    .btn:active { transform: scale(.98); }
+    .btn.red { background: var(--red); color: #fff; } .btn.red:hover { filter: brightness(1.08); }
+    .btn.ghost { border: 1px solid rgba(255,255,255,.5); color: #fff; }
+    .stars { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .9rem; color: rgba(255,255,255,.86); }
+    .stars b { color: #FFD24A; }
+
+    .mats { background: var(--navy); color: #fff; }
+    .mats .in { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding-block: 18px; }
+    .mats span:first-child { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: #9FB6E6; font-weight: 700; flex-basis: 100%; }
+    @media (min-width: 900px) { .mats span:first-child { flex-basis: auto; margin-right: 6px; } }
+    .mats em { font-style: normal; font-family: var(--f-display); font-stretch: 112%; font-weight: 700; font-size: 1.05rem; display: inline-flex; align-items: center; gap: 10px; }
+    .mats em::before { content: ""; width: 7px; height: 7px; background: var(--red); transform: rotate(45deg); }
+
+    section.block { padding-block: 64px 6px; }
+    .eyebrow { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--red); font-weight: 800; }
+    h2.sec { font-weight: 900; text-transform: uppercase; font-size: clamp(2rem, 6vw, 3.4rem); line-height: .95; margin-top: 8px; text-wrap: balance; color: var(--navy); }
+    .sub { color: var(--ink-2); margin-top: 12px; max-width: 62ch; }
+
+    .mosaic { margin-top: 26px; display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+    @media (min-width: 900px) { .mosaic { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 14px; } .mosaic figure:nth-child(1) { grid-column: span 2; grid-row: span 2; } .mosaic figure:nth-child(5) { grid-row: span 2; } }
+    .mosaic figure { margin: 0; position: relative; overflow: hidden; border-radius: 10px; background: #dfe3ea; }
+    .mosaic img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    @media (min-width: 900px) { .mosaic img { aspect-ratio: auto; } }
+    .mosaic figcaption { position: absolute; left: 8px; bottom: 8px; font-size: .78rem; font-weight: 700; background: rgba(255,255,255,.92); color: var(--navy); padding: 4px 10px; border-radius: 999px; }
+
+    .works { margin-top: 26px; display: grid; gap: 14px; }
+    @media (min-width: 700px) { .works { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1040px) { .works { grid-template-columns: repeat(5, 1fr); } }
+    .works article { background: var(--paper); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 0 var(--line); display: grid; grid-template-rows: auto 1fr; }
+    .works img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .works .in { padding: 14px 16px 18px; border-top: 4px solid var(--brand); }
+    .works h3 { font-weight: 800; font-size: 1.15rem; color: var(--navy); line-height: 1.15; }
+    .works p { margin-top: 6px; font-size: .9rem; color: var(--ink-2); }
+
+    .gates { margin-top: 14px; display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 900px) { .gates { grid-template-columns: repeat(4, 1fr); } }
+    .gates img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
+
+    .quote-wrap { padding-block: 64px 6px; }
+    .quote { background: var(--navy); color: #fff; border-radius: 14px; padding: 26px 18px; display: grid; gap: 20px; position: relative; overflow: hidden; }
+    .quote::before { content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border: 26px solid rgba(217,42,46,.85); border-radius: 50%; opacity: .25; }
+    @media (min-width: 900px) { .quote { grid-template-columns: .9fr 1.3fr; padding: 40px; gap: 40px; } }
+    .quote h2 { font-weight: 900; text-transform: uppercase; font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: .98; }
+    .quote .lede { margin-top: 12px; color: rgba(255,255,255,.8); }
+    .quote .free { margin-top: 16px; font-family: var(--f-script); font-size: 2rem; color: #FFB4B4; line-height: 1; }
+    .fields { display: grid; gap: 14px; position: relative; }
+    .fields .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .fields label { display: grid; gap: 6px; font-size: .74rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #9FB6E6; }
+    .fields select, .fields input { height: 48px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.07); padding: 0 14px; font: inherit; font-size: 1rem; color: #fff; width: 100%; appearance: none; }
+    .fields select option { color: #111; }
+    .fields input::placeholder { color: rgba(255,255,255,.45); }
+    .grp { display: grid; gap: 8px; }
+    .grp > span { font-size: .74rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #9FB6E6; }
+    .opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .opts label { position: relative; text-transform: none; letter-spacing: 0; font-size: .92rem; font-weight: 600; color: #fff; display: block; }
+    .opts input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+    .opts span { display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); cursor: pointer; }
+    .opts input:checked + span { background: #fff; color: var(--navy); border-color: #fff; }
+    .opts input:focus-visible + span { outline: 2px solid #fff; outline-offset: 2px; }
+    .hint { font-size: .84rem; color: rgba(255,255,255,.7); }
+
+    .visit { padding-block: 64px 40px; display: grid; gap: 26px; }
+    @media (min-width: 860px) { .visit { grid-template-columns: 1fr 1fr; } }
+    .visit h2 { font-weight: 900; text-transform: uppercase; font-size: 2rem; color: var(--navy); margin-bottom: 12px; }
+    .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .hours li span:last-child { color: var(--ink-2); font-variant-numeric: tabular-nums; text-align: right; }
+    .data { display: grid; gap: 14px; align-content: start; }
+    .data a { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; line-height: 1.4; }
+    .data a:hover { color: var(--brand); }
+    .data :global(svg) { flex: 0 0 auto; margin-top: 2px; color: var(--red); }
+
+    footer { border-top: 1px solid var(--line); padding-block: 22px calc(22px + 76px); font-size: .86rem; color: var(--ink-2); }
+    footer .in { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px max(16px, env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-right,0px)); background: color-mix(in oklab, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .bar .btn { width: 100%; }
+    @media (min-width: 860px) { .bar { display: none; } footer { padding-bottom: 22px; } }
+  </style>
+
+  <header class="gutter">
+    <div class="top wrap">
+      <a class="mark" href="#top"><b>Herrería</b><i>Familiar Machuca</i></a>
+      {wa && <a class="pill" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={18} /> 33 1775 2599</a>}
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <img src={`${P}/hero.webp`} alt="Pérgola con lambrín frente a una casa, hecha por Herrería Familiar Machuca" width="1500" height="843" fetchpriority="high" />
+      <div class="txt">
+        <span class="tag">Zapopan, Jalisco</span>
+        <h1>Especialistas en pérgolas<span class="script">además… todo tipo de herrería</span></h1>
+        <p>Todas nuestras estructuras son en metal. Portones, estructuras, puertas y ventanas, barandales y tapancos, hechos a la medida de tu casa.</p>
+        <div class="ctas">
+          <a class="btn red" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotización sin compromiso</a>
+          <a class="btn ghost" href="#pergolas">Ver trabajos</a>
+        </div>
+        {site.rating && <div class="stars"><span><b>★ {site.rating.stars}</b> · {site.rating.count} reseñas en Google</span><span>Abierto todos los días</span></div>}
+      </div>
+    </section>
+
+    <div class="mats gutter"><div class="in wrap"><span>Trabajamos con</span>{materials.map((m) => <em>{m}</em>)}</div></div>
+
+    <section class="block gutter" id="pergolas">
+      <div class="wrap">
+        <span class="eyebrow">Nuestra especialidad</span>
+        <h2 class="sec">Pérgolas</h2>
+        <p class="sub">Estructura metálica con la cubierta que mejor le quede a tu espacio: deck PVC, lambrín, reglas de aluminio, policarbonato, vidrio templado o láminas PVC.</p>
+        <div class="mosaic">
+          {pergolas.map((p) => <figure><img src={`${P}/${p.img}.webp`} alt={p.t} loading="lazy" /><figcaption>{p.t}</figcaption></figure>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="block gutter">
+      <div class="wrap">
+        <span class="eyebrow">Además…</span>
+        <h2 class="sec">Todo tipo de herrería</h2>
+        <div class="works">
+          {works.map((w) => <article><img src={`${P}/${w.img}.webp`} alt={w.t} loading="lazy" /><div class="in"><h3>{w.t}</h3><p>{w.d}</p></div></article>)}
+        </div>
+        <div class="gates">{gates.map((g) => <img src={`${P}/${g}.webp`} alt="Portón hecho por Herrería Familiar Machuca" loading="lazy" />)}</div>
+      </div>
+    </section>
+
+    <section class="quote-wrap gutter" id="cotizar">
+      {wa && (
+        <form class="quote wrap" id="quote" data-wa={wa}>
+          <div>
+            <span class="eyebrow" style="color:#FF9C9C">Cotizaciones</span>
+            <h2>Cuéntanos qué necesitas</h2>
+            <p class="lede">Con el tipo de trabajo, las medidas y tu colonia te respondemos por WhatsApp.</p>
+            <p class="free">sin compromiso</p>
+          </div>
+          <div class="fields">
+            <div class="row">
+              <label>Trabajo<select id="kind">{kinds.map((k) => <option>{k}</option>)}</select></label>
+              <label>Colonia<input id="area" type="text" placeholder="Zapopan, Tlaquepaque…" /></label>
+            </div>
+            <div class="grp"><span>Cubierta (si es pérgola o domo)</span>
+              <div class="opts">{covers.map((c, i) => <label><input type="radio" name="cover" value={c} checked={i === covers.length - 1} /><span>{c}</span></label>)}</div>
+            </div>
+            <label>Medidas aproximadas<input id="size" type="text" placeholder="Ej. 4 × 3 m" /></label>
+            <button class="btn red" type="submit"><Icon name="whatsapp" size={18} /> Enviar por WhatsApp</button>
+            <p class="hint">Si tienes fotos del espacio, mándalas en el mismo chat.</p>
+          </div>
+        </form>
+      )}
+    </section>
+
+    <section class="visit wrap gutter" id="contacto">
+      <div>
+        <h2>Horario</h2>
+        <ul class="hours">{site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}</ul>
+      </div>
+      <div class="data">
+        {site.address && <a href={site.mapUrl} target="_blank" rel="noreferrer"><Icon name="pin" /> <span>{site.address}</span></a>}
+        {wa && <a href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" /> <span>WhatsApp 33 1775 2599 · Ramón Machuca</span></a>}
+        <a href="tel:+523323518836"><Icon name="phone" /> <span>33 2351 8836</span></a>
+        {site.facebook && <a href={`https://www.facebook.com/${site.facebook}`} target="_blank" rel="noreferrer"><Icon name="facebook" /> <span>herrería familiar machuca</span></a>}
+      </div>
+    </section>
+  </main>
+
+  <footer class="gutter"><div class="in wrap"><span>Herrería Familiar Machuca · Zapopan, Jalisco</span><span>Especialistas en pérgolas · todo tipo de herrería</span></div></footer>
+  {wa && <div class="bar"><a class="btn red" href="#cotizar"><Icon name="whatsapp" size={18} /> Cotización sin compromiso</a></div>}
+
+  <script>
+    const f = document.getElementById("quote") as HTMLFormElement | null;
+    f?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (id: string) => (f.querySelector<HTMLInputElement | HTMLSelectElement>("#" + id)?.value ?? "").trim();
+      const cover = f.querySelector<HTMLInputElement>('input[name="cover"]:checked')?.value ?? "";
+      const msg = `Hola, Herrería Familiar Machuca. Quiero una cotización:\n• Trabajo: ${v("kind")}\n• Cubierta: ${cover}\n• Medidas: ${v("size") || "por definir"}\n• Colonia: ${v("area") || "por definir"}`;
+      window.open(`https://wa.me/${f.dataset.wa}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+  </script>
+</Base>
